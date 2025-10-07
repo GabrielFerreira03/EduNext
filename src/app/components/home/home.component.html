@@ -1,0 +1,155 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Bem-vindo ao EduNext</h1>
+        <p class="hero-subtitle">
+          Plataforma educacional moderna para aprender programação e tecnologia
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">{{ courses.length }}</span>
+            <span class="stat-label">Cursos Disponíveis</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">{{ userProgress }}%</span>
+            <span class="stat-label">Progresso Atual</span>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn btn-primary">Começar Agora</button>
+          <button class="btn btn-secondary">Ver Cursos</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tecnologias Section -->
+  <section id="cursos" class="technologies">
+    <div class="container">
+      <h2 class="section-title">Tecnologias que Você Vai Aprender</h2>
+      <div class="tech-grid">
+        <div class="tech-card">
+          <h3>Lógica de Programação</h3>
+          <p>Fundamentos essenciais para resolver problemas computacionais</p>
+        </div>
+        <div class="tech-card">
+          <h3>HTML & CSS</h3>
+          <p>Criação de interfaces web modernas e responsivas</p>
+        </div>
+        <div class="tech-card">
+          <h3>JavaScript</h3>
+          <p>Programação dinâmica para web e aplicações interativas</p>
+        </div>
+        <div class="tech-card">
+          <h3>Angular & TypeScript</h3>
+          <p>Framework robusto para aplicações web escaláveis</p>
+        </div>
+        <div class="tech-card">
+          <h3>Git & Versionamento</h3>
+          <p>Controle de versão e colaboração em projetos</p>
+        </div>
+        <div class="tech-card">
+          <h3>Metodologias Ágeis</h3>
+          <p>Scrum e práticas modernas de desenvolvimento</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cursos Section -->
+  <section class="courses">
+    <div class="container">
+      <h2 class="section-title">Nossos Cursos</h2>
+      <div class="courses-grid">
+        <div class="course-card" *ngFor="let course of courses">
+          <div class="course-header">
+            <h3>{{ course.title }}</h3>
+            <span class="course-level" [class]="'level-' + course.level.toLowerCase()">
+              {{ course.level }}
+            </span>
+          </div>
+          <p class="course-description">{{ course.description }}</p>
+          <div class="course-meta">
+            <span class="course-duration">⏱️ {{ course.duration }}</span>
+            <span class="course-tech">🔧 {{ course.technology }}</span>
+          </div>
+          <button class="btn btn-primary course-btn">Inscrever-se</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sprint Atual (Metodologias Ágeis) -->
+  <section class="sprint-section">
+    <div class="container">
+      <h2 class="section-title">Sprint Atual - Metodologia Ágil (Scrum)</h2>
+      <div class="sprint-card">
+        <div class="sprint-header">
+          <h3>Sprint {{ currentSprint.number }}</h3>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="userProgress"></div>
+          </div>
+        </div>
+        <p class="sprint-goal">{{ currentSprint.goal }}</p>
+        <div class="tasks-list">
+          <div class="task" *ngFor="let task of currentSprint.tasks; let i = index" 
+               [class.completed]="task.completed">
+            <input type="checkbox" [checked]="task.completed" 
+                   (change)="completeTask(i)" [disabled]="task.completed">
+            <span>{{ task.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre Section -->
+  <section id="sobre" class="about">
+    <div class="container">
+      <h2 class="section-title">Sobre o EduNext</h2>
+      <div class="about-content">
+        <p>
+          O EduNext é uma plataforma educacional moderna desenvolvida com as mais recentes 
+          tecnologias web. Nosso objetivo é proporcionar uma experiência de aprendizado 
+          excepcional em programação e tecnologia.
+        </p>
+        <p>
+          Utilizamos metodologias ágeis (Scrum) em nosso desenvolvimento e estamos em 
+          total conformidade com a LGPD (Lei Geral de Proteção de Dados), garantindo 
+          a segurança e privacidade dos nossos usuários.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LGPD Modal -->
+  <div class="lgpd-modal" *ngIf="showLGPDModal">
+    <div class="modal-content">
+      <h3>Política de Privacidade - LGPD</h3>
+      <p>
+        Respeitamos sua privacidade e estamos em conformidade com a LGPD. 
+        Escolha quais dados você permite que coletemos:
+      </p>
+      <div class="consent-options">
+        <label>
+          <input type="checkbox" [(ngModel)]="lgpdConsent.functional" disabled>
+          Cookies funcionais (obrigatórios)
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="lgpdConsent.analytics">
+          Cookies de análise (opcional)
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="lgpdConsent.marketing">
+          Cookies de marketing (opcional)
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" (click)="acceptLGPDConsent()">Aceitar</button>
+        <button class="btn btn-secondary" (click)="rejectLGPDConsent()">Apenas Essenciais</button>
+      </div>
+    </div>
+  </div>
+</div>
