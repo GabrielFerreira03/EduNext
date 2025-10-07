@@ -1,0 +1,36 @@
+<header class="header">
+  <div class="container">
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a routerLink="/" class="brand-link">
+          <h1>EduNext</h1>
+          <span class="brand-subtitle">Plataforma Educacional</span>
+        </a>
+      </div>
+      
+      <button class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <ul class="navbar-nav" [class.active]="isMenuOpen">
+        <li class="nav-item">
+          <a routerLink="/home" class="nav-link" (click)="closeMenu()">Início</a>
+        </li>
+        <li class="nav-item">
+          <a href="#cursos" class="nav-link" (click)="closeMenu()">Cursos</a>
+        </li>
+        <li class="nav-item">
+          <a href="#sobre" class="nav-link" (click)="closeMenu()">Sobre</a>
+        </li>
+        <li class="nav-item">
+          <a href="#contato" class="nav-link" (click)="closeMenu()">Contato</a>
+        </li>
+        <li class="nav-item">
+          <a href="#lgpd" class="nav-link" (click)="closeMenu()">Privacidade</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
