@@ -2,7 +2,6 @@
   min-height: 100vh;
 }
 
-/* Hero Section */
 .hero {
   background: linear-gradient(135deg, var(--primary-color), #0056b3);
   color: white;
@@ -68,7 +67,6 @@
   color: var(--primary-color);
 }
 
-/* Sections */
 .section-title {
   text-align: center;
   font-size: 2.5rem;
@@ -85,7 +83,6 @@
   background-color: var(--light-color);
 }
 
-/* Tech Grid */
 .tech-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -114,7 +111,6 @@
   font-size: 1.3rem;
 }
 
-/* Courses Grid */
 .courses-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -157,6 +153,11 @@
   font-size: 0.8rem;
   font-weight: bold;
   text-transform: uppercase;
+}
+
+.level-básico {
+  background-color: #007bff;
+  color: white;
 }
 
 .level-iniciante {
@@ -208,7 +209,6 @@
   transform: translateY(-2px);
 }
 
-/* Sprint Section */
 .sprint-card {
   background: white;
   border-radius: var(--border-radius);
@@ -276,7 +276,10 @@
   transform: scale(1.2);
 }
 
-/* About Section */
+.about-section {
+  /* About Section styles */
+}
+
 .about-content {
   max-width: 800px;
   margin: 0 auto;
@@ -290,7 +293,6 @@
   color: var(--secondary-color);
 }
 
-/* LGPD Modal */
 .lgpd-modal {
   position: fixed;
   top: 0;
@@ -338,7 +340,6 @@
   justify-content: flex-end;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .hero {
     padding: 3rem 1rem;

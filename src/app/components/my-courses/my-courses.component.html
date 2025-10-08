@@ -1,0 +1,90 @@
+<div class="my-courses-container">
+  <div class="page-header">
+    <h1>Meus Cursos</h1>
+    <p>Gerencie seus cursos matriculados e explore novos conteúdos</p>
+  </div>
+
+  <div class="courses-section">
+    <h2>Cursos Matriculados</h2>
+    
+    <div class="courses-grid" *ngIf="enrolledCourses.length > 0; else noEnrolledCourses">
+      <div class="course-card enrolled" *ngFor="let course of enrolledCourses">
+        <div class="course-content">
+          <h3>{{ course.title }}</h3>
+          <p class="instructor">{{ course.instructor }}</p>
+          <div class="progress-info">
+            <span class="progress-text">Progresso: {{ course.progress }}%</span>
+            <div class="progress-bar">
+              <div class="progress-fill" [style.width.%]="course.progress"></div>
+            </div>
+          </div>
+          <div class="course-actions">
+            <button class="btn-cancel" (click)="cancelEnrollment(course.id)">
+              Cancelar Matrícula
+            </button>
+            <button class="btn-certificate" 
+                    *ngIf="(course.progress || 0) >= 100" 
+                    (click)="viewCertificate(course.id)">
+              Certificado
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noEnrolledCourses>
+      <div class="empty-state">
+        <i class="fas fa-graduation-cap"></i>
+        <h3>Nenhum curso matriculado</h3>
+        <p>Você ainda não se matriculou em nenhum curso. Explore os cursos disponíveis abaixo!</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="courses-section">
+    <h2>Cursos Disponíveis</h2>
+    
+    <div class="courses-grid" *ngIf="availableCourses.length > 0">
+      <div class="course-card available" *ngFor="let course of availableCourses">
+        <div class="course-content">
+          <h3>{{ course.title }}</h3>
+          <p class="instructor">{{ course.instructor }}</p>
+          <span class="tech-tag">{{ course.technology }}</span>
+          <div class="course-actions">
+            <button class="btn-enroll" (click)="enrollInCourse(course.id)">
+              Matricular-se
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmação -->
+  <div class="modal-overlay" *ngIf="showConfirmModal" (click)="closeConfirmModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Confirmar Cancelamento</h3>
+        <button class="modal-close" (click)="closeConfirmModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="warning-icon">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <p>Tem certeza que deseja cancelar sua matrícula no curso:</p>
+        <h4>{{ courseToCancel?.title }}</h4>
+        <p class="warning-text">Esta ação não pode ser desfeita e você perderá todo o progresso atual.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal-cancel" (click)="closeConfirmModal()">
+          Manter Matrícula
+        </button>
+        <button class="btn-modal-confirm" (click)="confirmCancelEnrollment()">
+          Sim, Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

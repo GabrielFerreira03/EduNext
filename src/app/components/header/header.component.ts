@@ -1,182 +1,188 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { SidebarService } from '../../services/sidebar.service';
+import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { SidebarService } from '../../services/sidebar.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
-  isMenuOpen = false;
+export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
-  userName = '';
-  sidebarOpen = false;
   isHomePage = false;
+  isSidebarOpen = false;
+  isNavbarVisible = true;
   isHeaderVisible = true;
+  sidebarOpen = false;
+  isMenuOpen = false;
   lastScrollTop = 0;
-  scrollThreshold = 5;
+  scrollThreshold = 100;
+
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private router: Router,
     private sidebarService: SidebarService
-  ) {}
+  ) { }
 
-  ngOnInit() {
-    this.checkLoginStatus();
-    this.checkCurrentRoute();
-    
-    // Inscrever-se no estado da sidebar para atualizar o visual do botão
-    this.sidebarService.sidebarOpen$.subscribe(
-      isOpen => this.sidebarOpen = isOpen
+  ngOnInit(): void {
+    this.isLoggedIn = this.authService.isLoggedIn();
+
+    const sidebarSub = this.sidebarService.sidebarOpen$.subscribe(
+      isOpen => {
+        this.isSidebarOpen = isOpen;
+        this.sidebarOpen = isOpen;
+      }
     );
 
-    // Detectar mudanças de rota para atualizar isHomePage
-    this.router.events.pipe(
+    const routerSub = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.checkCurrentRoute();
+    ).subscribe((event) => {
+      const navEvent = event as NavigationEnd;
+      this.isHomePage = navEvent.url === '/' || navEvent.url === '/home';
+      this.isLoggedIn = this.authService.isLoggedIn();
     });
+
+    this.subscriptions.add(sidebarSub);
+    this.subscriptions.add(routerSub);
   }
 
-  checkLoginStatus() {
-    this.isLoggedIn = this.authService.isLoggedIn();
-    if (this.isLoggedIn) {
-      const currentUser = this.authService.getCurrentUser();
-      this.userName = currentUser ? currentUser.name : '';
-    }
-  }
-
-  checkCurrentRoute() {
-    this.isHomePage = this.router.url === '/' || this.router.url === '/home';
-  }
-
-  toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
-  closeMenu(): void {
-    this.isMenuOpen = false;
-  }
-
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/']);
-    this.checkLoginStatus();
-  }
-
-  onLogoClick(): void {
-    if (this.isLoggedIn) {
-      this.router.navigate(['/dashboard']);
-    } else if (this.isHomePage) {
-      // Se estiver na página home, rola para o topo
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      // Se não estiver na home, navega para a home
-      this.router.navigate(['/']);
-    }
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   toggleSidebar(): void {
     this.sidebarService.toggleSidebar();
   }
 
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  onLogoClick(): void {
+    this.goToHome();
+  }
+
   goToLogin(): void {
-    this.closeMenu();
     this.router.navigate(['/login']).then(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
     });
   }
 
   goToRegister(): void {
-    this.closeMenu();
     this.router.navigate(['/register']).then(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
     });
   }
 
-  goToHome(): void {
-    this.closeMenu();
-    if (this.isHomePage) {
-      // Se já estiver na página home, apenas rola para o topo
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      // Se não estiver na home, navega para a home e depois rola para o topo
-      this.router.navigate(['/']).then(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
-  }
-
   goToCursos(): void {
-    this.closeMenu();
-    if (this.isHomePage) {
-      // Se já estiver na página home, rola para a seção cursos
-      const element = document.getElementById('cursos');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // Se não estiver na home, navega para a home e depois rola para a seção cursos
-      this.router.navigate(['/']).then(() => {
-        setTimeout(() => {
-          const element = document.getElementById('cursos');
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
-      });
-    }
+    this.scrollToCourses();
   }
 
   goToSobre(): void {
-    this.closeMenu();
+    this.scrollToAbout();
+  }
+
+
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
+
+  goToHome(): void {
     if (this.isHomePage) {
-      // Se já estiver na página home, rola para a seção sobre
-      const element = document.getElementById('sobre');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      // Se não estiver na home, navega para a home e depois rola para a seção sobre
       this.router.navigate(['/']).then(() => {
-        setTimeout(() => {
-          const element = document.getElementById('sobre');
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
+        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+      });
+    }
+  }
+
+  goToDashboard(): void {
+    this.router.navigate(['/dashboard']);
+  }
+
+  scrollToSection(sectionId: string): void {
+    if (this.isHomePage) {
+      this.scrollToElement(sectionId);
+    } else {
+      this.router.navigate(['/']).then(() => {
+        setTimeout(() => this.scrollToElement(sectionId), 100);
+      });
+    }
+  }
+
+  scrollToTop(): void {
+    if (this.isHomePage) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      this.router.navigate(['/']).then(() => {
+        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+      });
+    }
+  }
+
+  scrollToCourses(): void {
+    if (this.isHomePage) {
+      this.scrollToElement('courses');
+    } else {
+      this.router.navigate(['/']).then(() => {
+        setTimeout(() => this.scrollToElement('courses'), 100);
+      });
+    }
+  }
+
+  private scrollToElement(elementId: string): void {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  scrollToAbout(): void {
+    if (this.isHomePage) {
+      this.scrollToElement('about');
+    } else {
+      this.router.navigate(['/']).then(() => {
+        setTimeout(() => this.scrollToElement('about'), 100);
       });
     }
   }
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
+    if (!this.isHomePage) return;
+
     const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // Se estiver no topo da página, sempre mostrar o navbar
-    if (currentScrollTop <= 0) {
+
+    if (currentScrollTop <= this.scrollThreshold) {
       this.isHeaderVisible = true;
+      this.isNavbarVisible = true;
       this.lastScrollTop = currentScrollTop;
       return;
     }
 
-    // Verificar se o scroll foi significativo o suficiente
     const scrollDifference = Math.abs(currentScrollTop - this.lastScrollTop);
-    
-    if (scrollDifference > this.scrollThreshold) {
-      if (currentScrollTop > this.lastScrollTop) {
-        // Rolando para baixo - esconder navbar
-        this.isHeaderVisible = false;
-      } else {
-        // Rolando para cima - mostrar navbar
-        this.isHeaderVisible = true;
-      }
-      
-      this.lastScrollTop = currentScrollTop;
+    if (scrollDifference < 10) return;
+
+    if (currentScrollTop > this.lastScrollTop) {
+      this.isHeaderVisible = false;
+      this.isNavbarVisible = false;
+    } else {
+      this.isHeaderVisible = true;
+      this.isNavbarVisible = true;
     }
+
+    this.lastScrollTop = currentScrollTop;
   }
 }

@@ -1,9 +1,8 @@
 <header class="header">
-    <nav class="navbar" [class.hidden]="!isHeaderVisible">
-      <!-- Lado esquerdo: Logo e texto -->
-      <div class="navbar-left">
-        <!-- Toggle button para usuários logados -->
-        <button *ngIf="isLoggedIn" class="sidebar-toggle-btn" (click)="toggleSidebar()" [class.active]="sidebarOpen">
+  <nav class="navbar" [class.hidden]="!isHeaderVisible">
+    <div class="header-container">
+      <div class="header-left">
+        <button *ngIf="isLoggedIn" class="toggle-btn sidebar-toggle-btn" (click)="toggleSidebar()" [class.active]="sidebarOpen">
           <span class="toggle-line line1"></span>
           <span class="toggle-line line2"></span>
           <span class="toggle-line line3"></span>
@@ -19,17 +18,14 @@
           </a>
         </div>
       </div>
-      
-      <!-- Lado direito: Navegação e botões -->
+
       <div class="navbar-right">
-        <!-- Menu toggle para usuários não logados -->
         <button *ngIf="!isLoggedIn" class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
           <span></span>
           <span></span>
           <span></span>
         </button>
         
-        <!-- Navegação para usuários não logados -->
         <ul *ngIf="!isLoggedIn" class="navbar-nav" [class.active]="isMenuOpen">
           <li class="nav-item">
             <a (click)="goToHome()" class="nav-link" style="cursor: pointer;">Início</a>
@@ -42,20 +38,18 @@
           </li>
         </ul>
         
-        <!-- Botões de autenticação para usuários não logados -->
         <div *ngIf="!isLoggedIn" class="auth-buttons" [class.active]="isMenuOpen">
           <a (click)="goToLogin()" class="btn-login" style="cursor: pointer;">Entrar</a>
           <a (click)="goToRegister()" class="btn-register" style="cursor: pointer;">Cadastrar</a>
         </div>
 
-        <!-- Área do usuário logado -->
         <div *ngIf="isLoggedIn" class="user-area">
-          <span class="welcome-text">Olá, {{ userName }}</span>
           <button class="btn-logout" (click)="logout()">
             <i class="fas fa-sign-out-alt"></i>
             <span>Sair</span>
           </button>
         </div>
       </div>
-    </nav>
+    </div>
+  </nav>
 </header>

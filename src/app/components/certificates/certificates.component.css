@@ -1,0 +1,589 @@
+.certificates-container {
+  padding: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.certificates-form {
+  max-width: 1200px;
+  width: 100%;
+  background: white;
+  border-radius: 16px;
+  border: 3px solid #007bff;
+  box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.certificates-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 2rem;
+}
+
+.certificates-header h1 {
+  color: #007bff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.certificates-header h1 i {
+  color: #007bff;
+  font-size: 2.2rem;
+}
+
+.certificates-header p {
+  color: #6c757d;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.certificates-content {
+  margin-top: 2rem;
+}
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.certificate-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.certificate-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+}
+
+.certificate-header {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.certificate-badge {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.certificate-badge i {
+  color: #007bff;
+  font-size: 1.8rem;
+}
+
+.certificate-level {
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.certificate-content {
+  padding: 2rem;
+}
+
+.certificate-content h3 {
+  color: #2c3e50;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.instructor {
+  color: #7f8c8d;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.certificate-details {
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  color: #34495e;
+  font-size: 0.95rem;
+}
+
+.detail-item i {
+  color: #007bff;
+  width: 16px;
+  text-align: center;
+}
+
+.grade {
+  font-weight: 600;
+}
+
+.skills-section h4 {
+  color: #2c3e50;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.certificate-actions {
+  padding: 1.5rem 2rem;
+  background: #f8f9fa;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  flex: 1;
+  justify-content: center;
+  min-width: 120px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+.btn-outline:hover {
+  background: #007bff;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.no-certificates, .no-user {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.no-certificates i, .no-user i {
+  font-size: 4rem;
+  color: #bdc3c7;
+  margin-bottom: 1.5rem;
+}
+
+.no-certificates h3, .no-user h3 {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.no-certificates p, .no-user p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+  backdrop-filter: blur(5px);
+}
+
+/* Modal Styles */
+.certificate-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+  backdrop-filter: blur(5px);
+}
+
+.certificate-modal {
+  background: white;
+  border-radius: 16px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1001;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+}
+
+.modal-close i {
+  color: #2c3e50;
+  font-size: 1.2rem;
+}
+
+.certificate-document {
+  padding: 3rem;
+}
+
+.certificate-border {
+  border: 8px solid #007bff;
+  border-radius: 12px;
+  padding: 3rem;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  position: relative;
+}
+
+.certificate-border::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(45deg, #007bff, #0056b3, #004085, #007bff);
+  border-radius: 16px;
+  z-index: -1;
+}
+
+.certificate-header-modal {
+  text-align: center;
+  margin-bottom: 2rem;
+  border-bottom: 3px solid #007bff;
+  padding-bottom: 2rem;
+}
+
+.certificate-logo img {
+  height: 60px;
+  margin-bottom: 1rem;
+}
+
+.certificate-header-modal h1 {
+  color: #2c3e50;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+.certificate-decoration i {
+  color: #007bff;
+  font-size: 2.5rem;
+}
+
+.certificate-body {
+  text-align: center;
+  line-height: 1.8;
+}
+
+.certificate-text {
+  color: #34495e;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.student-name {
+  color: #007bff;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 1.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #007bff;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+.course-name {
+  color: #e74c3c;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 1.5rem 0;
+  font-style: italic;
+}
+
+.certificate-date {
+  margin: 2rem 0;
+  padding: 1rem;
+  background: rgba(0, 123, 255, 0.1);
+  border-radius: 8px;
+}
+
+.certificate-date p {
+  color: #2c3e50;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.certificate-footer-modal {
+  margin-top: 3rem;
+  border-top: 2px solid #007bff;
+  padding-top: 2rem;
+}
+
+.signature-section {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+}
+
+.signature {
+  text-align: center;
+}
+
+.signature-line {
+  width: 200px;
+  height: 2px;
+  background: #007bff;
+  margin: 0 auto 0.5rem;
+}
+
+.signature p {
+  color: #2c3e50;
+  font-weight: 600;
+  margin: 0.5rem 0 0.25rem;
+}
+
+.signature small {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.certificate-info {
+  text-align: left;
+  background: rgba(52, 73, 94, 0.05);
+  padding: 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.certificate-info p {
+  margin: 0.5rem 0;
+  color: #2c3e50;
+}
+
+.verify-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.verify-link:hover {
+  text-decoration: underline;
+}
+
+.modal-actions {
+  padding: 2rem 3rem;
+  background: #f8f9fa;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  border-top: 1px solid #e9ecef;
+}
+
+.modal-actions .btn {
+  min-width: 150px;
+}
+
+@media (max-width: 768px) {
+  .certificates-container {
+    padding: 1rem;
+  }
+
+  .certificates-form {
+    margin-top: 1rem;
+    padding: 1.5rem;
+  }
+
+  .certificates-header h1 {
+    font-size: 2rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .certificates-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .certificate-actions {
+    flex-direction: column;
+  }
+
+  .certificate-actions .btn {
+    flex: none;
+  }
+
+  .certificate-modal-overlay {
+    padding: 1rem;
+  }
+
+  .certificate-document {
+    padding: 1.5rem;
+  }
+
+  .certificate-border {
+    padding: 1.5rem;
+  }
+
+  .student-name {
+    font-size: 1.8rem;
+  }
+
+  .course-name {
+    font-size: 1.4rem;
+  }
+
+  .signature-section {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .signature-line {
+    width: 150px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .modal-actions .btn {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .certificates-form {
+    padding: 1rem;
+  }
+
+  .certificates-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .certificate-content {
+    padding: 1.5rem;
+  }
+
+  .certificate-header {
+    padding: 1rem;
+  }
+
+  .certificate-badge {
+    width: 50px;
+    height: 50px;
+  }
+
+  .certificate-badge i {
+    font-size: 1.5rem;
+  }
+
+  .certificate-level {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}

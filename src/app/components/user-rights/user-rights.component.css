@@ -139,7 +139,6 @@ a:hover {
   transform: translateY(0);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .user-rights-container {
     padding: 10px;

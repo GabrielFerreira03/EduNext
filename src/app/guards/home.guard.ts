@@ -14,7 +14,6 @@ export class HomeGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
-      // Se o usuário estiver logado, redireciona para o dashboard
       this.router.navigate(['/dashboard']);
       return false;
     }

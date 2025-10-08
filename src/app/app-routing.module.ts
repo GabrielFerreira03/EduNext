@@ -8,6 +8,10 @@ import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-poli
 import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
 import { CookiePolicyComponent } from './components/cookie-policy/cookie-policy.component';
 import { UserRightsComponent } from './components/user-rights/user-rights.component';
+import { MyCoursesComponent } from './components/my-courses/my-courses.component';
+import { ProgressComponent } from './components/progress/progress.component';
+import { CertificatesComponent } from './components/certificates/certificates.component';
+import { SettingsComponent } from './components/settings/settings.component';
 import { HomeGuard } from './guards/home.guard';
 
 const routes: Routes = [
@@ -16,6 +20,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'my-courses', component: MyCoursesComponent },
+  { path: 'progress', component: ProgressComponent },
+  { path: 'certificates', component: CertificatesComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'terms-of-use', component: TermsOfUseComponent },
   { path: 'cookie-policy', component: CookiePolicyComponent },
