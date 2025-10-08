@@ -1,0 +1,65 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>Entrar no EduNext</h2>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="login-form">
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input 
+          type="email" 
+          id="email" 
+          [(ngModel)]="email" 
+          name="email"
+          required
+          class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha:</label>
+        <input 
+          type="password" 
+          id="password" 
+          [(ngModel)]="password" 
+          name="password"
+          required
+          class="form-control">
+      </div>
+
+      <div class="form-options">
+        <div class="remember-me">
+          <input 
+            type="checkbox" 
+            id="rememberMe" 
+            [(ngModel)]="rememberMe" 
+            name="rememberMe">
+          <label for="rememberMe">Lembrar de mim</label>
+        </div>
+        <a href="#" class="forgot-password">Esqueci minha senha</a>
+      </div>
+
+      <button type="submit" class="btn-login">Entrar</button>
+    </form>
+
+    <div class="login-footer">
+      <p>Não tem conta? 
+        <a (click)="goToRegister()" class="register-link">Cadastre-se</a>
+      </p>
+      
+      <div class="policy-links">
+        <a routerLink="/privacy-policy" class="policy-link">Política de Privacidade</a>
+        <span class="separator">•</span>
+        <a routerLink="/terms-of-use" class="policy-link">Termos de Uso</a>
+        <span class="separator">•</span>
+        <a routerLink="/cookie-policy" class="policy-link">Política de Cookies</a>
+        <span class="separator">•</span>
+        <a routerLink="/user-rights" class="policy-link">Seus Direitos</a>
+      </div>
+    </div>
+  </div>
+</div>

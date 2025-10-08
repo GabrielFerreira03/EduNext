@@ -1,22 +1,33 @@
 <header class="header">
-  <div class="container">
-    <nav class="navbar">
+    <nav class="navbar" [class.hidden]="!isHeaderVisible">
+      <!-- Toggle button para usuários logados -->
+      <button *ngIf="isLoggedIn" class="sidebar-toggle-btn" (click)="toggleSidebar()" [class.active]="sidebarOpen">
+        <span class="toggle-line line1"></span>
+        <span class="toggle-line line2"></span>
+        <span class="toggle-line line3"></span>
+      </button>
+      
       <div class="navbar-brand">
-        <a routerLink="/" class="brand-link">
-          <h1>EduNext</h1>
-          <span class="brand-subtitle">Plataforma Educacional</span>
+        <a (click)="onLogoClick()" class="brand-link" style="cursor: pointer;">
+          <img src="assets/images/logofundoinvisivel.png" alt="EduNext Logo" class="brand-logo">
+          <div class="brand-text">
+            <h1>EduNext</h1>
+            <span class="brand-subtitle">Plataforma Educacional</span>
+          </div>
         </a>
       </div>
       
-      <button class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
+      <!-- Menu toggle para usuários não logados -->
+      <button *ngIf="!isLoggedIn" class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
         <span></span>
         <span></span>
         <span></span>
       </button>
       
-      <ul class="navbar-nav" [class.active]="isMenuOpen">
+      <!-- Navegação para usuários não logados -->
+      <ul *ngIf="!isLoggedIn" class="navbar-nav" [class.active]="isMenuOpen">
         <li class="nav-item">
-          <a routerLink="/home" class="nav-link" (click)="closeMenu()">Início</a>
+          <a routerLink="/" class="nav-link" (click)="closeMenu()">Início</a>
         </li>
         <li class="nav-item">
           <a href="#cursos" class="nav-link" (click)="closeMenu()">Cursos</a>
@@ -24,13 +35,21 @@
         <li class="nav-item">
           <a href="#sobre" class="nav-link" (click)="closeMenu()">Sobre</a>
         </li>
-        <li class="nav-item">
-          <a href="#contato" class="nav-link" (click)="closeMenu()">Contato</a>
-        </li>
-        <li class="nav-item">
-          <a href="#lgpd" class="nav-link" (click)="closeMenu()">Privacidade</a>
-        </li>
       </ul>
+      
+      <!-- Botões de autenticação para usuários não logados -->
+      <div *ngIf="!isLoggedIn" class="auth-buttons" [class.active]="isMenuOpen">
+        <a routerLink="/login" class="btn-login" (click)="closeMenu()">Entrar</a>
+        <a routerLink="/register" class="btn-register" (click)="closeMenu()">Cadastrar</a>
+      </div>
+
+      <!-- Área do usuário logado -->
+      <div *ngIf="isLoggedIn" class="user-area">
+        <span class="welcome-text">Olá, {{ userName }}</span>
+        <button class="btn-logout" (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Sair</span>
+        </button>
+      </div>
     </nav>
-  </div>
 </header>
