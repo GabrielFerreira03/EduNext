@@ -1,7 +1,6 @@
 <div class="home-container">
   <!-- Hero Section -->
   <section class="hero">
-    <div class="container">
       <div class="hero-content">
         <h1 class="hero-title">Bem-vindo ao EduNext</h1>
         <p class="hero-subtitle">
@@ -13,21 +12,19 @@
             <span class="stat-label">Cursos Disponíveis</span>
           </div>
           <div class="stat">
-            <span class="stat-number">{{ userProgress }}%</span>
-            <span class="stat-label">Progresso Atual</span>
+            <span class="stat-number">1.2k+</span>
+            <span class="stat-label">Estudantes Ativos</span>
           </div>
         </div>
         <div class="hero-actions">
-          <button class="btn btn-primary">Começar Agora</button>
-          <button class="btn btn-secondary">Ver Cursos</button>
+          <button class="btn btn-primary" (click)="goToRegister()">Começar Agora</button>
+          <button class="btn btn-secondary" (click)="goToCourses()">Ver Cursos</button>
         </div>
       </div>
-    </div>
   </section>
 
   <!-- Tecnologias Section -->
   <section id="cursos" class="technologies">
-    <div class="container">
       <h2 class="section-title">Tecnologias que Você Vai Aprender</h2>
       <div class="tech-grid">
         <div class="tech-card">
@@ -55,12 +52,10 @@
           <p>Scrum e práticas modernas de desenvolvimento</p>
         </div>
       </div>
-    </div>
   </section>
 
   <!-- Cursos Section -->
   <section class="courses">
-    <div class="container">
       <h2 class="section-title">Nossos Cursos</h2>
       <div class="courses-grid">
         <div class="course-card" *ngFor="let course of courses">
@@ -78,36 +73,12 @@
           <button class="btn btn-primary course-btn">Inscrever-se</button>
         </div>
       </div>
-    </div>
   </section>
 
-  <!-- Sprint Atual (Metodologias Ágeis) -->
-  <section class="sprint-section">
-    <div class="container">
-      <h2 class="section-title">Sprint Atual - Metodologia Ágil (Scrum)</h2>
-      <div class="sprint-card">
-        <div class="sprint-header">
-          <h3>Sprint {{ currentSprint.number }}</h3>
-          <div class="progress-bar">
-            <div class="progress-fill" [style.width.%]="userProgress"></div>
-          </div>
-        </div>
-        <p class="sprint-goal">{{ currentSprint.goal }}</p>
-        <div class="tasks-list">
-          <div class="task" *ngFor="let task of currentSprint.tasks; let i = index" 
-               [class.completed]="task.completed">
-            <input type="checkbox" [checked]="task.completed" 
-                   (change)="completeTask(i)" [disabled]="task.completed">
-            <span>{{ task.name }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- Sobre Section -->
   <section id="sobre" class="about">
-    <div class="container">
       <h2 class="section-title">Sobre o EduNext</h2>
       <div class="about-content">
         <p>
@@ -121,7 +92,6 @@
           a segurança e privacidade dos nossos usuários.
         </p>
       </div>
-    </div>
   </section>
 
   <!-- LGPD Modal -->

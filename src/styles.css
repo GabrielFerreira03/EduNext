@@ -5,11 +5,19 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
+  height: 100%;
+  overflow-x: hidden;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: #333;
   background-color: #f8f9fa;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 90px; /* Compensar altura do header fixo */
 }
 
 /* Variáveis CSS para tema */
@@ -31,7 +39,7 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
 .btn {

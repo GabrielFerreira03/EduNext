@@ -6,7 +6,8 @@
 .hero {
   background: linear-gradient(135deg, var(--primary-color), #0056b3);
   color: white;
-  padding: 4rem 0;
+  padding: 4rem 2rem;
+  margin-top: 2rem;
   text-align: center;
 }
 
@@ -76,11 +77,11 @@
 }
 
 .technologies, .courses, .about {
-  padding: 4rem 0;
+  padding: 4rem 2rem;
 }
 
 .sprint-section {
-  padding: 4rem 0;
+  padding: 4rem 2rem;
   background-color: var(--light-color);
 }
 
@@ -89,6 +90,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .tech-card {
@@ -116,6 +119,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .course-card {
@@ -124,6 +129,9 @@
   box-shadow: var(--box-shadow);
   padding: 2rem;
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .course-card:hover {
@@ -177,10 +185,27 @@
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
   color: var(--secondary-color);
+  flex-grow: 1;
 }
 
 .course-btn {
   width: 100%;
+  margin-top: auto;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.course-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
 /* Sprint Section */
@@ -315,6 +340,14 @@
 
 /* Responsividade */
 @media (max-width: 768px) {
+  .hero {
+    padding: 3rem 1rem;
+  }
+  
+  .technologies, .courses, .about, .sprint-section {
+    padding: 3rem 1rem;
+  }
+  
   .hero-title {
     font-size: 2.5rem;
   }

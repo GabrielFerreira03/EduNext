@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface Course {
   id: number;
@@ -35,26 +36,14 @@ export class HomeComponent implements OnInit {
     functional: true
   };
 
-  // Metodologias Ágeis - Sprint atual
-  currentSprint = {
-    number: 1,
-    goal: 'Implementar página inicial da plataforma EduNext',
-    tasks: [
-      { name: 'Criar estrutura HTML', completed: true },
-      { name: 'Implementar CSS responsivo', completed: true },
-      { name: 'Adicionar lógica JavaScript/TypeScript', completed: true },
-      { name: 'Configurar roteamento Angular', completed: true },
-      { name: 'Implementar conformidade LGPD', completed: false }
-    ]
-  };
 
-  constructor() {
+
+  constructor(private router: Router) {
     this.initializeCourses();
     this.checkLGPDConsent();
   }
 
   ngOnInit(): void {
-    this.calculateProgress();
     this.setFeaturedCourse();
   }
 
@@ -104,11 +93,7 @@ export class HomeComponent implements OnInit {
     ];
   }
 
-  // Lógica de programação - Calcular progresso
-  private calculateProgress(): void {
-    const completedTasks = this.currentSprint.tasks.filter(task => task.completed).length;
-    this.userProgress = Math.round((completedTasks / this.currentSprint.tasks.length) * 100);
-  }
+
 
   // Lógica de programação - Definir curso em destaque
   private setFeaturedCourse(): void {
@@ -143,12 +128,7 @@ export class HomeComponent implements OnInit {
     this.acceptLGPDConsent();
   }
 
-  // Metodologia Ágil - Completar tarefa
-  completeTask(taskIndex: number): void {
-    this.currentSprint.tasks[taskIndex].completed = true;
-    this.calculateProgress();
-    console.log(`Tarefa completada: ${this.currentSprint.tasks[taskIndex].name}`);
-  }
+
 
   // Lógica de programação - Filtrar cursos por nível
   getCoursesByLevel(level: string): Course[] {
@@ -158,5 +138,18 @@ export class HomeComponent implements OnInit {
   // Lógica de programação - Buscar curso por ID
   getCourseById(id: number): Course | undefined {
     return this.courses.find(course => course.id === id);
+  }
+
+  // Navegação - Ir para cadastro
+  goToRegister(): void {
+    this.router.navigate(['/register']);
+  }
+
+  // Navegação - Ir para seção de cursos
+  goToCourses(): void {
+    const element = document.getElementById('cursos');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }

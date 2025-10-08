@@ -1,0 +1,189 @@
+<div class="dashboard-container" [class.sidebar-open]="sidebarOpen">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.open]="sidebarOpen">
+    <nav class="sidebar-nav">
+      <div class="sidebar-close">
+        <button class="close-btn" (click)="toggleSidebar()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <ul>
+        <li *ngFor="let item of menuItems" 
+            [class.active]="item.active"
+            (click)="selectMenuItem(item.id)">
+          <a>
+            <i [class]="item.icon"></i>
+            <span>{{ item.label }}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Sair</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <h1>{{ getCurrentViewTitle() }}</h1>
+      <div class="top-bar-actions">
+        <button class="notification-btn">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        <div class="user-menu">
+          <div class="user-avatar-small" [style.background-color]="getAvatarColor()">
+            {{ getUserInitial() }}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <!-- Home View -->
+      <div *ngIf="currentView === 'home'" class="view-content">
+        <div class="welcome-section">
+          <h2>Bem-vindo de volta, {{ userName }}!</h2>
+          <p>Continue sua jornada de aprendizado onde parou.</p>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="card stats-card">
+            <h3>Estatísticas Rápidas</h3>
+            <div class="stats-grid">
+              <div class="stat-item">
+                <i class="fas fa-book"></i>
+                <div>
+                  <span class="stat-number">12</span>
+                  <span class="stat-label">Cursos</span>
+                </div>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-certificate"></i>
+                <div>
+                  <span class="stat-number">8</span>
+                  <span class="stat-label">Certificados</span>
+                </div>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-clock"></i>
+                <div>
+                  <span class="stat-number">45h</span>
+                  <span class="stat-label">Estudadas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card recent-activity">
+            <h3>Atividade Recente</h3>
+            <ul>
+              <li>
+                <i class="fas fa-play-circle"></i>
+                <span>Completou: "Introdução ao Angular"</span>
+                <small>2 horas atrás</small>
+              </li>
+              <li>
+                <i class="fas fa-star"></i>
+                <span>Avaliou: "JavaScript Avançado"</span>
+                <small>1 dia atrás</small>
+              </li>
+              <li>
+                <i class="fas fa-certificate"></i>
+                <span>Certificado obtido: "HTML & CSS"</span>
+                <small>3 dias atrás</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sprint View -->
+      <div *ngIf="currentView === 'sprint'" class="view-content">
+        <div class="sprint-header">
+          <h2>{{ currentSprint.title }}</h2>
+          <div class="sprint-info">
+            <span class="sprint-number">Sprint {{ currentSprint.sprintNumber }}</span>
+            <span class="sprint-dates">{{ currentSprint.startDate }} - {{ currentSprint.endDate }}</span>
+            <span class="days-remaining">{{ getDaysRemaining() }} dias restantes</span>
+          </div>
+        </div>
+
+        <div class="sprint-grid">
+          <div class="card sprint-progress">
+            <h3>Progresso do Sprint</h3>
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="currentSprint.progress"></div>
+              </div>
+              <span class="progress-text">{{ currentSprint.progress }}% concluído</span>
+            </div>
+          </div>
+
+          <div class="card sprint-tasks">
+            <h3>Tarefas do Sprint</h3>
+            <div class="task-list">
+              <div *ngFor="let task of currentSprint.tasks" class="task-item">
+                <div class="task-info">
+                  <h4>{{ task.title }}</h4>
+                  <p>Responsável: {{ task.assignee }}</p>
+                </div>
+                <span [class]="getTaskStatusClass(task.status)" class="task-status">
+                  {{ getTaskStatusText(task.status) }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card burndown-chart">
+            <h3>Burndown Chart</h3>
+            <div class="chart-container">
+              <div class="chart-placeholder">
+                <i class="fas fa-chart-line"></i>
+                <p>Gráfico de burndown seria exibido aqui</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other Views -->
+      <div *ngIf="currentView === 'courses'" class="view-content">
+        <h2>Meus Cursos</h2>
+        <p>Aqui serão exibidos seus cursos matriculados.</p>
+      </div>
+
+      <div *ngIf="currentView === 'progress'" class="view-content">
+        <h2>Progresso</h2>
+        <p>Aqui será exibido seu progresso geral.</p>
+      </div>
+
+      <div *ngIf="currentView === 'calendar'" class="view-content">
+        <h2>Calendário</h2>
+        <p>Aqui será exibido seu calendário de estudos.</p>
+      </div>
+
+      <div *ngIf="currentView === 'profile'" class="view-content">
+        <h2>Perfil</h2>
+        <p>Aqui você pode editar suas informações pessoais.</p>
+      </div>
+
+      <div *ngIf="currentView === 'settings'" class="view-content">
+        <h2>Configurações</h2>
+        <p>Aqui você pode ajustar suas preferências.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Overlay para mobile -->
+<div class="sidebar-overlay" 
+     [class.active]="sidebarOpen" 
+     (click)="toggleSidebar()"></div>

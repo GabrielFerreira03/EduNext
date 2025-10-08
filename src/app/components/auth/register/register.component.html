@@ -1,0 +1,144 @@
+<div class="register-container">
+  <div class="register-card">
+    <div class="register-header">
+      <h2>Junte-se ao EduNext</h2>
+      <p>Comece sua jornada de aprendizado em<br>Língua Gestual Portuguesa</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="register-form">
+      <div class="form-group">
+        <label for="fullName">Nome completo:</label>
+        <input 
+          type="text" 
+          id="fullName" 
+          [(ngModel)]="fullName" 
+          name="fullName"
+          placeholder="Seu nome completo"
+          required
+          class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="username">Nome de usuário:</label>
+        <input 
+          type="text" 
+          id="username" 
+          [(ngModel)]="username" 
+          name="username"
+          placeholder="Escolha um nome de usuário"
+          required
+          class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="birthDate">Data de nascimento:</label>
+        <input 
+          type="date" 
+          id="birthDate" 
+          [(ngModel)]="birthDate" 
+          name="birthDate"
+          placeholder="dd/mm/aaaa"
+          required
+          class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input 
+          type="email" 
+          id="email" 
+          [(ngModel)]="email" 
+          name="email"
+          placeholder="seu@email.com"
+          required
+          class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha:</label>
+        <div class="password-input-container">
+          <input 
+            [type]="showPassword ? 'text' : 'password'" 
+            id="password" 
+            [(ngModel)]="password" 
+            name="password"
+            placeholder="Digite uma senha segura"
+            required
+            class="form-control">
+          <button 
+            type="button" 
+            class="password-toggle"
+            (click)="togglePasswordVisibility('password')">
+            <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirmar senha:</label>
+        <div class="password-input-container">
+          <input 
+            [type]="showConfirmPassword ? 'text' : 'password'" 
+            id="confirmPassword" 
+            [(ngModel)]="confirmPassword" 
+            name="confirmPassword"
+            placeholder="Confirme sua senha"
+            required
+            class="form-control">
+          <button 
+            type="button" 
+            class="password-toggle"
+            (click)="togglePasswordVisibility('confirm')">
+            <i [class]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-options">
+        <div class="checkbox-item">
+          <input 
+            type="checkbox" 
+            id="acceptTerms" 
+            [(ngModel)]="acceptTerms" 
+            name="acceptTerms"
+            required>
+          <label for="acceptTerms">
+            Aceito os <a routerLink="/terms-of-use" class="terms-link">Termos de Serviço</a>
+          </label>
+        </div>
+
+        <div class="checkbox-item">
+          <input 
+            type="checkbox" 
+            id="acceptMarketing" 
+            [(ngModel)]="acceptMarketing" 
+            name="acceptMarketing">
+          <label for="acceptMarketing">
+            Quero receber novidades sobre cursos
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-register" [disabled]="!acceptTerms">Criar Conta</button>
+    </form>
+
+    <div class="register-footer">
+      <p>Já tem uma conta? 
+        <a (click)="goToLogin()" class="login-link">Faça login aqui</a>
+      </p>
+      <p class="privacy-notice">
+        Ao criar uma conta, você concorda com nossos <a routerLink="/terms-of-use" class="terms-link">Termos de Serviço</a> e <a routerLink="/privacy-policy" class="terms-link">Política de Privacidade</a>
+      </p>
+      
+      <div class="policy-links">
+        <a routerLink="/privacy-policy" class="policy-link">Política de Privacidade</a>
+        <span class="separator">•</span>
+        <a routerLink="/terms-of-use" class="policy-link">Termos de Uso</a>
+        <span class="separator">•</span>
+        <a routerLink="/cookie-policy" class="policy-link">Política de Cookies</a>
+        <span class="separator">•</span>
+        <a routerLink="/user-rights" class="policy-link">Seus Direitos</a>
+      </div>
+    </div>
+  </div>
+</div>
