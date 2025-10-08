@@ -11,9 +11,9 @@
 
 .navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
+  padding: 1rem 2rem;
   gap: 1rem;
   position: relative;
   height: 80px;
@@ -28,9 +28,16 @@
   opacity: 0;
 }
 
-.navbar .sidebar-toggle-btn {
-  position: absolute;
-  left: 10px;
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 /* Estilos para o toggle button animado */
@@ -185,6 +192,14 @@
 
 /* Responsividade */
 @media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+  
+  .navbar-right {
+    gap: 1rem;
+  }
+  
   .menu-toggle {
     display: flex;
   }
@@ -290,8 +305,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  position: absolute;
-  right: 10px;
 }
 
 .welcome-text {

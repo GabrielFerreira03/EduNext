@@ -84,6 +84,75 @@ export class HeaderComponent implements OnInit {
     this.sidebarService.toggleSidebar();
   }
 
+  goToLogin(): void {
+    this.closeMenu();
+    this.router.navigate(['/login']).then(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  goToRegister(): void {
+    this.closeMenu();
+    this.router.navigate(['/register']).then(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  goToHome(): void {
+    this.closeMenu();
+    if (this.isHomePage) {
+      // Se já estiver na página home, apenas rola para o topo
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Se não estiver na home, navega para a home e depois rola para o topo
+      this.router.navigate(['/']).then(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  }
+
+  goToCursos(): void {
+    this.closeMenu();
+    if (this.isHomePage) {
+      // Se já estiver na página home, rola para a seção cursos
+      const element = document.getElementById('cursos');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Se não estiver na home, navega para a home e depois rola para a seção cursos
+      this.router.navigate(['/']).then(() => {
+        setTimeout(() => {
+          const element = document.getElementById('cursos');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      });
+    }
+  }
+
+  goToSobre(): void {
+    this.closeMenu();
+    if (this.isHomePage) {
+      // Se já estiver na página home, rola para a seção sobre
+      const element = document.getElementById('sobre');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Se não estiver na home, navega para a home e depois rola para a seção sobre
+      this.router.navigate(['/']).then(() => {
+        setTimeout(() => {
+          const element = document.getElementById('sobre');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      });
+    }
+  }
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
