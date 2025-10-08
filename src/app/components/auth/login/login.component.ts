@@ -13,56 +13,77 @@ export class LoginComponent implements OnInit {
   rememberMe: boolean = false;
   showPassword: boolean = false;
   errorMessage: string = '';
+  isLoading: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
-  onSubmit() {
-    this.errorMessage = '';
-    
-    // Validação básica
+  ngOnInit(): void {
+    const savedEmail = localStorage.getItem('rememberedEmail');
+    if (savedEmail) {
+      this.email = savedEmail;
+      this.rememberMe = true;
+    }
+  }
+
+  onSubmit(): void {
     if (!this.email || !this.password) {
       this.errorMessage = 'Por favor, preencha todos os campos.';
       return;
     }
 
-    // Verificar se o email está cadastrado
-    if (!this.authService.isEmailRegistered(this.email)) {
-      this.errorMessage = 'Email não cadastrado. Por favor, registre-se primeiro.';
+    this.isLoading = true;
+    this.errorMessage = '';
+
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const user = users.find((u: any) => u.email === this.email);
+
+    if (!user) {
+      this.errorMessage = 'Email não encontrado. Cadastre-se primeiro.';
+      this.isLoading = false;
       return;
     }
 
-    // Tentar fazer login
-    const user = this.authService.login(this.email, this.password);
-    
-    if (user) {
-      // Se "Lembrar de mim" estiver marcado, salvar no localStorage
-      if (this.rememberMe) {
-        localStorage.setItem('rememberedEmail', this.email);
-      } else {
-        localStorage.removeItem('rememberedEmail');
-      }
+    if (user.password === this.password) {
+      this.authService.login(this.email, this.password).subscribe({
+        next: (success) => {
+          this.isLoading = false;
+          if (success) {
+            if (this.rememberMe) {
+              localStorage.setItem('rememberedEmail', this.email);
+            } else {
+              localStorage.removeItem('rememberedEmail');
+            }
 
-      // Login bem-sucedido, redirecionar para dashboard
-      this.router.navigate(['/dashboard']);
+            this.router.navigate(['/dashboard']);
+          }
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.errorMessage = 'Erro ao fazer login. Tente novamente.';
+        }
+      });
     } else {
-      this.errorMessage = 'Email ou senha incorretos.';
+      this.errorMessage = 'Senha incorreta.';
+      this.isLoading = false;
     }
   }
 
-  togglePasswordVisibility() {
+  togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
 
-  goToRegister() {
-    this.router.navigate(['/register']);
+  goToRegister(): void {
+    this.router.navigate(['/register']).then(() => {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    });
   }
 
-  ngOnInit() {
-    // Verificar se há email salvo para "Lembrar senha"
-    const rememberedEmail = localStorage.getItem('rememberedEmail');
-    if (rememberedEmail) {
-      this.email = rememberedEmail;
-      this.rememberMe = true;
-    }
+  goToHome(): void {
+    this.router.navigate(['/']);
   }
 }

@@ -205,8 +205,7 @@
   margin: 0 8px;
 }
 
-/* Responsividade */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .login-container {
     padding: 10px;
   }

@@ -1,155 +1,119 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-interface Course {
-  id: number;
-  title: string;
-  description: string;
-  duration: string;
-  level: string;
-  technology: string;
-}
-
-interface LGPDConsent {
-  analytics: boolean;
-  marketing: boolean;
-  functional: boolean;
-}
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  // Propriedades para demonstrar lógica de programação
-  courses: Course[] = [];
-  featuredCourse: Course | null = null;
-  currentDate: Date = new Date();
-  userProgress: number = 0;
-  
-  // LGPD - Controle de consentimento
+  courses: any[] = [];
   showLGPDModal: boolean = false;
-  lgpdConsent: LGPDConsent = {
+  lgpdConsent = {
+    functional: true,
     analytics: false,
-    marketing: false,
-    functional: true
+    marketing: false
   };
 
+  constructor(private router: Router) { }
 
-
-  constructor(private router: Router) {
-    this.initializeCourses();
+  ngOnInit(): void {
+    this.loadCourses();
     this.checkLGPDConsent();
   }
 
-  ngOnInit(): void {
-    this.setFeaturedCourse();
-  }
-
-  // Lógica de programação - Inicializar cursos
-  private initializeCourses(): void {
+  private loadCourses(): void {
     this.courses = [
       {
-        id: 1,
-        title: 'Lógica de Programação',
-        description: 'Fundamentos da programação e resolução de problemas',
-        duration: '40 horas',
-        level: 'Iniciante',
-        technology: 'Algoritmos'
+        title: 'Fundamentos de Programação',
+        description: 'Aprenda os conceitos básicos de programação',
+        level: 'Básico',
+        duration: '20 horas',
+        technology: 'Lógica'
       },
       {
-        id: 2,
         title: 'HTML & CSS',
-        description: 'Criação de páginas web modernas e responsivas',
-        duration: '60 horas',
-        level: 'Iniciante',
-        technology: 'Frontend'
+        description: 'Criação de páginas web modernas',
+        level: 'Básico',
+        duration: '30 horas',
+        technology: 'Web'
       },
       {
-        id: 3,
-        title: 'JavaScript Avançado',
-        description: 'Programação avançada com JavaScript ES6+',
-        duration: '80 horas',
+        title: 'JavaScript Essencial',
+        description: 'Programação dinâmica para web',
         level: 'Intermediário',
+        duration: '40 horas',
         technology: 'JavaScript'
       },
       {
-        id: 4,
-        title: 'Angular com TypeScript',
-        description: 'Desenvolvimento de aplicações SPA com Angular',
-        duration: '100 horas',
+        title: 'Angular Framework',
+        description: 'Desenvolvimento de aplicações web',
         level: 'Avançado',
+        duration: '60 horas',
         technology: 'Angular'
-      },
-      {
-        id: 5,
-        title: 'Git & GitHub',
-        description: 'Versionamento de código e colaboração',
-        duration: '30 horas',
-        level: 'Iniciante',
-        technology: 'Versionamento'
       }
     ];
   }
 
-
-
-  // Lógica de programação - Definir curso em destaque
-  private setFeaturedCourse(): void {
-    const randomIndex = Math.floor(Math.random() * this.courses.length);
-    this.featuredCourse = this.courses[randomIndex];
-  }
-
-  // LGPD - Verificar consentimento
   private checkLGPDConsent(): void {
     const consent = localStorage.getItem('lgpd-consent');
     if (!consent) {
       this.showLGPDModal = true;
-    } else {
-      this.lgpdConsent = JSON.parse(consent);
     }
   }
 
-  // LGPD - Aceitar consentimento
-  acceptLGPDConsent(): void {
-    localStorage.setItem('lgpd-consent', JSON.stringify(this.lgpdConsent));
-    this.showLGPDModal = false;
-    console.log('Consentimento LGPD salvo:', this.lgpdConsent);
-  }
-
-  // LGPD - Rejeitar consentimento
-  rejectLGPDConsent(): void {
-    this.lgpdConsent = {
-      analytics: false,
-      marketing: false,
-      functional: true
-    };
-    this.acceptLGPDConsent();
-  }
-
-
-
-  // Lógica de programação - Filtrar cursos por nível
-  getCoursesByLevel(level: string): Course[] {
-    return this.courses.filter(course => course.level === level);
-  }
-
-  // Lógica de programação - Buscar curso por ID
-  getCourseById(id: number): Course | undefined {
-    return this.courses.find(course => course.id === id);
-  }
-
-  // Navegação - Ir para cadastro
   goToRegister(): void {
-    this.router.navigate(['/register']);
+    this.router.navigate(['/register']).then(() => {
+      // Aguarda um pequeno delay para garantir que a página carregou
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    });
   }
 
-  // Navegação - Ir para seção de cursos
   goToCourses(): void {
-    const element = document.getElementById('cursos');
+    const element = document.getElementById('courses');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   }
+
+  goToAbout(): void {
+    const element = document.getElementById('about');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  acceptLGPDConsent(): void {
+    localStorage.setItem('lgpd-consent', JSON.stringify(this.lgpdConsent));
+    this.showLGPDModal = false;
+  }
+
+  rejectLGPDConsent(): void {
+    const essentialConsent = {
+      functional: true,
+      analytics: false,
+      marketing: false
+    };
+    localStorage.setItem('lgpd-consent', JSON.stringify(essentialConsent));
+    this.showLGPDModal = false;
+  }
+
+  navigateToLogin(): void {
+    this.router.navigate(['/login']).then(() => {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    });
+  }
+
+  navigateToRegister(): void {
+    this.router.navigate(['/register']).then(() => {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    });
+  }
+
 }

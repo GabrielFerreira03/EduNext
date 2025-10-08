@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SidebarService } from '../../services/sidebar.service';
+import { AuthService, User } from '../../services/auth.service';
+import { CourseService, Course } from '../../services/course.service';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,164 +9,210 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  userName: string = 'Usuário';
-  currentView: string = 'home';
-  sidebarOpen: boolean = false;
-  private sidebarSubscription: Subscription = new Subscription();
+  
+  currentUser: User | null = null;
+  userName = '';
+  
+  completedCourses = 0;
+  studyHours = 0;
+  currentLevel = 'Iniciante';
+  certificates = 0;
+  averageProgress = 0;
 
-  // Dados do Sprint Atual
-  currentSprint = {
-    title: 'Sprint Atual - Metodologia Ágil (Scrum)',
-    sprintNumber: 3,
-    startDate: '2025-01-01',
-    endDate: '2025-01-14',
-    progress: 75,
-    tasks: [
-      { id: 1, title: 'Implementar autenticação', status: 'completed', assignee: 'João Silva' },
-      { id: 2, title: 'Criar dashboard', status: 'in-progress', assignee: 'Maria Santos' },
-      { id: 3, title: 'Testes unitários', status: 'pending', assignee: 'Pedro Costa' },
-      { id: 4, title: 'Deploy em produção', status: 'pending', assignee: 'Ana Lima' }
-    ],
-    burndownData: [
-      { day: 1, planned: 100, actual: 100 },
-      { day: 2, planned: 90, actual: 95 },
-      { day: 3, planned: 80, actual: 85 },
-      { day: 4, planned: 70, actual: 75 },
-      { day: 5, planned: 60, actual: 65 },
-      { day: 6, planned: 50, actual: 50 },
-      { day: 7, planned: 40, actual: 35 }
-    ]
+  enrolledCourses: Course[] = [];
+
+  private enrolledCoursesSubscription?: Subscription;
+
+  weeklyStats = {
+    lessonsCompleted: 12,
+    hoursStudied: 8.5,
+    streak: 5
   };
 
-  menuItems = [
-    { id: 'home', icon: 'fas fa-home', label: 'Início', active: true },
-    { id: 'courses', icon: 'fas fa-book', label: 'Meus Cursos', active: false },
-    { id: 'sprint', icon: 'fas fa-tasks', label: 'Sprint Atual', active: false },
-    { id: 'progress', icon: 'fas fa-chart-line', label: 'Progresso', active: false },
-    { id: 'calendar', icon: 'fas fa-calendar', label: 'Calendário', active: false },
-    { id: 'profile', icon: 'fas fa-user', label: 'Perfil', active: false },
-    { id: 'settings', icon: 'fas fa-cog', label: 'Configurações', active: false }
-  ];
-
   constructor(
-    private router: Router, 
     private authService: AuthService,
-    private sidebarService: SidebarService
-  ) {}
+    private courseService: CourseService
+  ) { }
 
-  ngOnInit() {
-    // Verificar se o usuário está logado
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
-      return;
-    }
+  ngOnInit(): void {
+    this.loadUserData();
+    this.loadEnrolledCourses();
+    this.calculateWeeklyStats();
+  }
 
-    // Obter dados do usuário logado
-    const currentUser = this.authService.getCurrentUser();
-    if (currentUser) {
-      this.userName = currentUser.name;
-    }
-    
-    // Restaurar o item selecionado do localStorage
-    this.restoreSelectedMenuItem();
-    
-    // Inscrever-se no estado da sidebar
-    this.sidebarSubscription = this.sidebarService.sidebarOpen$.subscribe(
-      isOpen => this.sidebarOpen = isOpen
+  private loadUserData(): void {
+    this.currentUser = this.authService.getCurrentUser();
+    this.userName = this.currentUser?.name || '';
+  }
+
+
+
+  private loadEnrolledCourses(): void {
+    this.enrolledCoursesSubscription = this.courseService.enrolledCourses$.subscribe(
+      courses => {
+        this.enrolledCourses = courses;
+        this.calculateUserStats();
+      }
     );
   }
 
-  ngOnDestroy() {
-    this.sidebarSubscription.unsubscribe();
-  }
-
-  toggleSidebar() {
-    this.sidebarService.toggleSidebar();
-  }
-
-  selectMenuItem(itemId: string) {
-    this.menuItems.forEach(item => item.active = false);
-    const selectedItem = this.menuItems.find(item => item.id === itemId);
-    if (selectedItem) {
-      selectedItem.active = true;
-      this.currentView = itemId;
-      
-      // Salvar o item selecionado no localStorage
-      localStorage.setItem('selectedMenuItem', itemId);
-    }
-    
-    // Fechar sidebar automaticamente após seleção
-    this.sidebarService.closeSidebar();
-  }
-
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/']);
-  }
-
-  // Método para obter a primeira letra do nome do usuário
-  getUserInitial(): string {
-    if (this.userName && this.userName.length > 0) {
-      return this.userName.charAt(0).toUpperCase();
-    }
-    return 'U'; // Fallback para 'U' de Usuário
-  }
-
-  // Método para gerar cor de fundo baseada no nome
-  getAvatarColor(): string {
-    const colors = [
-      '#007bff', '#28a745', '#dc3545', '#ffc107', 
-      '#17a2b8', '#6f42c1', '#e83e8c', '#fd7e14',
-      '#20c997', '#6610f2', '#e21e80', '#795548'
-    ];
-    
-    if (this.userName && this.userName.length > 0) {
-      const index = this.userName.charCodeAt(0) % colors.length;
-      return colors[index];
-    }
-    return '#007bff'; // Cor padrão
-  }
-
-  getTaskStatusClass(status: string): string {
-    switch (status) {
-      case 'completed': return 'status-completed';
-      case 'in-progress': return 'status-in-progress';
-      case 'pending': return 'status-pending';
-      default: return '';
+  ngOnDestroy(): void {
+    if (this.enrolledCoursesSubscription) {
+      this.enrolledCoursesSubscription.unsubscribe();
     }
   }
 
-  getTaskStatusText(status: string): string {
-    switch (status) {
-      case 'completed': return 'Concluída';
-      case 'in-progress': return 'Em Progresso';
-      case 'pending': return 'Pendente';
-      default: return status;
+  private calculateUserStats(): void {
+    // Resetar estatísticas se não há cursos matriculados
+    if (!this.enrolledCourses || this.enrolledCourses.length === 0) {
+      this.completedCourses = 0;
+      this.studyHours = 0;
+      this.currentLevel = 'Iniciante';
+      this.certificates = 0;
+      this.averageProgress = 0;
+      return;
+    }
+
+    // Calcular cursos completados (progresso >= 100%)
+    this.completedCourses = this.enrolledCourses.filter(course => 
+      course.progress && course.progress >= 100
+    ).length;
+
+    // Calcular certificados (mesmo que cursos completados)
+    this.certificates = this.completedCourses;
+
+    // Calcular progresso médio de todos os cursos
+    const totalProgress = this.enrolledCourses.reduce((total, course) => {
+      return total + (course.progress || 0);
+    }, 0);
+    this.averageProgress = this.enrolledCourses.length > 0 
+      ? Math.round(totalProgress / this.enrolledCourses.length) 
+      : 0;
+
+    // Calcular total de horas estudadas baseado no progresso dos cursos
+    this.studyHours = this.enrolledCourses.reduce((total, course) => {
+      // Estimar horas estudadas baseado no progresso do curso
+      const estimatedCourseHours = 20; // Assumindo 20 horas por curso
+      const progressPercentage = (course.progress || 0) / 100;
+      return total + (estimatedCourseHours * progressPercentage);
+    }, 0);
+
+    // Arredondar para uma casa decimal
+    this.studyHours = Math.round(this.studyHours * 10) / 10;
+
+    // Determinar nível baseado nas horas estudadas e cursos completados
+    if (this.studyHours < 10 && this.completedCourses === 0) {
+      this.currentLevel = 'Iniciante';
+    } else if (this.studyHours < 50 && this.completedCourses < 2) {
+      this.currentLevel = 'Intermediário';
+    } else if (this.studyHours < 100 && this.completedCourses < 5) {
+      this.currentLevel = 'Avançado';
+    } else {
+      this.currentLevel = 'Expert';
     }
   }
 
-  getDaysRemaining(): number {
-    const endDate = new Date(this.currentSprint.endDate);
+  private calculateWeeklyStats(): void {
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+    let lessonsCompleted = 0;
+    let hoursStudied = 0;
+    let activeDays = new Set<string>();
+
+    this.enrolledCourses.forEach(course => {
+      if (course.modules) {
+        course.modules.forEach(module => {
+          module.activities.forEach(activity => {
+            if (activity.completed && activity.completedAt && activity.completedAt >= oneWeekAgo) {
+              lessonsCompleted++;
+              
+              const activityDuration = activity.duration || 30;
+              hoursStudied += activityDuration / 60;
+              
+              const dayKey = activity.completedAt.toDateString();
+              activeDays.add(dayKey);
+            }
+          });
+        });
+      }
+    });
+
+    const streak = this.calculateStreak(activeDays);
+
+    this.weeklyStats = {
+      lessonsCompleted: Math.round(lessonsCompleted),
+      hoursStudied: Math.round(hoursStudied * 10) / 10,
+      streak
+    };
+  }
+
+  private calculateStreak(activeDays: Set<string>): number {
+    if (activeDays.size === 0) return 0;
+
+    const sortedDays = Array.from(activeDays)
+      .map(day => new Date(day))
+      .sort((a, b) => b.getTime() - a.getTime());
+
+    let streak = 1;
     const today = new Date();
-    const diffTime = endDate.getTime() - today.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return Math.max(0, diffDays);
-  }
+    today.setHours(0, 0, 0, 0);
 
-  getCurrentViewTitle(): string {
-    const activeItem = this.menuItems.find(item => item.active);
-    return activeItem ? activeItem.label : 'Dashboard';
-  }
-
-  restoreSelectedMenuItem(): void {
-    const savedItemId = localStorage.getItem('selectedMenuItem');
-    if (savedItemId) {
-      this.menuItems.forEach(item => item.active = false);
-      const savedItem = this.menuItems.find(item => item.id === savedItemId);
-      if (savedItem) {
-        savedItem.active = true;
-        this.currentView = savedItemId;
+    const mostRecentDay = sortedDays[0];
+    mostRecentDay.setHours(0, 0, 0, 0);
+    
+    const daysDiff = Math.floor((today.getTime() - mostRecentDay.getTime()) / (1000 * 60 * 60 * 24));
+    
+    if (daysDiff > 1) {
+      return 0;
+    }
+    for (let i = 1; i < sortedDays.length; i++) {
+      const currentDay = sortedDays[i];
+      const previousDay = sortedDays[i - 1];
+      
+      currentDay.setHours(0, 0, 0, 0);
+      previousDay.setHours(0, 0, 0, 0);
+      
+      const diffDays = Math.floor((previousDay.getTime() - currentDay.getTime()) / (1000 * 60 * 60 * 24));
+      
+      if (diffDays === 1) {
+        streak++;
+      } else {
+        break;
       }
     }
+
+    return streak;
   }
+
+
+
+
+
+  goToMyCourses(): void {
+    // Fazer scroll até a seção de cursos matriculados
+    const coursesSection = document.querySelector('.courses-section');
+    if (coursesSection) {
+      coursesSection.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
+  }
+
+  cancelEnrollment(course: Course): void {
+    this.courseService.cancelEnrollment(course);
+  }
+
+  scrollToAvailableCourses(): void {
+    // Fazer scroll até a seção de cursos disponíveis
+    const availableCoursesSection = document.querySelector('.available-courses-section');
+    if (availableCoursesSection) {
+      availableCoursesSection.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
+  }
+
 }

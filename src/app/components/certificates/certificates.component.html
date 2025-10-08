@@ -1,0 +1,167 @@
+<div class="certificates-container">
+  <div class="certificates-form">
+    <div class="certificates-header">
+      <h1><i class="fas fa-certificate"></i> Meus Certificados</h1>
+      <p>Seus certificados de conclusão de cursos</p>
+    </div>
+
+    <div class="certificates-content" *ngIf="currentUser">
+    <div class="certificates-grid" *ngIf="certificates.length > 0">
+      <div class="certificate-card" *ngFor="let certificate of certificates">
+        <div class="certificate-header">
+          <div class="certificate-badge">
+            <i class="fas fa-award"></i>
+          </div>
+          <div class="certificate-level" [style.background-color]="getLevelColor(certificate.level)">
+            {{ certificate.level }}
+          </div>
+        </div>
+
+        <div class="certificate-content">
+          <h3>{{ certificate.courseName }}</h3>
+          <p class="instructor">{{ certificate.instructor }}</p>
+          
+          <div class="certificate-details">
+            <div class="detail-item">
+              <i class="fas fa-calendar-alt"></i>
+              <span>Concluído em {{ formatDate(certificate.completionDate) }}</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-clock"></i>
+              <span>{{ certificate.duration }}</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-star"></i>
+              <span class="grade" [style.color]="getGradeColor(certificate.grade)">
+                {{ certificate.grade }}% - {{ getGradeLabel(certificate.grade) }}
+              </span>
+            </div>
+          </div>
+
+          <div class="skills-section">
+            <h4>Habilidades Adquiridas:</h4>
+            <div class="skills-list">
+              <span class="skill-tag" *ngFor="let skill of certificate.skills">{{ skill }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="certificate-actions">
+          <button class="btn btn-primary" (click)="openCertificateModal(certificate)">
+            <i class="fas fa-eye"></i>
+            Visualizar
+          </button>
+          <button class="btn btn-secondary" (click)="downloadCertificate(certificate)">
+            <i class="fas fa-download"></i>
+            Download
+          </button>
+          <button class="btn btn-outline" (click)="shareCertificate(certificate)">
+            <i class="fas fa-share-alt"></i>
+            Compartilhar
+          </button>
+        </div>
+      </div>
+    </div>
+
+      <div class="no-certificates" *ngIf="certificates.length === 0">
+      <i class="fas fa-certificate"></i>
+      <h3>Nenhum certificado ainda</h3>
+      <p>Complete seus cursos para obter certificados de conclusão.</p>
+      <a routerLink="/my-courses" class="btn btn-primary">
+        <i class="fas fa-book"></i>
+        Ver Meus Cursos
+      </a>
+    </div>
+  </div>
+
+    <div class="not-logged-in" *ngIf="!currentUser">
+      <i class="fas fa-user-slash"></i>
+      <h3>Acesso Restrito</h3>
+      <p>Faça login para visualizar seus certificados.</p>
+    </div>
+  </div>
+</div>
+
+<div class="certificate-modal-overlay" *ngIf="showCertificateModal" (click)="closeCertificateModal()">
+  <div class="certificate-modal" (click)="$event.stopPropagation()" *ngIf="selectedCertificate">
+    <button class="modal-close" (click)="closeCertificateModal()">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div class="certificate-document">
+      <div class="certificate-border">
+        <div class="certificate-header-modal">
+          <div class="certificate-logo">
+            <img src="assets/images/logofundoinvisivel.png" alt="EduNext Logo">
+          </div>
+          <h1>CERTIFICADO DE CONCLUSÃO</h1>
+          <div class="certificate-decoration">
+            <i class="fas fa-award"></i>
+          </div>
+        </div>
+
+        <div class="certificate-body">
+          <p class="certificate-text">
+            Certificamos que
+          </p>
+          <h2 class="student-name">{{ currentUser?.name || 'Estudante' }}</h2>
+          <p class="certificate-text">
+            concluiu com êxito o curso
+          </p>
+          <h3 class="course-name">{{ selectedCertificate.courseName }}</h3>
+          <p class="certificate-text">
+            ministrado por <strong>{{ selectedCertificate.instructor }}</strong>
+            <br>
+            com carga horária de <strong>{{ selectedCertificate.duration }}</strong>
+            <br>
+            obtendo nota final de <strong [style.color]="getGradeColor(selectedCertificate.grade)">{{ selectedCertificate.grade }}%</strong>
+          </p>
+
+          <div class="certificate-date">
+            <p>{{ formatDate(selectedCertificate.completionDate) }}</p>
+          </div>
+
+          <div class="certificate-footer-modal">
+            <div class="signature-section">
+              <div class="signature">
+                <div class="signature-line"></div>
+                <p>{{ selectedCertificate.instructor }}</p>
+                <small>Instrutor</small>
+              </div>
+              <div class="signature">
+                <div class="signature-line"></div>
+                <p>EduNext Academy</p>
+                <small>Instituição</small>
+              </div>
+            </div>
+
+            <div class="certificate-info">
+              <p><strong>Certificado Nº:</strong> {{ selectedCertificate.certificateNumber }}</p>
+              <p><strong>Código de Validação:</strong> {{ selectedCertificate.validationCode }}</p>
+              <p><strong>Verificar autenticidade:</strong> 
+                <a href="#" (click)="verifyCertificate(selectedCertificate)" class="verify-link">
+                  {{ selectedCertificate.credentialUrl }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-primary" (click)="downloadCertificate(selectedCertificate)">
+        <i class="fas fa-download"></i>
+        Download PDF
+      </button>
+      <button class="btn btn-secondary" (click)="shareCertificate(selectedCertificate)">
+        <i class="fas fa-share-alt"></i>
+        Compartilhar
+      </button>
+      <button class="btn btn-outline" (click)="verifyCertificate(selectedCertificate)">
+        <i class="fas fa-check-circle"></i>
+        Verificar Autenticidade
+      </button>
+    </div>
+  </div>
+</div>

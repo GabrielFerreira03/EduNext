@@ -125,7 +125,6 @@ a:hover {
   transform: translateY(0);
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .cookie-policy-container {
     padding: 10px;

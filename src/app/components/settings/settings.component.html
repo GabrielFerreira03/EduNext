@@ -1,0 +1,213 @@
+<div class="settings-container">
+  <div class="settings-content" *ngIf="currentUser; else notLoggedIn">
+    <div class="settings-form">
+      <div class="settings-header">
+        <h1 class="settings-title">
+          <i class="fas fa-cog"></i>
+          Configurações
+        </h1>
+      </div>
+
+      <div class="tabs-navigation">
+        <button 
+          class="tab-button" 
+          [class.active]="activeTab === 'profile'"
+          (click)="setActiveTab('profile')">
+          <i class="fas fa-user"></i>
+          Perfil
+        </button>
+        <button 
+          class="tab-button" 
+          [class.active]="activeTab === 'appearance'"
+          (click)="setActiveTab('appearance')">
+          <i class="fas fa-palette"></i>
+          Aparência
+        </button>
+      </div>
+
+        <div class="tab-content">
+          <div class="profile-tab" *ngIf="activeTab === 'profile'">
+          <div class="profile-section">
+            <h2 class="section-title">
+              <i class="fas fa-user"></i>
+              Informações do Perfil
+            </h2>
+            
+            <div class="profile-info">
+              <div class="avatar-section">
+                <div class="user-avatar">{{ getFirstLetter() }}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Nome Completo</div>
+                <div class="info-value">{{ currentUser.name }}</div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-label">E-mail</div>
+                <div class="info-value">{{ currentUser.email }}</div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-label">Data de Nascimento</div>
+                <div class="info-value">{{ currentUser.birthDate ? formatDate(currentUser.birthDate) : 'Não informado' }}</div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-label">Membro desde</div>
+                <div class="info-value">{{ currentUser.joinDate ? formatDate(currentUser.joinDate) : 'Não informado' }}</div>
+              </div>
+            </div>
+
+              <div class="profile-actions">
+              <button 
+                class="btn-action btn-change-password" 
+                (click)="togglePasswordForm()">
+                <i class="fas fa-lock"></i>
+                {{ showPasswordForm ? 'Cancelar' : 'Alterar Senha' }}
+              </button>
+              
+              <button 
+                class="btn-action btn-appearance" 
+                (click)="setActiveTab('appearance')">
+                <i class="fas fa-palette"></i>
+                Aparência
+              </button>
+            </div>
+          </div>
+
+            <div class="password-section" *ngIf="showPasswordSection">
+            <h2 class="section-title">
+              <i class="fas fa-lock"></i>
+              Alterar Senha
+            </h2>
+            
+            <form class="password-form" (ngSubmit)="changePassword()">
+              <div class="form-group">
+                <label class="form-label" for="currentPassword">Senha Atual</label>
+                <div class="password-input-group">
+                  <input 
+                    [type]="showCurrentPassword ? 'text' : 'password'"
+                    id="currentPassword" 
+                    [(ngModel)]="passwordForm.currentPassword" 
+                    name="currentPassword"
+                    class="form-control"
+                    placeholder="Digite sua senha atual"
+                    required>
+                  <button 
+                    type="button" 
+                    class="password-toggle" 
+                    (click)="togglePasswordVisibility('current')">
+                    <i [class]="showCurrentPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="newPassword">Nova Senha</label>
+                <div class="password-input-group">
+                  <input 
+                    [type]="showNewPassword ? 'text' : 'password'"
+                    id="newPassword" 
+                    [(ngModel)]="passwordForm.newPassword" 
+                    name="newPassword"
+                    class="form-control"
+                    placeholder="Digite sua nova senha (mínimo 8 caracteres)"
+                    required>
+                  <button 
+                    type="button" 
+                    class="password-toggle" 
+                    (click)="togglePasswordVisibility('new')">
+                    <i [class]="showNewPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="confirmPassword">Confirmar Nova Senha</label>
+                <div class="password-input-group">
+                  <input 
+                    [type]="showConfirmPassword ? 'text' : 'password'"
+                    id="confirmPassword" 
+                    [(ngModel)]="passwordForm.confirmPassword" 
+                    name="confirmPassword"
+                    class="form-control"
+                    placeholder="Confirme sua nova senha"
+                    required>
+                  <button 
+                    type="button" 
+                    class="password-toggle" 
+                    (click)="togglePasswordVisibility('confirm')">
+                    <i [class]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="password-requirements">
+                <h4>Requisitos da senha:</h4>
+                <ul>
+                  <li [class.valid]="passwordForm.newPassword.length >= 8">Mínimo de 8 caracteres</li>
+                  <li [class.valid]="passwordForm.newPassword === passwordForm.confirmPassword && passwordForm.confirmPassword.length > 0">Senhas devem ser iguais</li>
+                  <li [class.valid]="passwordForm.newPassword !== passwordForm.currentPassword && passwordForm.newPassword.length > 0">Diferente da senha atual</li>
+                </ul>
+              </div>
+
+              <div class="form-actions">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary"
+                  [disabled]="!isPasswordFormValid()">
+                  <i class="fas fa-save"></i>
+                  Alterar Senha
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+          <div class="appearance-tab" *ngIf="activeTab === 'appearance'">
+          <div class="appearance-section">
+            <h3>Configurações de Aparência</h3>
+            
+            <div class="theme-selector">
+              <label>Escolha seu tema:</label>
+              <div class="theme-buttons">
+                <button 
+                  class="theme-button" 
+                  [class.active]="currentTheme === 'light'"
+                  (click)="setTheme('light')">
+                  <i class="fas fa-sun"></i>
+                  <span>Claro</span>
+                </button>
+                <button 
+                  class="theme-button" 
+                  [class.active]="currentTheme === 'dark'"
+                  (click)="setTheme('dark')">
+                  <i class="fas fa-moon"></i>
+                  <span>Escuro</span>
+                </button>
+              </div>
+            </div>
+            
+            <div class="appearance-footer">
+              <button class="btn-back" (click)="setActiveTab('profile')">
+                <i class="fas fa-arrow-left"></i> Voltar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <ng-template #notLoggedIn>
+    <div class="not-logged-in">
+      <i class="fas fa-user-slash"></i>
+      <h2>Acesso Restrito</h2>
+      <p>Você precisa estar logado para acessar as configurações.</p>
+      <a routerLink="/login" class="btn btn-primary">
+        <i class="fas fa-sign-in-alt"></i>
+        Fazer Login
+      </a>
+    </div>
+  </ng-template>
+</div>

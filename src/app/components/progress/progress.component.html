@@ -1,0 +1,158 @@
+<div class="progress-container">
+  <div class="progress-header">
+    <h1><i class="fas fa-chart-line"></i> Meu Progresso</h1>
+    <p>Acompanhe seu desenvolvimento nos cursos</p>
+  </div>
+
+  <div class="progress-content" *ngIf="currentUser">
+    <div class="courses-sidebar">
+      <h3>Cursos em Andamento</h3>
+      <div class="course-list">
+        <div 
+          class="course-item" 
+          *ngFor="let course of courseProgress"
+          [class.active]="selectedCourse?.id === course.id"
+          (click)="selectCourse(course)">
+          <div class="course-info">
+            <h4>{{ course.title }}</h4>
+            <p>{{ course.instructor }}</p>
+            <div class="course-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="course.progress || 0"></div>
+              </div>
+              <span class="progress-text">{{ course.progress || 0 }}%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="course-details" *ngIf="selectedCourse">
+      <div class="course-header">
+        <h2>{{ selectedCourse.title }}</h2>
+        <div class="course-stats">
+          <div class="stat">
+            <i class="fas fa-calendar-alt"></i>
+            <div>
+              <span class="stat-label">Matriculado em</span>
+              <span class="stat-value">{{ formatDate(selectedCourse.enrolledAt!) }}</span>
+            </div>
+          </div>
+          <div class="stat">
+            <i class="fas fa-clock"></i>
+            <div>
+              <span class="stat-label">Último acesso</span>
+              <span class="stat-value">{{ formatDate(selectedCourse.lastAccessed!) }}</span>
+            </div>
+          </div>
+          <div class="stat">
+            <i class="fas fa-hourglass-half"></i>
+            <div>
+              <span class="stat-label">Tempo de estudo</span>
+              <span class="stat-value">{{ selectedCourse.totalStudyTime }}h</span>
+            </div>
+          </div>
+          <div class="stat">
+            <i class="fas fa-target"></i>
+            <div>
+              <span class="stat-label">Conclusão estimada</span>
+              <span class="stat-value">{{ formatDate(selectedCourse.estimatedCompletion!) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-overview">
+        <h3>Progresso Geral</h3>
+        <div class="progress-summary">
+          <div class="progress-circle">
+            <svg viewBox="0 0 36 36" class="circular-chart">
+              <path class="circle-bg"
+                d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+              <path class="circle"
+                [attr.stroke-dasharray]="(selectedCourse.progress || 0) + ', 100'"
+                d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+              <text x="18" y="20.35" class="percentage">{{ selectedCourse.progress || 0 }}%</text>
+            </svg>
+          </div>
+          <div class="progress-details">
+            <div class="detail-item">
+              <span class="detail-label">Módulos concluídos:</span>
+              <span class="detail-value">{{ selectedCourse.completedModules }}/{{ selectedCourse.totalModules }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Atividades concluídas:</span>
+              <span class="detail-value">{{ selectedCourse.completedActivities }}/{{ selectedCourse.totalActivities }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="modules-list">
+        <h3>Módulos do Curso</h3>
+        <div class="modules-list">
+          <div class="module-item" *ngFor="let module of selectedCourse.modules">
+            <div class="module-header" [class.completed]="module.completed">
+              <div class="module-info">
+                <h4>
+                  <i class="fas fa-check-circle" *ngIf="module.completed"></i>
+                  <i class="fas fa-circle" *ngIf="!module.completed"></i>
+                  {{ module.title }}
+                </h4>
+                <p>{{ module.description }}</p>
+              </div>
+              <div class="module-progress">
+                <div class="progress-bar">
+                  <div class="progress-fill" [style.width.%]="getModuleProgress(module)"></div>
+                </div>
+                <span class="progress-text">{{ getModuleProgress(module) }}%</span>
+              </div>
+            </div>
+
+            <div class="activities-list" *ngIf="module.expanded">
+              <div class="activity-item" *ngFor="let activity of module.activities" [class.completed]="activity.completed">
+                <div class="activity-icon">
+                  <i [class]="getActivityIcon(activity.type)" [class.completed]="activity.completed"></i>
+                </div>
+                <div class="activity-info">
+                  <h5>{{ activity.title }}</h5>
+                  <div class="activity-meta">
+                    <span class="activity-type">{{ getActivityTypeLabel(activity.type) }}</span>
+                    <span class="activity-duration" *ngIf="activity.duration">{{ formatDuration(activity.duration) }}</span>
+                    <span class="activity-score" *ngIf="activity.score && activity.completed">
+                      Nota: {{ activity.score }}%
+                    </span>
+                  </div>
+                </div>
+                <div class="activity-status">
+                  <span class="completed-badge" *ngIf="activity.completed">
+                    <i class="fas fa-check"></i>
+                    Concluído
+                  </span>
+                  <span class="pending-badge" *ngIf="!activity.completed">
+                    Pendente
+                  </span>
+                  <div class="completed-date" *ngIf="activity.completedAt">
+                    {{ formatDate(activity.completedAt) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="not-logged-in" *ngIf="!currentUser">
+    <i class="fas fa-user-slash"></i>
+    <h3>Acesso Restrito</h3>
+    <p>Faça login para visualizar seu progresso nos cursos.</p>
+  </div>
+</div>

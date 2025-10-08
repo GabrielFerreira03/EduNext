@@ -185,8 +185,7 @@
   font-size: 12px;
 }
 
-/* Responsividade */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .register-container {
     padding: 10px;
   }
