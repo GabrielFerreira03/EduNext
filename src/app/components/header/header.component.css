@@ -40,6 +40,11 @@
   opacity: 0;
 }
 
+/* Ocultar navbar durante a visualização de certificado */
+body.hide-header .navbar {
+  display: none !important;
+}
+
 .header-left {
   display: flex;
   align-items: center;

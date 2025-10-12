@@ -20,7 +20,7 @@ interface Certificate {
   templateUrl: './certificates.component.html',
   styleUrls: ['./certificates.component.css']
 })
-export class CertificatesComponent implements OnInit {
+export class CertificatesComponent implements OnInit, OnDestroy {
   certificates: Certificate[] = [];
   filteredCertificates: Certificate[] = [];
   searchTerm: string = '';
@@ -158,14 +158,23 @@ export class CertificatesComponent implements OnInit {
   openCertificateModal(certificate: Certificate): void {
     this.selectedCertificate = certificate;
     this.showCertificateModal = true;
+    // Oculta o cabeçalho/navbar durante a visualização do certificado
+    document.body.classList.add('hide-header');
   }
 
   closeCertificateModal(): void {
     this.showCertificateModal = false;
     this.selectedCertificate = null;
+    // Restaura a exibição do cabeçalho/navbar ao fechar o certificado
+    document.body.classList.remove('hide-header');
   }
 
   verifyCertificate(certificate: Certificate): void {
     window.open(certificate.credentialUrl, '_blank');
+  }
+
+  ngOnDestroy(): void {
+    // Garante que a classe seja removida ao destruir o componente
+    document.body.classList.remove('hide-header');
   }
 }
