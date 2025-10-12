@@ -587,3 +587,134 @@
     font-size: 0.8rem;
   }
 }
+/* Dark theme overrides for Certificates page */
+:host-context([data-theme="dark"]) .certificates-container,
+[data-theme="dark"] .certificates-container {
+  background: #2d2d2d !important;
+  color: #ffffff;
+}
+
+:host-context([data-theme="dark"]) .certificates-form,
+[data-theme="dark"] .certificates-form {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+:host-context([data-theme="dark"]) .certificates-header,
+[data-theme="dark"] .certificates-header {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+:host-context([data-theme="dark"]) .certificates-header h1,
+[data-theme="dark"] .certificates-header h1 {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .certificates-header h1 i,
+[data-theme="dark"] .certificates-header h1 i {
+  color: var(--primary-color) !important;
+}
+:host-context([data-theme="dark"]) .certificates-header p,
+[data-theme="dark"] .certificates-header p {
+  color: #e0e0e0 !important;
+}
+
+:host-context([data-theme="dark"]) .certificate-card,
+[data-theme="dark"] .certificate-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+:host-context([data-theme="dark"]) .certificate-header,
+[data-theme="dark"] .certificate-header {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+:host-context([data-theme="dark"]) .certificate-badge,
+[data-theme="dark"] .certificate-badge {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+:host-context([data-theme="dark"]) .certificate-badge i,
+[data-theme="dark"] .certificate-badge i {
+  color: var(--primary-color) !important;
+}
+:host-context([data-theme="dark"]) .certificate-level,
+[data-theme="dark"] .certificate-level {
+  color: #f9fafb !important;
+}
+
+:host-context([data-theme="dark"]) .certificate-content h3,
+[data-theme="dark"] .certificate-content h3 {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .instructor,
+[data-theme="dark"] .instructor {
+  color: #e0e0e0 !important;
+}
+:host-context([data-theme="dark"]) .detail-item,
+[data-theme="dark"] .detail-item {
+  color: #e0e0e0 !important;
+}
+:host-context([data-theme="dark"]) .detail-item i,
+[data-theme="dark"] .detail-item i {
+  color: var(--primary-color) !important;
+}
+:host-context([data-theme="dark"]) .skills-section h4,
+[data-theme="dark"] .skills-section h4 {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .skill-tag,
+[data-theme="dark"] .skill-tag {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .certificate-actions,
+[data-theme="dark"] .certificate-actions {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+:host-context([data-theme="dark"]) .btn,
+[data-theme="dark"] .btn {
+  color: #ffffff;
+}
+:host-context([data-theme="dark"]) .btn-primary,
+[data-theme="dark"] .btn-primary {
+  background-color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .btn-secondary,
+[data-theme="dark"] .btn-secondary {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .btn-outline,
+[data-theme="dark"] .btn-outline {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.7) !important;
+}
+:host-context([data-theme="dark"]) .btn-outline:hover,
+[data-theme="dark"] .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .no-certificates,
+[data-theme="dark"] .no-certificates {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+:host-context([data-theme="dark"]) .no-certificates h3,
+[data-theme="dark"] .no-certificates h3 {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .no-certificates p,
+[data-theme="dark"] .no-certificates p {
+  color: #e0e0e0 !important;
+}
+:host-context([data-theme="dark"]) .verify-link,
+[data-theme="dark"] .verify-link {
+  color: var(--primary-color) !important;
+}

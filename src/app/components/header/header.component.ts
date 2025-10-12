@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { SidebarService } from '../../services/sidebar.service';
 import { AuthService } from '../../services/auth.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -22,15 +23,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   scrollThreshold = 100;
 
   private subscriptions: Subscription = new Subscription();
+  currentTheme: string = 'light';
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    private themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
+
+    const themeSub = this.themeService.currentTheme$.subscribe(theme => {
+      this.currentTheme = theme;
+    });
 
     const sidebarSub = this.sidebarService.sidebarOpen$.subscribe(
       isOpen => {
@@ -49,6 +56,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(sidebarSub);
     this.subscriptions.add(routerSub);
+    this.subscriptions.add(themeSub);
   }
 
   ngOnDestroy(): void {
@@ -82,6 +90,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }, 100);
     });
   }
+
 
   goToCursos(): void {
     this.scrollToCourses();
@@ -157,6 +166,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         setTimeout(() => this.scrollToElement('about'), 100);
       });
     }
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 
   @HostListener('window:scroll', ['$event'])

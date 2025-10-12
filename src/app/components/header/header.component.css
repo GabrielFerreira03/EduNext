@@ -54,6 +54,8 @@
   flex-shrink: 0;
 }
 
+/* Removidos estilos do dropdown de tema */
+
 .toggle-btn {
   background: #007bff;
   border: none;
@@ -565,4 +567,85 @@
     width: 14px;
     height: 1px;
   }
+}
+
+/* Tema escuro: sobrescrever fundos para atender especificação */
+[data-theme="dark"] .header {
+  background: #2d2d2d !important;
+}
+[data-theme="dark"] .navbar {
+  background: #2d2d2d !important;
+}
+[data-theme="dark"] .navbar-nav,
+[data-theme="dark"] .auth-buttons {
+  background: #2d2d2d !important;
+}
+[data-theme="dark"] .nav-link {
+  color: #ffffff !important;
+}
+[data-theme="dark"] .nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+[data-theme="dark"] .btn-logout {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Dark theme: sidebar toggle button background */
+[data-theme="dark"] .toggle-btn.sidebar-toggle-btn {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Dark theme: hover and active states for sidebar toggle */
+[data-theme="dark"] .toggle-btn.sidebar-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .toggle-btn.sidebar-toggle-btn.active {
+  background: rgba(255, 255, 255, 0.25) !important;
+  transform: scale(1.1);
+}
+
+[data-theme="dark"] .toggle-btn.sidebar-toggle-btn.active:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: scale(1.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Escopo do componente: garantir aplicação via :host-context */
+:host-context([data-theme="dark"]) .toggle-btn.sidebar-toggle-btn {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+:host-context([data-theme="dark"]) .toggle-btn.sidebar-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+:host-context([data-theme="dark"]) .toggle-btn.sidebar-toggle-btn.active {
+  background: rgba(255, 255, 255, 0.25) !important;
+  transform: scale(1.1);
+}
+:host-context([data-theme="dark"]) .toggle-btn.sidebar-toggle-btn.active:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: scale(1.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Dark theme: regra geral para qualquer .toggle-btn no header */
+[data-theme="dark"] .toggle-btn {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+:host-context([data-theme="dark"]) .toggle-btn {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }

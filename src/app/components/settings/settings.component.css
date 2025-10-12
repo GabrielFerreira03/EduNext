@@ -325,6 +325,7 @@
   background: #007bff;
   color: white;
   border: 2px solid #007bff;
+  margin: 0 auto;
 }
 
 .btn-change-password:hover {
@@ -334,18 +335,7 @@
   box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
 }
 
-.btn-appearance {
-  background: #007bff;
-  color: white;
-  border: 2px solid #007bff;
-}
-
-.btn-appearance:hover {
-  background: #0056b3;
-  border-color: #0056b3;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
-}
+/* Removed .btn-appearance styles per request */
 
 .tabs-navigation {
   display: flex;
@@ -494,6 +484,91 @@
   border-color: #007bff;
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+}
+
+/* Overrides para tema escuro */
+[data-theme="dark"] .settings-container {
+  background: #2d2d2d;
+}
+:host-context([data-theme="dark"]) .settings-container {
+  background: #2d2d2d;
+}
+[data-theme="dark"] .appearance-section {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+:host-context([data-theme="dark"]) .appearance-section {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+[data-theme="dark"] .theme-selector label {
+  color: #ffffff;
+}
+:host-context([data-theme="dark"]) .theme-selector label {
+  color: #ffffff;
+}
+[data-theme="dark"] .theme-button {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+:host-context([data-theme="dark"]) .theme-button {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+[data-theme="dark"] .theme-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+:host-context([data-theme="dark"]) .theme-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+[data-theme="dark"] .btn-back {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+:host-context([data-theme="dark"]) .btn-back {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Modo escuro para o formulário de configurações */
+:host-context([data-theme="dark"]) .settings-form {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  box-shadow: none;
+}
+[data-theme="dark"] .settings-form {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+/* Modo escuro para os itens de informação */
+:host-context([data-theme="dark"]) .info-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+[data-theme="dark"] .info-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+:host-context([data-theme="dark"]) .info-item:hover,
+[data-theme="dark"] .info-item:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
+}
+:host-context([data-theme="dark"]) .info-value,
+[data-theme="dark"] .info-value {
+  color: #e0e0e0;
 }
 
 .theme-button.active i {

@@ -18,6 +18,9 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
 }
 
 .hero-subtitle {
@@ -89,6 +92,7 @@
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  align-items: stretch;
 }
 
 .tech-card {
@@ -98,11 +102,43 @@
   box-shadow: var(--box-shadow);
   text-align: center;
   transition: var(--transition);
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 .tech-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.tech-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.04));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.tech-card:hover::after {
+  opacity: 1;
+}
+
+.tech-card:focus-visible {
+  outline: 3px solid #007bff;
+  outline-offset: 4px;
+}
+
+@media (hover: none) {
+  .tech-card:hover {
+    transform: none;
+    box-shadow: var(--box-shadow);
+  }
+  .tech-card:hover::after {
+    opacity: 0;
+  }
 }
 
 .tech-card h3 {
@@ -111,12 +147,181 @@
   font-size: 1.3rem;
 }
 
+/* Tech section base styles */
+.tech-section {
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, var(--primary-color), #0056b3);
+}
+
+.tech-section .section-title {
+  color: white;
+}
+
+/* Tema escuro: overrides para Tech Section */
+:host-context([data-theme="dark"]) .tech-section,
+[data-theme="dark"] .tech-section,
+body.dark-mode .tech-section {
+  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+}
+:host-context([data-theme="dark"]) .tech-section .section-title,
+[data-theme="dark"] .tech-section .section-title,
+body.dark-mode .tech-section .section-title {
+  color: #ffffff !important;
+}
+
+/* Dark theme overrides for tech cards (robust selectors) */
+:host-context([data-theme="dark"]) .tech-card,
+[data-theme="dark"] .tech-card,
+body.dark-mode .tech-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(8px);
+}
+
+:host-context([data-theme="dark"]) .tech-card h3,
+[data-theme="dark"] .tech-card h3,
+body.dark-mode .tech-card h3 {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .tech-card:hover,
+[data-theme="dark"] .tech-card:hover,
+body.dark-mode .tech-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+:host-context([data-theme="dark"]) .tech-card::after,
+[data-theme="dark"] .tech-card::after,
+body.dark-mode .tech-card::after {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.06));
+}
+
+:host-context([data-theme="dark"]) .tech-card:focus-visible,
+[data-theme="dark"] .tech-card:focus-visible,
+body.dark-mode .tech-card:focus-visible {
+  outline-color: #66aaff;
+}
+
+/* Dark theme overrides for tech section and grid content */
+:host-context([data-theme="dark"]) .tech-section,
+[data-theme="dark"] .tech-section,
+body.dark-mode .tech-section {
+  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .tech-section .section-title,
+[data-theme="dark"] .tech-section .section-title,
+body.dark-mode .tech-section .section-title {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .tech-card p,
+[data-theme="dark"] .tech-card p,
+body.dark-mode .tech-card p {
+  color: #eaeaea !important;
+}
+
+/* Acessibilidade: Alto contraste para tech cards */
+@media (prefers-contrast: more) {
+  .tech-card {
+    border: 2px solid #666 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #111 !important;
+  }
+  :host-context([data-theme="dark"]) .tech-card,
+  [data-theme="dark"] .tech-card,
+  body.dark-mode .tech-card {
+    background: #1e1e1e !important;
+    color: #ffffff !important;
+    border-color: #aaa !important;
+  }
+}
+
+
+
 .courses-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* Courses section base styles to match hero */
+.courses-section {
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, var(--primary-color), #0056b3);
+}
+
+.courses-section .section-title {
+  color: white;
+}
+
+/* Dark theme overrides for Courses section to match hero */
+:host-context([data-theme="dark"]) .courses-section,
+[data-theme="dark"] .courses-section,
+body.dark-mode .courses-section {
+  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .courses-section .section-title,
+[data-theme="dark"] .courses-section .section-title,
+body.dark-mode .courses-section .section-title {
+  color: #ffffff !important;
+}
+
+/* Dark theme overrides for course cards in Home */
+:host-context([data-theme="dark"]) .courses-section .course-card,
+[data-theme="dark"] .courses-section .course-card,
+body.dark-mode .courses-section .course-card {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+}
+
+/* Garantia final do tema escuro para Courses Section (alta especificidade) */
+:host-context([data-theme="dark"]) .home-container .courses-section,
+:host-context([data-theme="dark"]) #courses,
+[data-theme="dark"] .home-container .courses-section,
+[data-theme="dark"] #courses,
+body.dark-mode .home-container .courses-section,
+body.dark-mode #courses {
+  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .home-container .courses-section .section-title,
+:host-context([data-theme="dark"]) #courses .section-title,
+[data-theme="dark"] .home-container .courses-section .section-title,
+[data-theme="dark"] #courses .section-title,
+body.dark-mode .home-container .courses-section .section-title,
+body.dark-mode #courses .section-title {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .course-header h3,
+[data-theme="dark"] .course-header h3,
+body.dark-mode .course-header h3 {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .course-description,
+[data-theme="dark"] .course-description,
+body.dark-mode .course-description {
+  color: #e0e0e0 !important;
+}
+
+:host-context([data-theme="dark"]) .courses-section .course-card:hover,
+[data-theme="dark"] .courses-section .course-card:hover,
+body.dark-mode .courses-section .course-card:hover {
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08) !important;
+  border-color: var(--primary-color) !important;
 }
 
 .course-card {
@@ -133,6 +338,62 @@
 .course-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark theme overrides for course cards */
+:host-context([data-theme="dark"]) .course-card,
+[data-theme="dark"] .course-card,
+body.dark-mode .course-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(8px);
+}
+
+:host-context([data-theme="dark"]) .course-card:hover,
+[data-theme="dark"] .course-card:hover,
+body.dark-mode .course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+:host-context([data-theme="dark"]) .course-header h3,
+[data-theme="dark"] .course-header h3,
+body.dark-mode .course-header h3 {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .course-description,
+[data-theme="dark"] .course-description,
+body.dark-mode .course-description,
+:host-context([data-theme="dark"]) .course-meta,
+[data-theme="dark"] .course-meta,
+body.dark-mode .course-meta {
+  color: #eaeaea !important;
+}
+
+/* Ensure level chip text contrast in dark mode */
+:host-context([data-theme="dark"]) .level-intermediário,
+[data-theme="dark"] .level-intermediário,
+body.dark-mode .level-intermediário {
+  color: #ffffff !important;
+}
+
+/* Button visibility in dark mode */
+:host-context([data-theme="dark"]) .course-btn,
+[data-theme="dark"] .course-btn,
+body.dark-mode .course-btn {
+  background-color: #007bff;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+:host-context([data-theme="dark"]) .course-btn:hover,
+[data-theme="dark"] .course-btn:hover,
+body.dark-mode .course-btn:hover {
+  background-color: #0056b3;
 }
 
 .course-header {
@@ -278,12 +539,24 @@
 
 .about-section {
   /* About Section styles */
+  background-color: var(--light-color);
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  margin-top: 3rem;
 }
 
 .about-content {
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: 1.1rem;
   line-height: 1.8;
 }
@@ -291,6 +564,32 @@
 .about-content p {
   margin-bottom: 1.5rem;
   color: var(--secondary-color);
+}
+
+/* Dark theme overrides for About section */
+:host-context([data-theme="dark"]) .about-section,
+[data-theme="dark"] .about-section,
+body.dark-mode .about-section {
+  background: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border-top: 1px solid #333 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+:host-context([data-theme="dark"]) .about-section .section-title,
+[data-theme="dark"] .about-section .section-title,
+body.dark-mode .about-section .section-title {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .about-content p,
+[data-theme="dark"] .about-content p,
+body.dark-mode .about-content p {
+  color: #e0e0e0 !important;
 }
 
 .lgpd-modal {
@@ -340,6 +639,73 @@
   justify-content: flex-end;
 }
 
+/* Tema escuro: overrides para modais na Home */
+:host-context([data-theme="dark"]) .modal-content,
+[data-theme="dark"] .modal-content,
+body.dark-mode .modal-content {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+}
+:host-context([data-theme="dark"]) .modal-content h3,
+[data-theme="dark"] .modal-content h3,
+body.dark-mode .modal-content h3 {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .modal-actions,
+[data-theme="dark"] .modal-actions,
+body.dark-mode .modal-actions {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Tema escuro: overrides para seção hero na Home */
+:host-context([data-theme="dark"]) .hero,
+[data-theme="dark"] .hero,
+body.dark-mode .hero {
+  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+  color: #e0e0e0 !important;
+}
+:host-context([data-theme="dark"]) .hero-title,
+[data-theme="dark"] .hero-title,
+body.dark-mode .hero-title {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+:host-context([data-theme="dark"]) .hero-subtitle,
+[data-theme="dark"] .hero-subtitle,
+body.dark-mode .hero-subtitle {
+  color: #e0e0e0 !important;
+  opacity: 0.9 !important;
+}
+:host-context([data-theme="dark"]) .hero-stats .stat-number,
+[data-theme="dark"] .hero-stats .stat-number,
+body.dark-mode .hero-stats .stat-number {
+  color: #ffd700 !important;
+}
+:host-context([data-theme="dark"]) .hero-stats .stat-label,
+[data-theme="dark"] .hero-stats .stat-label,
+body.dark-mode .hero-stats .stat-label {
+  color: #e0e0e0 !important;
+}
+:host-context([data-theme="dark"]) .btn-secondary,
+[data-theme="dark"] .btn-secondary,
+body.dark-mode .btn-secondary {
+  color: #e0e0e0 !important;
+  border-color: #e0e0e0 !important;
+}
+:host-context([data-theme="dark"]) .btn-secondary:hover,
+[data-theme="dark"] .btn-secondary:hover,
+body.dark-mode .btn-secondary:hover {
+  background-color: #e0e0e0 !important;
+  color: #121212 !important;
+  border-color: #e0e0e0 !important;
+}
+
 @media (max-width: 768px) {
   .hero {
     padding: 3rem 1rem;
@@ -376,4 +742,40 @@
   .modal-actions {
     flex-direction: column;
   }
+}
+/* Acessibilidade: alto contraste desativa gradiente de texto para máxima legibilidade */
+@media (prefers-contrast: more) {
+  .hero-title {
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: initial !important;
+    color: #111 !important;
+    text-shadow: none !important;
+  }
+  :host-context([data-theme="dark"]) .hero-title,
+  [data-theme="dark"] .hero-title,
+  body.dark-mode .hero-title {
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: initial !important;
+    color: #ffffff !important;
+    text-shadow: none !important;
+  }
+}
+/* Garantia final do tema escuro para Tech Section (alta especificidade) */
+:host-context([data-theme="dark"]) .home-container .tech-section,
+:host-context([data-theme="dark"]) section.tech-section,
+[data-theme="dark"] .home-container .tech-section,
+body.dark-mode .home-container .tech-section {
+  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+  color: #ffffff !important;
+}
+/* Dark theme overrides for course technology labels */
+:host-context([data-theme="dark"]) .course-meta,
+[data-theme="dark"] .course-meta {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .course-tech,
+[data-theme="dark"] .course-tech {
+  color: #ffffff !important;
 }

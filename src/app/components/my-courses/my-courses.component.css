@@ -574,6 +574,32 @@
   to { opacity: 1; }
 }
 
+/* Tema escuro: overrides para modal de confirmação */
+:host-context([data-theme="dark"]) .modal-content,
+[data-theme="dark"] .modal-content,
+body.dark-mode .modal-content {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+}
+:host-context([data-theme="dark"]) .modal-body p,
+[data-theme="dark"] .modal-body p,
+body.dark-mode .modal-body p {
+  color: #e0e0e0 !important;
+}
+:host-context([data-theme="dark"]) .modal-body h4,
+[data-theme="dark"] .modal-body h4,
+body.dark-mode .modal-body h4 {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .modal-footer,
+[data-theme="dark"] .modal-footer,
+body.dark-mode .modal-footer {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-top-color: rgba(255, 255, 255, 0.2) !important;
+}
+
 @keyframes slideIn {
   from { 
     opacity: 0;
@@ -635,4 +661,127 @@
   .course-content {
     padding: 1rem;
   }
+}
+/* Dark theme overrides for My Courses page */
+:host-context([data-theme="dark"]) .my-courses-container,
+[data-theme="dark"] .my-courses-container {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .page-header h1,
+[data-theme="dark"] .page-header h1 {
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+:host-context([data-theme="dark"]) .page-header p,
+[data-theme="dark"] .page-header p {
+  color: #e0e0e0 !important;
+}
+
+:host-context([data-theme="dark"]) .courses-section,
+[data-theme="dark"] .courses-section {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+}
+:host-context([data-theme="dark"]) .courses-section h2,
+[data-theme="dark"] .courses-section h2 {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+}
+:host-context([data-theme="dark"]) .courses-section h2:hover,
+[data-theme="dark"] .courses-section h2:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08) !important;
+  border-color: var(--primary-color) !important;
+}
+
+:host-context([data-theme="dark"]) .courses-grid .course-card,
+[data-theme="dark"] .courses-grid .course-card,
+:host-context([data-theme="dark"]) .course-card,
+[data-theme="dark"] .course-card {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+}
+:host-context([data-theme="dark"]) .course-card:hover,
+[data-theme="dark"] .course-card:hover {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 12px 40px rgba(255, 255, 255, 0.08) !important;
+}
+:host-context([data-theme="dark"]) .course-card.enrolled,
+[data-theme="dark"] .course-card.enrolled {
+  border-color: var(--success-color) !important;
+  background: rgba(40, 167, 69, 0.12) !important;
+}
+:host-context([data-theme="dark"]) .course-card.available,
+[data-theme="dark"] .course-card.available {
+  border-color: var(--primary-color) !important;
+  background: rgba(0, 123, 255, 0.12) !important;
+}
+
+:host-context([data-theme="dark"]) .course-badge,
+[data-theme="dark"] .course-badge {
+  background: var(--primary-color) !important;
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .course-content h3,
+[data-theme="dark"] .course-content h3 {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .course-description,
+[data-theme="dark"] .course-description,
+:host-context([data-theme="dark"]) .instructor,
+[data-theme="dark"] .instructor {
+  color: #e0e0e0 !important;
+}
+
+:host-context([data-theme="dark"]) .tech-tag,
+[data-theme="dark"] .tech-tag {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+:host-context([data-theme="dark"]) .tech-tag:hover,
+[data-theme="dark"] .tech-tag:hover {
+  background: var(--primary-color) !important;
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .progress-bar,
+[data-theme="dark"] .progress-bar {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+:host-context([data-theme="dark"]) .progress-fill,
+[data-theme="dark"] .progress-fill {
+  background: var(--success-color) !important;
+}
+:host-context([data-theme="dark"]) .progress-text,
+[data-theme="dark"] .progress-text {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .course-actions button,
+[data-theme="dark"] .course-actions button {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+:host-context([data-theme="dark"]) .empty-state,
+[data-theme="dark"] .empty-state {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+:host-context([data-theme="dark"]) .empty-state h3,
+[data-theme="dark"] .empty-state h3 {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .empty-state p,
+[data-theme="dark"] .empty-state p {
+  color: #e0e0e0 !important;
 }

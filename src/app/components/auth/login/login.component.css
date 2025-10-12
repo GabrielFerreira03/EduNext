@@ -224,3 +224,105 @@
     align-items: flex-start;
   }
 }
+
+/* Modo escuro: garantir fundo e textos consistentes */
+:host-context([data-theme="dark"]) .login-container,
+[data-theme="dark"] .login-container,
+body.dark-mode .login-container {
+  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+}
+
+:host-context([data-theme="dark"]) .login-card,
+[data-theme="dark"] .login-card,
+body.dark-mode .login-card {
+  background: #2b2b2b !important;
+  color: #ffffff !important;
+  border-color: #667eea !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+:host-context([data-theme="dark"]) .login-header h2,
+[data-theme="dark"] .login-header h2,
+body.dark-mode .login-header h2 {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .login-header p,
+[data-theme="dark"] .login-header p,
+body.dark-mode .login-header p,
+:host-context([data-theme="dark"]) .login-footer,
+[data-theme="dark"] .login-footer,
+body.dark-mode .login-footer {
+  color: #cccccc !important;
+}
+
+:host-context([data-theme="dark"]) .form-group label,
+[data-theme="dark"] .form-group label,
+body.dark-mode .form-group label {
+  color: #eaeaea !important;
+}
+
+:host-context([data-theme="dark"]) .form-control,
+[data-theme="dark"] .form-control,
+body.dark-mode .form-control {
+  background: #1f1f1f !important;
+  color: #ffffff !important;
+  border-color: #3a3a3a !important;
+}
+
+:host-context([data-theme="dark"]) .form-control:focus,
+[data-theme="dark"] .form-control:focus,
+body.dark-mode .form-control:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+}
+
+:host-context([data-theme="dark"]) .forgot-password,
+[data-theme="dark"] .forgot-password,
+body.dark-mode .forgot-password,
+:host-context([data-theme="dark"]) .register-link,
+[data-theme="dark"] .register-link,
+body.dark-mode .register-link {
+  color: #8aa3ff !important;
+}
+
+:host-context([data-theme="dark"]) .forgot-password:hover,
+[data-theme="dark"] .forgot-password:hover,
+body.dark-mode .forgot-password:hover,
+:host-context([data-theme="dark"]) .register-link:hover,
+[data-theme="dark"] .register-link:hover,
+body.dark-mode .register-link:hover {
+  color: #a7b8ff !important;
+}
+
+:host-context([data-theme="dark"]) .policy-links,
+[data-theme="dark"] .policy-links,
+body.dark-mode .policy-links {
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+:host-context([data-theme="dark"]) .policy-link,
+[data-theme="dark"] .policy-link,
+body.dark-mode .policy-link {
+  color: #bbbbbb !important;
+}
+
+:host-context([data-theme="dark"]) .policy-link:hover,
+[data-theme="dark"] .policy-link:hover,
+body.dark-mode .policy-link:hover {
+  color: #8aa3ff !important;
+}
+
+:host-context([data-theme="dark"]) .separator,
+[data-theme="dark"] .separator,
+body.dark-mode .separator {
+  color: #777 !important;
+}
+
+:host-context([data-theme="dark"]) .error-message,
+[data-theme="dark"] .error-message,
+body.dark-mode .error-message {
+  background-color: rgba(220, 53, 69, 0.15) !important;
+  color: #ffb3b8 !important;
+  border-color: rgba(220, 53, 69, 0.4) !important;
+}

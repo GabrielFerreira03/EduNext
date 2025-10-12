@@ -258,3 +258,72 @@
 .sidebar::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
+
+/* Overrides de tema escuro focados na navegação da sidebar */
+:host-context([data-theme="dark"]) .sidebar-nav,
+[data-theme="dark"] .sidebar-nav {
+  color: #ffffff !important;
+}
+
+/* Fundo da navegação no tema escuro */
+:host-context([data-theme="dark"]) .sidebar-nav,
+[data-theme="dark"] .sidebar-nav {
+  background-color: #2d2d2d !important;
+}
+body.dark-mode .sidebar-nav {
+  background-color: #2d2d2d !important;
+}
+
+/* Suporte a variante global body.dark-mode */
+body.dark-mode .sidebar-nav {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .sidebar-nav .nav-link,
+[data-theme="dark"] .sidebar-nav .nav-link {
+  color: #ffffff !important;
+  border-left-color: transparent !important;
+}
+
+body.dark-mode .sidebar-nav .nav-link {
+  color: #ffffff !important;
+  border-left-color: transparent !important;
+}
+
+:host-context([data-theme="dark"]) .sidebar-nav .nav-link:hover,
+[data-theme="dark"] .sidebar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border-left-color: #ffffff !important;
+}
+
+body.dark-mode .sidebar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border-left-color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .sidebar-nav .nav-link.active,
+[data-theme="dark"] .sidebar-nav .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  border-left-color: #ffffff !important;
+}
+
+body.dark-mode .sidebar-nav .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  border-left-color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .sidebar-nav .nav-link i,
+[data-theme="dark"] .sidebar-nav .nav-link i,
+:host-context([data-theme="dark"]) .sidebar-nav .nav-link span,
+[data-theme="dark"] .sidebar-nav .nav-link span {
+  color: #ffffff !important;
+}
+
+body.dark-mode .sidebar-nav .nav-link i,
+body.dark-mode .sidebar-nav .nav-link span {
+  color: #ffffff !important;
+}

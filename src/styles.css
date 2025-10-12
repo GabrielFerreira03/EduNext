@@ -84,8 +84,127 @@ body {
 }
 
 [data-theme="dark"] {
-  background-color: #1a1a1a;
-  color: #e0e0e0;
+  background-color: #2d2d2d;
+  color: #ffffff;
+}
+
+/* Variáveis no tema escuro (opcional para componentes que usam vars) */
+:root[data-theme="dark"] {
+  --light-color: #2d2d2d;
+  --dark-color: #ffffff;
+  --border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Fundo geral e texto no tema escuro */
+[data-theme="dark"] body {
+  background-color: #2d2d2d;
+  color: #ffffff;
+}
+
+/* Superfícies internas no tema escuro */
+[data-theme="dark"] .card,
+[data-theme="dark"] .sprint-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* Modais no tema escuro com fundo sólido */
+[data-theme="dark"] .modal-content,
+body.dark-mode .modal-content,
+:host-context([data-theme="dark"]) .modal-content {
+  background-color: #2d2d2d !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Dark mode refinements for modal internals */
+[data-theme="dark"] .modal-header,
+body.dark-mode .modal-header,
+:host-context([data-theme="dark"]) .modal-header {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+[data-theme="dark"] .modal-title,
+body.dark-mode .modal-title,
+:host-context([data-theme="dark"]) .modal-title {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .modal-body p,
+body.dark-mode .modal-body p,
+:host-context([data-theme="dark"]) .modal-body p {
+  color: #e0e0e0 !important;
+}
+
+[data-theme="dark"] .modal-footer,
+body.dark-mode .modal-footer,
+:host-context([data-theme="dark"]) .modal-footer {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-top-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+[data-theme="dark"] .modal-actions,
+body.dark-mode .modal-actions,
+:host-context([data-theme="dark"]) .modal-actions {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+[data-theme="dark"] .btn-close,
+body.dark-mode .btn-close,
+:host-context([data-theme="dark"]) .btn-close {
+  filter: invert(1) grayscale(100%) brightness(180%);
+  opacity: 0.8;
+}
+
+[data-theme="dark"] .modal-content a,
+body.dark-mode .modal-content a,
+:host-context([data-theme="dark"]) .modal-content a {
+  color: #8aa3ff !important;
+}
+
+[data-theme="dark"] .modal-content a:hover,
+body.dark-mode .modal-content a:hover,
+:host-context([data-theme="dark"]) .modal-content a:hover {
+  color: #a7b8ff !important;
+}
+
+/* Inputs e elementos de formulário no tema escuro */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* Navbar e Header no tema escuro */
+[data-theme="dark"] .header {
+  background-color: #2d2d2d !important;
+}
+[data-theme="dark"] .navbar {
+  background-color: #2d2d2d !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+[data-theme="dark"] .navbar-brand,
+[data-theme="dark"] .nav-link {
+  color: #ffffff !important;
+}
+[data-theme="dark"] .nav-link:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Tabelas no tema escuro */
+[data-theme="dark"] table {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+[data-theme="dark"] th,
+[data-theme="dark"] td {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 body.dark-mode :root {
@@ -155,4 +274,144 @@ body.dark-mode td {
 
 body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
   background-color: #343a40;
+}
+
+/* Sidebar no tema escuro (regras globais para garantir aplicação) */
+[data-theme="dark"] .sidebar {
+  background: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: none !important;
+}
+[data-theme="dark"] .sidebar-header,
+[data-theme="dark"] .sidebar-footer {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+[data-theme="dark"] .sidebar-title,
+[data-theme="dark"] .sidebar-close {
+  color: #ffffff !important;
+}
+[data-theme="dark"] .sidebar-nav {
+  background-color: #2d2d2d !important;
+  color: #ffffff !important;
+}
+[data-theme="dark"] .sidebar-nav .nav-link {
+  color: #ffffff !important;
+  border-left-color: transparent !important;
+}
+[data-theme="dark"] .sidebar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border-left-color: #ffffff !important;
+}
+[data-theme="dark"] .sidebar-nav .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  border-left-color: #ffffff !important;
+}
+[data-theme="dark"] .sidebar-nav .nav-link i,
+[data-theme="dark"] .sidebar-nav .nav-link span {
+  color: #ffffff !important;
+}
+
+/* Variante alternativa: body.dark-mode */
+body.dark-mode .sidebar {
+  background: #2d2d2d !important;
+  box-shadow: none !important;
+}
+body.dark-mode .sidebar-header,
+body.dark-mode .sidebar-footer {
+  background-color: #2d2d2d !important;
+  border-color: #404040 !important;
+}
+body.dark-mode .sidebar-title,
+body.dark-mode .sidebar-close {
+  color: #e0e0e0 !important;
+}
+body.dark-mode .sidebar-nav {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0 !important;
+}
+body.dark-mode .sidebar-nav .nav-link {
+  color: #e0e0e0 !important;
+  border-left-color: transparent !important;
+}
+body.dark-mode .sidebar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #e0e0e0 !important;
+  border-left-color: #e0e0e0 !important;
+}
+body.dark-mode .sidebar-nav .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: #e0e0e0 !important;
+  border-left-color: #e0e0e0 !important;
+}
+body.dark-mode .sidebar-nav .nav-link i,
+body.dark-mode .sidebar-nav .nav-link span {
+  color: #e0e0e0 !important;
+}
+/* Dark theme fallback for tech cards (global) */
+[data-theme="dark"] .tech-card,
+body.dark-mode .tech-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+[data-theme="dark"] .tech-card h3,
+body.dark-mode .tech-card h3 {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .tech-card p,
+body.dark-mode .tech-card p {
+  color: #eaeaea !important;
+}
+
+[data-theme="dark"] .tech-card:focus-visible,
+body.dark-mode .tech-card:focus-visible {
+  outline-color: #66aaff;
+}
+
+/* Global dark theme: ensure Home sections match hero */
+:root[data-theme="dark"] .tech-section,
+[data-theme="dark"] .tech-section,
+body.dark-mode .tech-section {
+  background: linear-gradient(135deg, var(--primary-color), #0056b3) !important;
+  color: #ffffff !important;
+}
+:root[data-theme="dark"] .tech-section .section-title,
+[data-theme="dark"] .tech-section .section-title,
+body.dark-mode .tech-section .section-title {
+  color: #ffffff !important;
+}
+
+ /* Even stronger specificity tied to Home layout */
+ :root[data-theme="dark"] .home-container .tech-section,
+ [data-theme="dark"] .home-container .tech-section,
+ body.dark-mode .home-container .tech-section,
+ :root[data-theme="dark"] .home-container section.tech-section,
+ [data-theme="dark"] .home-container section.tech-section,
+ body.dark-mode .home-container section.tech-section {
+   background: linear-gradient(135deg, var(--primary-color), #0056b3) !important;
+   color: #ffffff !important;
+ }
+ :root[data-theme="dark"] .home-container .tech-section .section-title,
+ [data-theme="dark"] .home-container .tech-section .section-title,
+ body.dark-mode .home-container .tech-section .section-title,
+ :root[data-theme="dark"] .home-container section.tech-section .section-title,
+ [data-theme="dark"] .home-container section.tech-section .section-title,
+ body.dark-mode .home-container section.tech-section .section-title {
+   color: #ffffff !important;
+ }
+
+:root[data-theme="dark"] .courses-section,
+[data-theme="dark"] .courses-section,
+body.dark-mode .courses-section {
+  background: linear-gradient(135deg, var(--primary-color), #0056b3) !important;
+  color: #ffffff !important;
+}
+:root[data-theme="dark"] .courses-section .section-title,
+[data-theme="dark"] .courses-section .section-title,
+body.dark-mode .courses-section .section-title {
+  color: #ffffff !important;
 }

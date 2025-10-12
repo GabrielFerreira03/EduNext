@@ -557,3 +557,191 @@
     width: 100%;
   }
 }
+/* Dark theme overrides for Progress page */
+:host-context([data-theme="dark"]) .progress-container,
+[data-theme="dark"] .progress-container {
+  background: #2d2d2d !important;
+  color: #ffffff;
+}
+
+:host-context([data-theme="dark"]) .courses-sidebar,
+[data-theme="dark"] .courses-sidebar,
+:host-context([data-theme="dark"]) .course-details,
+[data-theme="dark"] .course-details {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+:host-context([data-theme="dark"]) .course-list .course-item,
+[data-theme="dark"] .course-list .course-item {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+:host-context([data-theme="dark"]) .course-item:hover,
+[data-theme="dark"] .course-item:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.08) !important;
+}
+:host-context([data-theme="dark"]) .course-item.active,
+[data-theme="dark"] .course-item.active {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: var(--primary-color) !important;
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .course-item.active .progress-bar,
+[data-theme="dark"] .course-item.active .progress-bar {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+:host-context([data-theme="dark"]) .progress-header h1,
+[data-theme="dark"] .progress-header h1 {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .progress-header h1 i,
+[data-theme="dark"] .progress-header h1 i {
+  color: var(--primary-color) !important;
+}
+:host-context([data-theme="dark"]) .progress-header p,
+[data-theme="dark"] .progress-header p {
+  color: #e0e0e0 !important;
+}
+
+/* Ensure sidebar heading "Cursos em Andamento" is legible */
+:host-context([data-theme="dark"]) .courses-sidebar h3,
+[data-theme="dark"] .courses-sidebar h3 {
+  color: #ffffff !important;
+  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Ensure selected course title like "Fundamentos de Programação" is legible */
+:host-context([data-theme="dark"]) .course-header h2,
+[data-theme="dark"] .course-header h2 {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .course-info h4,
+[data-theme="dark"] .course-info h4,
+:host-context([data-theme="dark"]) .course-info p,
+[data-theme="dark"] .course-info p {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .progress-bar,
+[data-theme="dark"] .progress-bar {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+:host-context([data-theme="dark"]) .progress-fill,
+[data-theme="dark"] .progress-fill {
+  background: var(--success-color) !important;
+}
+:host-context([data-theme="dark"]) .progress-text,
+[data-theme="dark"] .progress-text {
+  color: #ffffff !important;
+}
+
+/* Ensure SVG percentage text (e.g., 75%) is visible */
+:host-context([data-theme="dark"]) .percentage,
+[data-theme="dark"] .percentage {
+  fill: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .stat,
+[data-theme="dark"] .stat {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-left-color: var(--primary-color) !important;
+}
+:host-context([data-theme="dark"]) .stat i,
+[data-theme="dark"] .stat i {
+  color: var(--primary-color) !important;
+}
+:host-context([data-theme="dark"]) .stat-label,
+[data-theme="dark"] .stat-label {
+  color: #e0e0e0 !important;
+}
+:host-context([data-theme="dark"]) .stat-value,
+[data-theme="dark"] .stat-value {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .overall-progress,
+[data-theme="dark"] .overall-progress {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+:host-context([data-theme="dark"]) .overall-progress h3,
+[data-theme="dark"] .overall-progress h3 {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .detail-item,
+[data-theme="dark"] .detail-item {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .detail-label,
+[data-theme="dark"] .detail-label {
+  color: #e0e0e0 !important;
+}
+:host-context([data-theme="dark"]) .detail-value,
+[data-theme="dark"] .detail-value {
+  color: #ffffff !important;
+}
+
+:host-context([data-theme="dark"]) .module-item,
+[data-theme="dark"] .module-item {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+:host-context([data-theme="dark"]) .module-header,
+[data-theme="dark"] .module-header {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+}
+:host-context([data-theme="dark"]) .module-info h4,
+[data-theme="dark"] .module-info h4 {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .module-info p,
+[data-theme="dark"] .module-info p {
+  color: #e0e0e0 !important;
+}
+
+:host-context([data-theme="dark"]) .activity-item:hover,
+[data-theme="dark"] .activity-item:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+:host-context([data-theme="dark"]) .activity-item.completed,
+[data-theme="dark"] .activity-item.completed {
+  background: rgba(40, 167, 69, 0.2) !important;
+  border-color: rgba(40, 167, 69, 0.4) !important;
+}
+:host-context([data-theme="dark"]) .activity-icon,
+[data-theme="dark"] .activity-icon {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .activity-icon i.completed,
+[data-theme="dark"] .activity-icon i.completed {
+  color: var(--success-color) !important;
+}
+
+:host-context([data-theme="dark"]) .pending-badge,
+[data-theme="dark"] .pending-badge {
+  background: #ffc107 !important;
+  color: #212529 !important;
+}
+:host-context([data-theme="dark"]) .completed-badge,
+[data-theme="dark"] .completed-badge {
+  background: var(--success-color) !important;
+  color: white !important;
+}
+
+:host-context([data-theme="dark"]) .not-logged-in,
+[data-theme="dark"] .not-logged-in {
+  color: #e0e0e0 !important;
+}
