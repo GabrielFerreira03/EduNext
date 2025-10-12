@@ -105,6 +105,22 @@
   color: #667eea;
 }
 
+/* Ajustes para garantir visibilidade do ícone de olho */
+.password-input-container .form-control {
+  padding-right: 44px; /* espaço à direita para o botão do olho */
+}
+
+.password-toggle {
+  z-index: 2; /* garante que fique acima do input */
+}
+
+/* Tema escuro: garantir que o ícone esteja visível */
+:host-context([data-theme="dark"]) .password-toggle,
+[data-theme="dark"] .password-toggle,
+body.dark-mode .password-toggle {
+  color: #eaeaea !important;
+}
+
 .form-options {
   display: flex;
   justify-content: space-between;

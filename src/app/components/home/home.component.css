@@ -99,6 +99,7 @@
   background: white;
   padding: 2rem;
   border-radius: var(--border-radius);
+  border: 1px solid #007bff;
   box-shadow: var(--box-shadow);
   text-align: center;
   transition: var(--transition);
@@ -214,6 +215,14 @@ body.dark-mode .tech-section {
   color: #ffffff !important;
 }
 
+/* Light mode: ensure white background for tech section */
+.tech-section {
+  background: #ffffff;
+}
+.tech-section .section-title {
+  color: #007bff;
+}
+
 :host-context([data-theme="dark"]) .tech-section .section-title,
 [data-theme="dark"] .tech-section .section-title,
 body.dark-mode .tech-section .section-title {
@@ -261,6 +270,14 @@ body.dark-mode .tech-card p {
 
 .courses-section .section-title {
   color: white;
+}
+
+/* Light mode override: ensure white background for #courses section */
+#courses {
+  background: #ffffff;
+}
+#courses .section-title {
+  color: #007bff;
 }
 
 /* Dark theme overrides for Courses section to match hero */
@@ -327,6 +344,7 @@ body.dark-mode .courses-section .course-card:hover {
 .course-card {
   background: white;
   border-radius: var(--border-radius);
+  border: 1px solid #007bff;
   box-shadow: var(--box-shadow);
   padding: 2rem;
   transition: var(--transition);
@@ -564,6 +582,19 @@ body.dark-mode .course-btn:hover {
 .about-content p {
   margin-bottom: 1.5rem;
   color: var(--secondary-color);
+}
+
+/* Fundo azul para a seção About no modo claro */
+#about {
+  background: #007bff;
+}
+
+#about .section-title {
+  color: #ffffff;
+}
+
+#about .about-content p {
+  color: #ffffff;
 }
 
 /* Dark theme overrides for About section */
