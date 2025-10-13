@@ -69,6 +69,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
+    // Garantir que o header permaneça visível quando o menu está aberto
+    if (this.isMenuOpen) {
+      this.isHeaderVisible = true;
+      this.isNavbarVisible = true;
+    }
   }
 
   onLogoClick(): void {
@@ -175,6 +180,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     if (!this.isHomePage) return;
+
+    // Se o menu está aberto, manter o header visível e não aplicar ocultação
+    if (this.isMenuOpen) {
+      this.isHeaderVisible = true;
+      this.isNavbarVisible = true;
+      return;
+    }
 
     const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 

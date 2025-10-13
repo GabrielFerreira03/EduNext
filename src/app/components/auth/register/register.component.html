@@ -6,6 +6,9 @@
     </div>
 
     <form (ngSubmit)="onSubmit()" class="register-form">
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
       <div class="form-group">
         <label for="fullName">Nome completo:</label>
         <input 
@@ -63,6 +66,8 @@
             [(ngModel)]="password" 
             name="password"
             placeholder="Digite uma senha segura"
+            minlength="8"
+            pattern=".*[^A-Za-z0-9].*"
             required
             class="form-control">
           <button 
@@ -83,6 +88,8 @@
             [(ngModel)]="confirmPassword" 
             name="confirmPassword"
             placeholder="Confirme sua senha"
+            minlength="8"
+            pattern=".*[^A-Za-z0-9].*"
             required
             class="form-control">
           <button 
@@ -92,6 +99,15 @@
             <i [class]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
           </button>
         </div>
+      </div>
+
+      <div class="password-requirements password-section" data-theme="dark">
+        <h4>Requisitos da senha:</h4>
+        <ul>
+          <li [class.valid]="password.length >= 8">Mínimo de 8 caracteres</li>
+          <li [class.valid]="hasSymbol(password)">Pelo menos um símbolo</li>
+          <li [class.valid]="password === confirmPassword && confirmPassword.length > 0">Senhas devem ser iguais</li>
+        </ul>
       </div>
 
       <div class="form-options">
@@ -119,7 +135,7 @@
         </div>
       </div>
 
-      <button type="submit" class="btn-register" [disabled]="!acceptTerms">Criar Conta</button>
+      <button type="submit" class="btn-register" [disabled]="!isFormValid()">Criar Conta</button>
     </form>
 
     <div class="register-footer">
@@ -134,8 +150,6 @@
         <a routerLink="/privacy-policy" class="policy-link">Política de Privacidade</a>
         <span class="separator">•</span>
         <a routerLink="/terms-of-use" class="policy-link">Termos de Uso</a>
-        <span class="separator">•</span>
-        <a routerLink="/cookie-policy" class="policy-link">Política de Cookies</a>
         <span class="separator">•</span>
         <a routerLink="/user-rights" class="policy-link">Seus Direitos</a>
       </div>

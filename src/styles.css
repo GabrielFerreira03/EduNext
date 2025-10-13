@@ -415,3 +415,41 @@ body.dark-mode .courses-section {
 body.dark-mode .courses-section .section-title {
   color: #ffffff !important;
 }
+/* Modo escuro global para seções de senha */
+[data-theme="dark"] .password-section,
+body.dark-mode .password-section,
+.password-section[data-theme="dark"] {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid #667eea !important;
+  border-radius: 8px;
+}
+
+[data-theme="dark"] .password-section h4,
+body.dark-mode .password-section h4,
+.password-section[data-theme="dark"] h4 {
+  color: #9fb3ff !important;
+}
+
+[data-theme="dark"] .password-section li,
+body.dark-mode .password-section li,
+.password-section[data-theme="dark"] li {
+  color: #ff7b7b !important;
+}
+
+[data-theme="dark"] .password-section li::before,
+body.dark-mode .password-section li::before,
+.password-section[data-theme="dark"] li::before {
+  color: #ff7b7b !important;
+}
+
+[data-theme="dark"] .password-section li.valid,
+body.dark-mode .password-section li.valid,
+.password-section[data-theme="dark"] li.valid {
+  color: #6be387 !important;
+}
+
+[data-theme="dark"] .password-section li.valid::before,
+body.dark-mode .password-section li.valid::before,
+.password-section[data-theme="dark"] li.valid::before {
+  color: #6be387 !important;
+}

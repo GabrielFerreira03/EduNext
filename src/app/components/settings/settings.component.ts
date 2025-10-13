@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, User } from '../../services/auth.service';
 import { ThemeService } from '../../services/theme.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-settings',
@@ -49,7 +50,8 @@ export class SettingsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -89,22 +91,28 @@ export class SettingsComponent implements OnInit {
 
   updateProfile(): void {
     console.log('Atualizando perfil:', this.profileForm);
-    alert('Perfil atualizado com sucesso!');
+    this.notificationService.showSuccess('Perfil atualizado com sucesso!');
   }
 
   changePassword(): void {
     if (this.passwordForm.newPassword !== this.passwordForm.confirmPassword) {
-      alert('As senhas não coincidem!');
+      this.notificationService.showError('As senhas não coincidem!');
       return;
     }
     
-    if (this.passwordForm.newPassword.length < 6) {
-      alert('A nova senha deve ter pelo menos 6 caracteres!');
+    if (this.passwordForm.newPassword.length < 8) {
+      this.notificationService.showError('A nova senha deve ter pelo menos 8 caracteres!');
+      return;
+    }
+    
+    // Nova regra: pelo menos um símbolo na nova senha
+    if (!this.hasSymbol(this.passwordForm.newPassword)) {
+      this.notificationService.showError('A nova senha deve conter pelo menos um símbolo (ex: ! &#64; # $ %).');
       return;
     }
     
     console.log('Alterando senha...');
-    alert('Senha alterada com sucesso!');
+    this.notificationService.showSuccess('Senha alterada com sucesso!');
     this.passwordForm = {
       currentPassword: '',
       newPassword: '',
@@ -114,12 +122,12 @@ export class SettingsComponent implements OnInit {
 
   updateNotifications(): void {
     console.log('Atualizando notificações:', this.notificationSettings);
-    alert('Configurações de notificação atualizadas!');
+    this.notificationService.showSuccess('Configurações de notificação atualizadas!');
   }
 
   updatePrivacy(): void {
     console.log('Atualizando privacidade:', this.privacySettings);
-    alert('Configurações de privacidade atualizadas!');
+    this.notificationService.showSuccess('Configurações de privacidade atualizadas!');
   }
 
   setTheme(theme: string): void {
@@ -128,14 +136,14 @@ export class SettingsComponent implements OnInit {
 
   exportData(): void {
     console.log('Exportando dados do usuário...');
-    alert('Seus dados serão enviados por email em até 24 horas.');
+    this.notificationService.showInfo('Seus dados serão enviados por email em até 24 horas.');
   }
 
   deleteAccount(): void {
     const confirmation = confirm('Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.');
     if (confirmation) {
       console.log('Excluindo conta...');
-      alert('Conta excluída com sucesso.');
+      this.notificationService.showWarning('Conta excluída com sucesso.');
     }
   }
 
@@ -153,6 +161,13 @@ export class SettingsComponent implements OnInit {
     return this.passwordForm.currentPassword.length > 0 &&
            this.passwordForm.newPassword.length >= 8 &&
            this.passwordForm.newPassword === this.passwordForm.confirmPassword &&
-           this.passwordForm.newPassword !== this.passwordForm.currentPassword;
+           this.passwordForm.newPassword !== this.passwordForm.currentPassword &&
+           this.hasSymbol(this.passwordForm.newPassword);
+  }
+
+  // Verifica se há pelo menos um símbolo na senha
+  hasSymbol(value: string): boolean {
+    if (!value) return false;
+    return /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
   }
 }

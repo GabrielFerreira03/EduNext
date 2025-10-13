@@ -56,56 +56,8 @@ export class CourseService {
   }
 
   private initializeCourses(): void {
-    // Cursos já matriculados com progresso
-    const enrolledCourses: Course[] = [
-      {
-        id: 'enrolled-1',
-        title: 'Fundamentos de Programação',
-        instructor: 'Prof. Ana Silva',
-        level: 'Básico',
-        duration: '20 horas',
-        technology: 'Lógica',
-        description: 'Aprenda os conceitos básicos de programação',
-        image: 'assets/images/programming-course.jpg',
-        progress: 75,
-        totalStudyTime: 15,
-        enrolledAt: new Date(2024, 0, 15),
-        lastAccessed: new Date(2024, 1, 10),
-        ...this.generateDetailedCourseData(75, 'Básico')
-      },
-      {
-        id: 'enrolled-2',
-        title: 'HTML & CSS',
-        instructor: 'Prof. Carlos Santos',
-        level: 'Básico',
-        duration: '30 horas',
-        technology: 'Web',
-        description: 'Criação de páginas web modernas',
-        image: 'assets/images/html-css-course.jpg',
-        progress: 45,
-        totalStudyTime: 14,
-        enrolledAt: new Date(2024, 1, 1),
-        lastAccessed: new Date(2024, 1, 8),
-        ...this.generateDetailedCourseData(45, 'Básico')
-      },
-      {
-        id: 'enrolled-3',
-        title: 'JavaScript Essencial',
-        instructor: 'Prof. Maria Costa',
-        level: 'Intermediário',
-        duration: '40 horas',
-        technology: 'JavaScript',
-        description: 'Programação dinâmica para web',
-        image: 'assets/images/js-course.jpg',
-        progress: 90,
-        totalStudyTime: 36,
-        enrolledAt: new Date(2023, 11, 10),
-        lastAccessed: new Date(2024, 1, 12),
-        ...this.generateDetailedCourseData(90, 'Intermediário')
-      }
-    ];
-
-    this.enrolledCoursesSubject.next(enrolledCourses);
+    // Iniciar sem cursos matriculados; o usuário decidirá quando matricular
+    this.enrolledCoursesSubject.next([]);
 
     const availableCourses: Course[] = [
       {

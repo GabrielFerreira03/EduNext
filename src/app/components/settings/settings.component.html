@@ -135,10 +135,11 @@
                 </div>
               </div>
 
-              <div class="password-requirements">
+              <div class="password-requirements password-section">
                 <h4>Requisitos da senha:</h4>
                 <ul>
                   <li [class.valid]="passwordForm.newPassword.length >= 8">Mínimo de 8 caracteres</li>
+                  <li [class.valid]="hasSymbol(passwordForm.newPassword)">Conter pelo menos um símbolo (ex: ! &#64; # $ %)</li>
                   <li [class.valid]="passwordForm.newPassword === passwordForm.confirmPassword && passwordForm.confirmPassword.length > 0">Senhas devem ser iguais</li>
                   <li [class.valid]="passwordForm.newPassword !== passwordForm.currentPassword && passwordForm.newPassword.length > 0">Diferente da senha atual</li>
                 </ul>

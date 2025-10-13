@@ -291,12 +291,14 @@ body.hide-header .navbar {
     opacity: 0;
     visibility: hidden;
     transition: var(--transition);
+    z-index: 1001;
   }
   
   .navbar-nav.active {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
+    z-index: 1001;
   }
   
   .nav-item {
@@ -322,12 +324,14 @@ body.hide-header .navbar {
     opacity: 0;
     visibility: hidden;
     transition: var(--transition);
+    z-index: 1001;
   }
   
   .auth-buttons.active {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
+    z-index: 1001;
   }
 }
 

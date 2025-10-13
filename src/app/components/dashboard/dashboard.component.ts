@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService, User } from '../../services/auth.service';
 import { CourseService, Course } from '../../services/course.service';
 import { Subscription } from 'rxjs';
@@ -31,7 +32,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -213,6 +215,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         block: 'start' 
       });
     }
+  }
+
+  navigateToMyCourses(): void {
+    this.router.navigate(['/my-courses']);
   }
 
 }

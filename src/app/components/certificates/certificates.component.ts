@@ -37,6 +37,8 @@ export class CertificatesComponent implements OnInit, OnDestroy {
     this.loadCertificates();
     this.extractSkills();
     this.filteredCertificates = this.certificates;
+    // Oculta o cabeçalho/navbar enquanto estiver na rota de certificados
+    document.body.classList.add('hide-header');
   }
 
   private loadCertificates(): void {
@@ -158,15 +160,11 @@ export class CertificatesComponent implements OnInit, OnDestroy {
   openCertificateModal(certificate: Certificate): void {
     this.selectedCertificate = certificate;
     this.showCertificateModal = true;
-    // Oculta o cabeçalho/navbar durante a visualização do certificado
-    document.body.classList.add('hide-header');
   }
 
   closeCertificateModal(): void {
     this.showCertificateModal = false;
     this.selectedCertificate = null;
-    // Restaura a exibição do cabeçalho/navbar ao fechar o certificado
-    document.body.classList.remove('hide-header');
   }
 
   verifyCertificate(certificate: Certificate): void {

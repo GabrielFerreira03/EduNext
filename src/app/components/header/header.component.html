@@ -20,15 +20,14 @@
       </div>
 
       <div class="navbar-right">
-        
 
-        <button *ngIf="!isLoggedIn" class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
+        <button class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
           <span></span>
           <span></span>
           <span></span>
         </button>
         
-        <ul *ngIf="!isLoggedIn" class="navbar-nav" [class.active]="isMenuOpen">
+        <ul class="navbar-nav" [class.active]="isMenuOpen">
           <li class="nav-item">
             <a (click)="goToHome()" class="nav-link" style="cursor: pointer;">Início</a>
           </li>

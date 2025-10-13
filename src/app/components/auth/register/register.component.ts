@@ -39,6 +39,12 @@ export class RegisterComponent {
       return;
     }
 
+    // Validação de força da senha: mínimo 8 caracteres e pelo menos 1 símbolo
+    if (!this.isStrongPassword(this.password)) {
+      this.errorMessage = 'A senha deve conter pelo menos 8 caracteres e um símbolo.';
+      return;
+    }
+
     if (this.password !== this.confirmPassword) {
       this.errorMessage = 'As senhas não coincidem.';
       return;
@@ -55,20 +61,13 @@ export class RegisterComponent {
       next: (success) => {
         this.isLoading = false;
         if (success) {
-          // Primeiro fazer logout para não manter o usuário logado
-          this.authService.logout();
-          
-          // Mostrar mensagem de sucesso
-          this.notificationService.showSuccess('Cadastro realizado com sucesso! Agora você pode fazer login.');
-          
-          // Redirecionar para login após um pequeno delay
-          setTimeout(() => {
-            this.router.navigate(['/login']).then(() => {
-              setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }, 100);
-            });
-          }, 1500);
+          // Mostrar mensagem de sucesso e redirecionar para o mesmo lugar do login (dashboard)
+          this.notificationService.showSuccess('Cadastro concluído com sucesso');
+          this.router.navigate(['/dashboard']).then(() => {
+            setTimeout(() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
+          });
         } else {
           // Verificar se o email já existe
           const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
@@ -106,5 +105,31 @@ export class RegisterComponent {
 
   goToHome(): void {
     this.router.navigate(['/']);
+  }
+
+  // Validação: mínimo 8 caracteres e pelo menos 1 símbolo
+  private isStrongPassword(pw: string): boolean {
+    return /^(?=.*[^A-Za-z0-9]).{8,}$/.test(pw);
+  }
+
+  // Auxiliar para o template: verifica se há ao menos um símbolo
+  hasSymbol(pw: string): boolean {
+    return /[^A-Za-z0-9]/.test(pw || '');
+  }
+
+  // Controla habilitação do botão: todos os campos preenchidos, termos aceitos,
+  // senha forte e confirmação igual
+  isFormValid(): boolean {
+    return !!(
+      this.fullName &&
+      this.username &&
+      this.birthDate &&
+      this.email &&
+      this.password &&
+      this.confirmPassword &&
+      this.password === this.confirmPassword &&
+      this.isStrongPassword(this.password) &&
+      this.acceptTerms
+    );
   }
 }

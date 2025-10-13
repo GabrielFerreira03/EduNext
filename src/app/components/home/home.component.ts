@@ -25,13 +25,6 @@ export class HomeComponent implements OnInit {
   private loadCourses(): void {
     this.courses = [
       {
-        title: 'Fundamentos de Programação',
-        description: 'Aprenda os conceitos básicos de programação',
-        level: 'Básico',
-        duration: '20 horas',
-        technology: 'Lógica'
-      },
-      {
         title: 'HTML & CSS',
         description: 'Criação de páginas web modernas',
         level: 'Básico',
