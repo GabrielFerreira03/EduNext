@@ -56,7 +56,7 @@ export class CourseService {
   }
 
   private initializeCourses(): void {
-    // Iniciar sem cursos matriculados; o usuário decidirá quando matricular
+    
     this.enrolledCoursesSubject.next([]);
 
     const availableCourses: Course[] = [
@@ -309,7 +309,7 @@ export class CourseService {
   }
 
   private calculateEstimatedCompletion(progress: number): Date {
-    const daysRemaining = Math.floor((100 - progress) / 5); // 5% por dia em média
+    const daysRemaining = Math.floor((100 - progress) / 5); 
     const estimatedDate = new Date();
     estimatedDate.setDate(estimatedDate.getDate() + daysRemaining);
     return estimatedDate;

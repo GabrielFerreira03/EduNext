@@ -181,15 +181,14 @@
   background: linear-gradient(135deg, rgba(0, 123, 255, 0.05), rgba(0, 123, 255, 0.1));
   border: 1px solid rgba(0, 123, 255, 0.2);
   border-radius: 8px;
-  overflow: hidden; /* garante que nada apareça fora da caixa */
+  overflow: hidden; 
 }
 
-/* Quando .password-requirements também tiver .password-section,
-   garantir espaçamento e alinhamento interno consistentes */
+
 .password-requirements.password-section,
 .password-section .password-requirements {
-  padding: 16px 16px 16px 36px !important; /* mais recuo da borda esquerda */
-  overflow: hidden !important; /* garante nada fora da borda */
+  padding: 16px 16px 16px 36px !important; 
+  overflow: hidden !important; 
   border-radius: 8px;
 }
 
@@ -200,7 +199,7 @@
 
 .password-requirements.password-section ul,
 .password-section .password-requirements ul {
-  list-style: none !important; /* remover marcadores nativos */
+  list-style: none !important; 
   padding-inline-start: 0 !important;
   padding-left: 0 !important;
   margin: 0 !important;
@@ -209,14 +208,14 @@
 
 .password-requirements.password-section li,
 .password-section .password-requirements li {
-  display: block !important; /* sem bullets internos, texto fluindo normalmente */
+  display: block !important; 
   align-items: initial;
   padding: 6px 0 !important;
 }
 
 .password-requirements.password-section li::before,
 .password-section .password-requirements li::before {
-  content: none !important; /* remover bolinhas internas */
+  content: none !important; 
   display: none !important;
   width: 0;
   height: 0;
@@ -226,10 +225,10 @@
 
 .password-requirements.password-section li::marker,
 .password-section .password-requirements li::marker {
-  content: '' !important; /* suprime o marcador nativo */
+  content: '' !important; 
 }
 
-/* Garantir que o marcador herde a cor do item */
+
 .password-requirements.password-section li::marker,
 .password-section .password-requirements li::marker {
   color: currentColor !important;
@@ -243,16 +242,16 @@
 }
 
 .password-requirements ul {
-  list-style: none !important; /* remove bullets nativos */
-  list-style-position: inside; /* fallback: manter dentro da caixa */
+  list-style: none !important; 
+  list-style-position: inside; 
   padding: 0 !important;
-  padding-inline-start: 24px !important; /* desloca a lista para a direita */
-  padding-left: 24px !important; /* compatibilidade */
+  padding-inline-start: 24px !important; 
+  padding-left: 24px !important;
   margin: 0 !important;
 }
 
 .password-requirements li {
-  list-style-type: none !important; /* reforço no nível do li */
+  list-style-type: none !important; 
   padding: 5px 0;
   color: #dc3545;
   font-size: 13px;
@@ -261,7 +260,7 @@
   transition: color 0.3s ease;
 }
 
-/* Remover marcador padrão APENAS fora da seção de senha */
+
 .password-requirements:not(.password-section) li::marker {
   content: '';
 }
@@ -283,7 +282,7 @@
   color: #28a745;
 }
 
-/* Overrides de tema escuro para os requisitos de senha em Settings */
+
 :host-context([data-theme="dark"]) .password-section .password-requirements,
 [data-theme="dark"] .password-section .password-requirements,
 body.dark-mode .password-section .password-requirements {
@@ -776,7 +775,7 @@ body.dark-mode .password-section .password-requirements li.valid::before {
 }
 }
 
-/* Tema escuro específico para os campos de senha em Settings */
+
 :host-context([data-theme="dark"]) .password-section .password-input-group .form-control,
 [data-theme="dark"] .password-section .password-input-group .form-control,
 body.dark-mode .password-section .password-input-group .form-control {
@@ -785,7 +784,7 @@ body.dark-mode .password-section .password-input-group .form-control {
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* IDs solicitados: currentPassword, newPassword e confirmPassword */
+
 :host-context([data-theme="dark"]) #currentPassword,
 [data-theme="dark"] #currentPassword,
 body.dark-mode #currentPassword,
@@ -800,7 +799,7 @@ body.dark-mode #confirmPassword {
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Estados de foco no tema escuro */
+
 :host-context([data-theme="dark"]) #currentPassword:focus,
 [data-theme="dark"] #currentPassword:focus,
 body.dark-mode #currentPassword:focus,
@@ -814,7 +813,7 @@ body.dark-mode #confirmPassword:focus {
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
 }
 
-/* Garantia adicional caso o tema escuro seja aplicado diretamente na seção */
+
 .password-section[data-theme="dark"] .password-input-group .form-control,
 .password-section[data-theme="dark"] #currentPassword,
 .password-section[data-theme="dark"] #newPassword,
@@ -824,7 +823,7 @@ body.dark-mode #confirmPassword:focus {
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Ajuste do botão de toggle dentro do tema escuro para visibilidade */
+
 :host-context([data-theme="dark"]) .password-section .password-toggle,
 [data-theme="dark"] .password-section .password-toggle,
 body.dark-mode .password-section .password-toggle,
@@ -832,7 +831,7 @@ body.dark-mode .password-section .password-toggle,
   color: #eaeaea !important;
 }
 
-/* Labels brancas no tema escuro dentro da seção de senha */
+
 :host-context([data-theme="dark"]) .password-section .form-label,
 [data-theme="dark"] .password-section .form-label,
 body.dark-mode .password-section .form-label,
@@ -840,7 +839,7 @@ body.dark-mode .password-section .form-label,
   color: #ffffff !important;
 }
 
-/* Placeholders brancos nos três inputs em tema escuro */
+
 :host-context([data-theme="dark"]) #currentPassword::placeholder,
 [data-theme="dark"] #currentPassword::placeholder,
 body.dark-mode #currentPassword::placeholder,
@@ -857,7 +856,7 @@ body.dark-mode #confirmPassword::placeholder,
   opacity: 0.85;
 }
 
-/* Placeholders brancos por contexto do container em tema escuro */
+
 :host-context([data-theme="dark"]) .password-section .form-control::placeholder,
 [data-theme="dark"] .password-section .form-control::placeholder,
 body.dark-mode .password-section .form-control::placeholder,

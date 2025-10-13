@@ -43,6 +43,20 @@
   color: #333;
 }
 
+
+:host-context([data-theme="dark"]) .privacy-policy-container,
+[data-theme="dark"] .privacy-policy-container,
+body.dark-mode .privacy-policy-container {
+  background: #2d2d2d !important;
+}
+
+:host-context([data-theme="dark"]) .content,
+[data-theme="dark"] .content,
+body.dark-mode .content {
+  background: #2d2d2d;
+  color: #e6e6e6;
+}
+
 section {
   margin-bottom: 30px;
 }

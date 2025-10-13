@@ -8,6 +8,12 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+:host-context([data-theme="dark"]) .terms-container,
+[data-theme="dark"] .terms-container,
+body.dark-mode .terms-container {
+  background: #2d2d2d !important;
+}
+
 .terms-card {
   background: white;
   border: 2px solid #667eea;
@@ -41,6 +47,13 @@
   padding: 30px;
   line-height: 1.6;
   color: #333;
+}
+
+:host-context([data-theme="dark"]) .content,
+[data-theme="dark"] .content,
+body.dark-mode .content {
+  background: #2d2d2d;
+  color: #e6e6e6;
 }
 
 section {

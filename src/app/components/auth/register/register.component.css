@@ -89,16 +89,16 @@
   color: #667eea;
 }
 
-/* Ajustes para garantir visibilidade do ícone de olho */
+
 .password-input-container .form-control {
-  padding-right: 44px; /* espaço à direita para o botão do olho */
+  padding-right: 44px;
 }
 
 .password-toggle {
-  z-index: 2; /* garante que fique acima do input */
+  z-index: 2; 
 }
 
-/* Tema escuro: garantir que o ícone esteja visível */
+
 :host-context([data-theme="dark"]) .password-toggle,
 [data-theme="dark"] .password-toggle,
 body.dark-mode .password-toggle {
@@ -244,10 +244,10 @@ body.dark-mode .password-toggle {
   margin: 0 8px;
 }
 
-/* Requisitos da senha - alinhado ao estilo de settings */
+
 .password-requirements:not(.password-section) {
   margin: 15px 0;
-  padding: 15px 15px 15px 36px; /* mais recuo à esquerda */
+  padding: 15px 15px 15px 36px; 
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(102, 126, 234, 0.1));
   border: 1px solid rgba(102, 126, 234, 0.2);
   border-radius: 8px;
@@ -261,8 +261,8 @@ body.dark-mode .password-toggle {
 }
 
 .password-requirements:not(.password-section) ul {
-  list-style: none; /* sem bullets nativos */
-  padding: 0; /* sem recuo adicional da lista */
+  list-style: none; 
+  padding: 0; 
   margin: 0;
 }
 
@@ -270,12 +270,12 @@ body.dark-mode .password-toggle {
   padding: 5px 0;
   color: #dc3545;
   font-size: 13px;
-  display: block; /* texto fluindo, sem ícone */
+  display: block; 
   transition: color 0.3s ease;
 }
 
 .password-requirements:not(.password-section) li::before {
-  content: none; /* remover bolinhas/ícones */
+  content: none; 
   display: none;
 }
 
@@ -288,7 +288,7 @@ body.dark-mode .password-toggle {
   display: none;
 }
 
-/* Tema escuro específico para a seção de senha */
+
 :host-context([data-theme="dark"]) .password-section,
 [data-theme="dark"] .password-section,
 body.dark-mode .password-section {
@@ -296,13 +296,13 @@ body.dark-mode .password-section {
   border-color: rgba(102, 126, 234, 0.4) !important;
 }
 
-/* Aplicar quando o atributo data-theme="dark" está na própria seção */
+
 .password-section[data-theme="dark"] {
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(102, 126, 234, 0.15)) !important;
   border-color: rgba(102, 126, 234, 0.4) !important;
 }
 
-/* Aplicar modo escuro diretamente quando a classe existir (escopo local) */
+
 .password-section {
   color: inherit;
 }
@@ -359,7 +359,7 @@ body.dark-mode .password-section li.valid::before {
 }
 .password-section li.valid::before { color: inherit; }
 
-/* Forçar visual escuro diretamente na seção, independentemente do tema global */
+
 .password-section {
   background: #2b2b2b !important;
   border-color: #667eea !important;
@@ -371,7 +371,7 @@ body.dark-mode .password-section li.valid::before {
 .password-section li.valid { color: #6be387 !important; }
 .password-section li.valid::before { color: #6be387 !important; }
 
-/* Modo escuro: garantir fundo e textos consistentes */
+
 :host-context([data-theme="dark"]) .register-container,
 [data-theme="dark"] .register-container,
 body.dark-mode .register-container {
@@ -465,12 +465,12 @@ body.dark-mode .separator {
   color: #777 !important;
 }
 
-/* Overrides solicitados: fundo da seção e inputs em modo escuro */
+
 .password-section {
   background: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* Inputs em modo escuro globalmente */
+
 :host-context([data-theme="dark"]) .form-control,
 [data-theme="dark"] .form-control,
 body.dark-mode .form-control {
@@ -479,20 +479,20 @@ body.dark-mode .form-control {
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Inputs dentro da password-section, mesmo sem tema global */
+
 .password-section .form-control,
 .password-section input.form-control {
   background: rgba(255, 255, 255, 0.1) !important;
   color: #ffffff !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
-/* Requisitos de senha dentro da seção de senha: sem bolinhas e com mais recuo */
+
 .password-requirements.password-section,
 .password-section .password-requirements {
-  padding: 15px 15px 15px 20px !important; /* ainda mais próximo da borda esquerda */
+  padding: 15px 15px 15px 20px !important; 
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 16px !important; /* afastar do checkbox-item abaixo */
+  margin-bottom: 16px !important; 
 }
 
 .password-requirements.password-section h4,
@@ -502,28 +502,28 @@ body.dark-mode .form-control {
 
 .password-requirements.password-section ul,
 .password-section .password-requirements ul {
-  list-style: none !important; /* remover marcadores nativos */
-  padding: 0 !important; /* sem recuo adicional */
+  list-style: none !important; 
+  padding: 0 !important; 
   margin: 0 !important;
 }
 
 .password-requirements.password-section li,
 .password-section .password-requirements li {
-  display: block !important; /* texto fluindo, sem ícone */
+  display: block !important; 
   padding: 6px 0 !important;
 }
 
 .password-requirements.password-section li::before,
 .password-section .password-requirements li::before {
-  content: none !important; /* remover bolinhas/ícones internos */
+  content: none !important; 
   display: none !important;
 }
 
 .password-requirements.password-section li::marker,
 .password-section .password-requirements li::marker {
-  content: '' !important; /* suprimir marcador nativo */
+  content: '' !important; 
 }
-/* Reintroduzir bolinhas internas nos requisitos de senha (registro) */
+
 .password-requirements.password-section li,
 .password-section .password-requirements li {
   display: flex !important;
@@ -532,7 +532,7 @@ body.dark-mode .form-control {
 
 .password-requirements.password-section li::before,
 .password-section .password-requirements li::before {
-  content: '' !important; /* mostrar bolinha */
+  content: '' !important; 
   display: inline-block !important;
   width: 6px;
   height: 6px;

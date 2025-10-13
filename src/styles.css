@@ -88,20 +88,20 @@ body {
   color: #ffffff;
 }
 
-/* Variáveis no tema escuro (opcional para componentes que usam vars) */
+
 :root[data-theme="dark"] {
   --light-color: #2d2d2d;
   --dark-color: #ffffff;
   --border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Fundo geral e texto no tema escuro */
+
 [data-theme="dark"] body {
   background-color: #2d2d2d;
   color: #ffffff;
 }
 
-/* Superfícies internas no tema escuro */
+
 [data-theme="dark"] .card,
 [data-theme="dark"] .sprint-card {
   background: rgba(255, 255, 255, 0.1);
@@ -109,7 +109,7 @@ body {
   color: #ffffff;
 }
 
-/* Modais no tema escuro com fundo sólido */
+
 [data-theme="dark"] .modal-content,
 body.dark-mode .modal-content,
 :host-context([data-theme="dark"]) .modal-content {
@@ -119,7 +119,7 @@ body.dark-mode .modal-content,
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
 }
 
-/* Dark mode refinements for modal internals */
+
 [data-theme="dark"] .modal-header,
 body.dark-mode .modal-header,
 :host-context([data-theme="dark"]) .modal-header {
@@ -171,7 +171,7 @@ body.dark-mode .modal-content a:hover,
   color: #a7b8ff !important;
 }
 
-/* Inputs e elementos de formulário no tema escuro */
+
 [data-theme="dark"] input,
 [data-theme="dark"] textarea,
 [data-theme="dark"] select {
@@ -180,7 +180,7 @@ body.dark-mode .modal-content a:hover,
   color: #ffffff;
 }
 
-/* Navbar e Header no tema escuro */
+
 [data-theme="dark"] .header {
   background-color: #2d2d2d !important;
 }
@@ -197,7 +197,7 @@ body.dark-mode .modal-content a:hover,
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Tabelas no tema escuro */
+
 [data-theme="dark"] table {
   background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
@@ -276,7 +276,7 @@ body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
   background-color: #343a40;
 }
 
-/* Sidebar no tema escuro (regras globais para garantir aplicação) */
+
 [data-theme="dark"] .sidebar {
   background: rgba(255, 255, 255, 0.08) !important;
   box-shadow: none !important;
@@ -313,7 +313,7 @@ body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
   color: #ffffff !important;
 }
 
-/* Variante alternativa: body.dark-mode */
+
 body.dark-mode .sidebar {
   background: #2d2d2d !important;
   box-shadow: none !important;
@@ -349,7 +349,7 @@ body.dark-mode .sidebar-nav .nav-link i,
 body.dark-mode .sidebar-nav .nav-link span {
   color: #e0e0e0 !important;
 }
-/* Dark theme fallback for tech cards (global) */
+
 [data-theme="dark"] .tech-card,
 body.dark-mode .tech-card {
   background: rgba(255, 255, 255, 0.1) !important;
@@ -372,7 +372,7 @@ body.dark-mode .tech-card:focus-visible {
   outline-color: #66aaff;
 }
 
-/* Global dark theme: ensure Home sections match hero */
+
 :root[data-theme="dark"] .tech-section,
 [data-theme="dark"] .tech-section,
 body.dark-mode .tech-section {
@@ -385,7 +385,7 @@ body.dark-mode .tech-section .section-title {
   color: #ffffff !important;
 }
 
- /* Even stronger specificity tied to Home layout */
+ 
  :root[data-theme="dark"] .home-container .tech-section,
  [data-theme="dark"] .home-container .tech-section,
  body.dark-mode .home-container .tech-section,
@@ -415,7 +415,7 @@ body.dark-mode .courses-section {
 body.dark-mode .courses-section .section-title {
   color: #ffffff !important;
 }
-/* Modo escuro global para seções de senha */
+
 [data-theme="dark"] .password-section,
 body.dark-mode .password-section,
 .password-section[data-theme="dark"] {

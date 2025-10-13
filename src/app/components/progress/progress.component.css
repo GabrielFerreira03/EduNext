@@ -557,7 +557,7 @@
     width: 100%;
   }
 }
-/* Dark theme overrides for Progress page */
+
 :host-context([data-theme="dark"]) .progress-container,
 [data-theme="dark"] .progress-container {
   background: #2d2d2d !important;
@@ -587,7 +587,13 @@
 }
 :host-context([data-theme="dark"]) .course-item.active,
 [data-theme="dark"] .course-item.active {
-  background: rgba(255, 255, 255, 0.15) !important;
+  background: #0d0d0d !important;
+  border-color: var(--primary-color) !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .course-item.active {
+  background: #0d0d0d !important;
   border-color: var(--primary-color) !important;
   color: #ffffff !important;
 }
@@ -609,14 +615,14 @@
   color: #e0e0e0 !important;
 }
 
-/* Ensure sidebar heading "Cursos em Andamento" is legible */
+
 :host-context([data-theme="dark"]) .courses-sidebar h3,
 [data-theme="dark"] .courses-sidebar h3 {
   color: #ffffff !important;
   border-bottom-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Ensure selected course title like "Fundamentos de Programação" is legible */
+
 :host-context([data-theme="dark"]) .course-header h2,
 [data-theme="dark"] .course-header h2 {
   color: #ffffff !important;
@@ -643,7 +649,7 @@
   color: #ffffff !important;
 }
 
-/* Ensure SVG percentage text (e.g., 75%) is visible */
+
 :host-context([data-theme="dark"]) .percentage,
 [data-theme="dark"] .percentage {
   fill: #ffffff !important;

@@ -158,11 +158,11 @@
   color: white;
 }
 
-/* Tema escuro: overrides para Tech Section */
+
 :host-context([data-theme="dark"]) .tech-section,
 [data-theme="dark"] .tech-section,
 body.dark-mode .tech-section {
-  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+  background: #2d2d2d !important;
 }
 :host-context([data-theme="dark"]) .tech-section .section-title,
 [data-theme="dark"] .tech-section .section-title,
@@ -170,7 +170,7 @@ body.dark-mode .tech-section .section-title {
   color: #ffffff !important;
 }
 
-/* Dark theme overrides for tech cards (robust selectors) */
+
 :host-context([data-theme="dark"]) .tech-card,
 [data-theme="dark"] .tech-card,
 body.dark-mode .tech-card {
@@ -207,15 +207,15 @@ body.dark-mode .tech-card:focus-visible {
   outline-color: #66aaff;
 }
 
-/* Dark theme overrides for tech section and grid content */
+
 :host-context([data-theme="dark"]) .tech-section,
 [data-theme="dark"] .tech-section,
 body.dark-mode .tech-section {
-  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+  background: #2d2d2d !important;
   color: #ffffff !important;
 }
 
-/* Light mode: ensure white background for tech section */
+
 .tech-section {
   background: #ffffff;
 }
@@ -235,7 +235,7 @@ body.dark-mode .tech-card p {
   color: #eaeaea !important;
 }
 
-/* Acessibilidade: Alto contraste para tech cards */
+
 @media (prefers-contrast: more) {
   .tech-card {
     border: 2px solid #666 !important;
@@ -262,7 +262,7 @@ body.dark-mode .tech-card p {
   margin: 0 auto;
 }
 
-/* Courses section base styles to match hero */
+
 .courses-section {
   padding: 4rem 2rem;
   background: linear-gradient(135deg, var(--primary-color), #0056b3);
@@ -272,7 +272,7 @@ body.dark-mode .tech-card p {
   color: white;
 }
 
-/* Light mode override: ensure white background for #courses section */
+
 #courses {
   background: #ffffff;
 }
@@ -280,11 +280,11 @@ body.dark-mode .tech-card p {
   color: #007bff;
 }
 
-/* Dark theme overrides for Courses section to match hero */
+
 :host-context([data-theme="dark"]) .courses-section,
 [data-theme="dark"] .courses-section,
 body.dark-mode .courses-section {
-  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+  background: #2d2d2d !important;
   color: #ffffff !important;
 }
 :host-context([data-theme="dark"]) .courses-section .section-title,
@@ -293,7 +293,7 @@ body.dark-mode .courses-section .section-title {
   color: #ffffff !important;
 }
 
-/* Dark theme overrides for course cards in Home */
+
 :host-context([data-theme="dark"]) .courses-section .course-card,
 [data-theme="dark"] .courses-section .course-card,
 body.dark-mode .courses-section .course-card {
@@ -303,14 +303,14 @@ body.dark-mode .courses-section .course-card {
   box-shadow: none !important;
 }
 
-/* Garantia final do tema escuro para Courses Section (alta especificidade) */
+
 :host-context([data-theme="dark"]) .home-container .courses-section,
 :host-context([data-theme="dark"]) #courses,
 [data-theme="dark"] .home-container .courses-section,
 [data-theme="dark"] #courses,
 body.dark-mode .home-container .courses-section,
 body.dark-mode #courses {
-  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+  background: #2d2d2d !important;
   color: #ffffff !important;
 }
 :host-context([data-theme="dark"]) .home-container .courses-section .section-title,
@@ -358,7 +358,7 @@ body.dark-mode .courses-section .course-card:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Dark theme overrides for course cards */
+
 :host-context([data-theme="dark"]) .course-card,
 [data-theme="dark"] .course-card,
 body.dark-mode .course-card {
@@ -392,14 +392,14 @@ body.dark-mode .course-meta {
   color: #eaeaea !important;
 }
 
-/* Ensure level chip text contrast in dark mode */
+
 :host-context([data-theme="dark"]) .level-intermediário,
 [data-theme="dark"] .level-intermediário,
 body.dark-mode .level-intermediário {
   color: #ffffff !important;
 }
 
-/* Button visibility in dark mode */
+
 :host-context([data-theme="dark"]) .course-btn,
 [data-theme="dark"] .course-btn,
 body.dark-mode .course-btn {
@@ -556,7 +556,7 @@ body.dark-mode .course-btn:hover {
 }
 
 .about-section {
-  /* About Section styles */
+
   background-color: var(--light-color);
   border-top: 1px solid #e9ecef;
   display: flex;
@@ -584,7 +584,7 @@ body.dark-mode .course-btn:hover {
   color: var(--secondary-color);
 }
 
-/* Fundo azul para a seção About no modo claro */
+
 #about {
   background: #007bff;
 }
@@ -597,7 +597,7 @@ body.dark-mode .course-btn:hover {
   color: #ffffff;
 }
 
-/* Dark theme overrides for About section */
+
 :host-context([data-theme="dark"]) .about-section,
 [data-theme="dark"] .about-section,
 body.dark-mode .about-section {
@@ -670,7 +670,7 @@ body.dark-mode .about-content p {
   justify-content: flex-end;
 }
 
-/* Tema escuro: overrides para modais na Home */
+
 :host-context([data-theme="dark"]) .modal-content,
 [data-theme="dark"] .modal-content,
 body.dark-mode .modal-content {
@@ -690,11 +690,11 @@ body.dark-mode .modal-actions {
   background: rgba(255, 255, 255, 0.04) !important;
 }
 
-/* Tema escuro: overrides para seção hero na Home */
+
 :host-context([data-theme="dark"]) .hero,
 [data-theme="dark"] .hero,
 body.dark-mode .hero {
-  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+  background: #2d2d2d !important;
   color: #e0e0e0 !important;
 }
 :host-context([data-theme="dark"]) .hero-title,
@@ -774,7 +774,7 @@ body.dark-mode .btn-secondary:hover {
     flex-direction: column;
   }
 }
-/* Acessibilidade: alto contraste desativa gradiente de texto para máxima legibilidade */
+
 @media (prefers-contrast: more) {
   .hero-title {
     background: none !important;
@@ -793,15 +793,15 @@ body.dark-mode .btn-secondary:hover {
     text-shadow: none !important;
   }
 }
-/* Garantia final do tema escuro para Tech Section (alta especificidade) */
+
 :host-context([data-theme="dark"]) .home-container .tech-section,
 :host-context([data-theme="dark"]) section.tech-section,
 [data-theme="dark"] .home-container .tech-section,
 body.dark-mode .home-container .tech-section {
-  background: linear-gradient(135deg, #1e1e1e, #2d2d2d) !important;
+  background: #2d2d2d !important;
   color: #ffffff !important;
 }
-/* Dark theme overrides for course technology labels */
+
 :host-context([data-theme="dark"]) .course-meta,
 [data-theme="dark"] .course-meta {
   color: #ffffff !important;

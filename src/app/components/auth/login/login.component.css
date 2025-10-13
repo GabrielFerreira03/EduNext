@@ -78,6 +78,12 @@
   box-sizing: border-box;
 }
 
+
+.form-control::placeholder {
+  color: #888;
+  opacity: 0.9;
+}
+
 .form-control:focus {
   outline: none;
   border-color: #667eea;
@@ -105,16 +111,16 @@
   color: #667eea;
 }
 
-/* Ajustes para garantir visibilidade do ícone de olho */
+
 .password-input-container .form-control {
-  padding-right: 44px; /* espaço à direita para o botão do olho */
+  padding-right: 44px; 
 }
 
 .password-toggle {
-  z-index: 2; /* garante que fique acima do input */
+  z-index: 2; 
 }
 
-/* Tema escuro: garantir que o ícone esteja visível */
+
 :host-context([data-theme="dark"]) .password-toggle,
 [data-theme="dark"] .password-toggle,
 body.dark-mode .password-toggle {
@@ -241,7 +247,7 @@ body.dark-mode .password-toggle {
   }
 }
 
-/* Modo escuro: garantir fundo e textos consistentes */
+
 :host-context([data-theme="dark"]) .login-container,
 [data-theme="dark"] .login-container,
 body.dark-mode .login-container {
@@ -284,6 +290,14 @@ body.dark-mode .form-control {
   background: #1f1f1f !important;
   color: #ffffff !important;
   border-color: #3a3a3a !important;
+}
+
+/* Placeholders visíveis no tema escuro */
+:host-context([data-theme="dark"]) .form-control::placeholder,
+[data-theme="dark"] .form-control::placeholder,
+body.dark-mode .form-control::placeholder {
+  color: #eaeaea !important;
+  opacity: 0.85;
 }
 
 :host-context([data-theme="dark"]) .form-control:focus,

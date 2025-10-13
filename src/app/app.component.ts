@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { NotificationService } from './services/notification.service';
 
 declare global {
   interface Window {
@@ -12,17 +13,21 @@ declare global {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'EduNext - Plataforma Educacional';
   
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private notificationService: NotificationService) {
     console.log('EduNext iniciado com sucesso!');
     
-    // Adicionar função global para resetar dados (útil para desenvolvimento)
+  
     window.resetEduNextData = () => {
       this.authService.clearAllData();
     };
     
     console.log('Para resetar todos os dados, digite: resetEduNextData() no console');
+  }
+
+  ngOnInit(): void {
+    
   }
 }

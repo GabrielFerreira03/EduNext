@@ -1,4 +1,4 @@
-/* Layout geral melhorado baseado na página de progresso */
+
 .dashboard-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -17,7 +17,7 @@
   background: #2d2d2d !important;
 }
 
-/* Refino: header do dashboard no tema escuro */
+
 :host-context([data-theme="dark"]) .dashboard-header {
   background: rgba(255, 255, 255, 0.1) !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
@@ -82,7 +82,7 @@
   font-size: 18px;
 }
 
-/* Seções com melhor estrutura */
+
 .progress-section,
 .stats-section,
 .courses-section,
@@ -130,7 +130,7 @@
   font-size: 1.5rem;
 }
 
-/* Layout compacto das estatísticas */
+
 .stats-grid-compact {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -400,7 +400,7 @@
   text-overflow: clip;
 }
 
-/* Mensagem quando não há estatísticas */
+
 .no-stats-message {
   text-align: center;
   padding: 3rem 2rem;
@@ -442,7 +442,7 @@
   }
 }
 
-/* Mensagem compacta quando não há cursos */
+
 .no-stats-message-compact {
   text-align: center;
   padding: 2rem;
@@ -503,7 +503,7 @@
   background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
 }
 
-/* Tema escuro: mensagem compacta sem estatísticas/cursos */
+
 :host-context([data-theme="dark"]) .no-stats-message-compact,
 [data-theme="dark"] .no-stats-message-compact,
 body.dark-mode .no-stats-message-compact {
@@ -629,7 +629,7 @@ body.dark-mode .no-stats-content i {
   letter-spacing: 0.5px;
 }
 
-/* Indicadores de progresso para stats */
+
 .stat-progress {
   display: flex;
   align-items: center;
@@ -661,7 +661,7 @@ body.dark-mode .no-stats-content i {
 
 
 
-/* Seção de cursos matriculados melhorada */
+
 .courses-section {
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
   border-radius: 16px;
@@ -907,7 +907,7 @@ body.dark-mode .no-stats-content i {
   border-radius: 10px;
 }
 
-/* Mensagem quando não há cursos */
+
 .no-courses-message {
   text-align: center;
   padding: 4rem 2rem;
@@ -963,7 +963,7 @@ body.dark-mode .no-stats-content i {
   margin: 0;
   font-size: 1rem;
 }
-/* Dark theme overrides for empty courses message */
+
 :host-context([data-theme="dark"]) .no-courses-message,
 [data-theme="dark"] .no-courses-message,
 body.dark-mode .no-courses-message {
@@ -1076,7 +1076,7 @@ body.dark-mode .no-courses-message p {
   box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
 }
 
-/* Seções de Cursos Disponíveis */
+
 .available-courses-section {
   margin-bottom: 40px;
 }
@@ -1424,7 +1424,7 @@ body.dark-mode .no-courses-message p {
 
 
 
-/* Cards de progresso melhorados */
+
 .progress-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1446,7 +1446,7 @@ body.dark-mode .no-courses-message p {
   overflow: hidden;
 }
 
-/* Tema escuro: superfícies, textos e bordas */
+
 [data-theme="dark"] .dashboard-container {
   background: #2d2d2d;
 }
@@ -1490,7 +1490,7 @@ body.dark-mode .no-courses-message p {
   color: #ffffff !important;
 }
 
-/* Dark mode refinements for progress section */
+
 :host-context([data-theme="dark"]) .progress-section h2,
 [data-theme="dark"] .progress-section h2 {
   color: #ffffff !important;
@@ -1508,19 +1508,19 @@ body.dark-mode .no-courses-message p {
   background: var(--primary-color) !important;
 }
 
-/* Dark mode refinements for stats section */
+
 :host-context([data-theme="dark"]) .stats-section h2,
 [data-theme="dark"] .stats-section h2 {
   color: #ffffff !important;
 }
 
-/* Dark mode refinements for courses section */
+
 :host-context([data-theme="dark"]) .courses-section h2,
 [data-theme="dark"] .courses-section h2 {
   color: #ffffff !important;
 }
 
-/* Rótulos específicos na stats-section em branco (modo escuro) */
+
 :host-context([data-theme="dark"]) .stats-section .stat-label,
 [data-theme="dark"] .stats-section .stat-label {
   color: #ffffff !important;
@@ -1546,7 +1546,7 @@ body.dark-mode .no-courses-message p {
   color: #ffffff !important;
 }
 
-/* Forçar superfície e bordas da seção de progresso no modo escuro */
+
 :host-context([data-theme="dark"]) .progress-section,
 [data-theme="dark"] .progress-section {
   background: rgba(255, 255, 255, 0.1) !important;
@@ -1554,7 +1554,7 @@ body.dark-mode .no-courses-message p {
   color: #ffffff !important;
 }
 
-/* Especificidade extra dentro do container do dashboard */
+
 :host-context([data-theme="dark"]) .dashboard-container .progress-section,
 [data-theme="dark"] .dashboard-container .progress-section {
   background: rgba(255, 255, 255, 0.1) !important;
@@ -1562,7 +1562,7 @@ body.dark-mode .no-courses-message p {
   color: #ffffff !important;
 }
 
-/* Garantia final do tema escuro para progress-section (alta especificidade) */
+
 :host-context([data-theme="dark"]) .progress-section,
 :host-context([data-theme="dark"]) .dashboard-container .progress-section,
 [data-theme="dark"] .progress-section,
@@ -1574,7 +1574,7 @@ body.dark-mode .no-courses-message p {
   box-shadow: none !important;
 }
 
-/* Garantia final do tema escuro para progress-card (alta especificidade) */
+
 :host-context([data-theme="dark"]) .progress-card,
 :host-context([data-theme="dark"]) .dashboard-container .progress-card,
 [data-theme="dark"] .progress-card,
@@ -1586,7 +1586,7 @@ body.dark-mode .no-courses-message p {
   box-shadow: none !important;
 }
 
-/* Garantia final do tema escuro para stats-section (alta especificidade) */
+
 :host-context([data-theme="dark"]) .stats-section,
 :host-context([data-theme="dark"]) .dashboard-container .stats-section,
 [data-theme="dark"] .stats-section,
@@ -1598,7 +1598,7 @@ body.dark-mode .no-courses-message p {
   box-shadow: none !important;
 }
 
-/* Garantia final do tema escuro para courses-section (alta especificidade) */
+
 :host-context([data-theme="dark"]) .courses-section,
 :host-context([data-theme="dark"]) .dashboard-container .courses-section,
 [data-theme="dark"] .courses-section,
@@ -1610,7 +1610,7 @@ body.dark-mode .no-courses-message p {
   box-shadow: none !important;
 }
 
-/* Dark mode refinements for enrolled-course-card */
+
 :host-context([data-theme="dark"]) .enrolled-course-card,
 [data-theme="dark"] .enrolled-course-card {
   background: rgba(255, 255, 255, 0.1) !important;
@@ -1638,7 +1638,7 @@ body.dark-mode .no-courses-message p {
   background: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* Ajustes de cartões compactos e itens gerais na seção de estatísticas (modo escuro) */
+
 :host-context([data-theme="dark"]) .stat-card-compact,
 [data-theme="dark"] .stat-card-compact {
   background: rgba(255, 255, 255, 0.1) !important;
@@ -1652,7 +1652,7 @@ body.dark-mode .no-courses-message p {
   color: #ffffff !important;
 }
 
-/* Cabeçalho e conteúdos do card no modo escuro */
+
 :host-context([data-theme="dark"]) .progress-card h3,
 [data-theme="dark"] .progress-card h3 {
   color: #ffffff !important;
@@ -1674,13 +1674,13 @@ body.dark-mode .no-courses-message p {
   background: var(--primary-color) !important;
 }
 
-/* Faixa decorativa do card no modo escuro */
+
 :host-context([data-theme="dark"]) .progress-card::before,
 [data-theme="dark"] .progress-card::before {
   background: linear-gradient(135deg, var(--primary-color), #0056b3) !important;
 }
 
-/* Tornar "Comece hoje!" legível no modo escuro */
+
 :host-context([data-theme="dark"]) .streak-indicator span,
 [data-theme="dark"] .streak-indicator span {
   color: #ffffff !important;
@@ -2107,7 +2107,7 @@ body.dark-mode .no-courses-message p {
   letter-spacing: 0.5px;
 }
 
-/* Tablets */
+
 @media (max-width: 1200px) {
   .stats-grid-compact {
     grid-template-columns: repeat(3, 1fr);
@@ -2266,7 +2266,7 @@ body.dark-mode .no-courses-message p {
   }
 }
 
-/* Mobile */
+
 @media (max-width: 480px) {
   .dashboard-container {
     padding: 0.5rem;
@@ -2306,7 +2306,7 @@ body.dark-mode .no-courses-message p {
   }
 }
 
-/* Animações adicionais */
+
 @keyframes pulse {
   0%, 100% {
     opacity: 0.5;
@@ -2395,7 +2395,7 @@ body.dark-mode .no-courses-message p {
     font-size: 20px;
   }
 
-/* Extra Small Mobile */
+
 @media (max-width: 320px) {
   .dashboard-container {
     padding: 0.25rem;

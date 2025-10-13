@@ -1,5 +1,5 @@
 <header class="header">
-  <nav class="navbar" [class.hidden]="!isHeaderVisible">
+  <nav class="navbar" [class.hidden]="!isHeaderVisible" [class.menu-open]="isMenuOpen">
     <div class="header-container">
       <div class="header-left">
         <button *ngIf="isLoggedIn" class="toggle-btn sidebar-toggle-btn" (click)="toggleSidebar()" [class.active]="sidebarOpen">
@@ -18,9 +18,15 @@
         </div>
       </div>
 
-      <div class="navbar-right">
+      <div class="navbar-right" [class.menu-open]="isMenuOpen">
+        <button *ngIf="showResponsiveMenuButton" class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
-        <ul class="navbar-nav active" *ngIf="!hidePrimaryNavLinks">
+
+        <ul class="navbar-nav active" *ngIf="!hidePrimaryNavLinks && !showResponsiveMenuButton">
           <li class="nav-item">
             <a (click)="goToHome()" class="nav-link" style="cursor: pointer;">Início</a>
           </li>
@@ -32,12 +38,16 @@
           </li>
         </ul>
         
-        <div *ngIf="!isLoggedIn" class="auth-buttons active">
+        <div *ngIf="!isLoggedIn && !showResponsiveMenuButton" class="auth-buttons active">
+          <button *ngIf="isHomePage || isLoginPage || isRegisterPage" class="btn-theme" (click)="toggleTheme()" aria-label="Alternar tema">
+            <i class="fas" [ngClass]="{ 'fa-sun': currentTheme === 'dark', 'fa-moon': currentTheme !== 'dark' }"></i>
+            <span>{{ currentTheme === 'dark' ? 'Tema Claro' : 'Tema Escuro' }}</span>
+          </button>
           <a (click)="goToLogin()" class="btn-login" style="cursor: pointer;">Entrar</a>
           <a (click)="goToRegister()" class="btn-register" style="cursor: pointer;">Cadastrar</a>
         </div>
 
-        <div *ngIf="isLoggedIn" class="user-area">
+        <div *ngIf="isLoggedIn && !showResponsiveMenuButton" class="user-area">
           <button class="btn-logout" (click)="logout()">
             <i class="fas fa-sign-out-alt"></i>
             <span>Sair</span>
@@ -47,3 +57,53 @@
     </div>
   </nav>
 </header>
+<!-- Overlay e Drawer Mobile posicionados fora da navbar para cobrir a tela inteira -->
+<div class="mobile-overlay" [class.active]="isMenuOpen" (click)="toggleMenu()"></div>
+<div class="mobile-drawer" [class.active]="isMenuOpen">
+  <div class="drawer-header">
+    <div class="drawer-brand">
+      <img src="assets/images/logofundoinvisivel.png" alt="EduNext Logo" class="drawer-logo">
+    </div>
+    <button class="drawer-close" (click)="toggleMenu()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <nav class="drawer-nav">
+    <ul class="drawer-list">
+      <li class="drawer-item">
+        <a (click)="goToHome(); toggleMenu()" class="drawer-link" [ngClass]="{ 'active': isHomePage }" style="cursor: pointer;">
+          <i class="fas fa-home"></i>
+          <span>Início</span>
+        </a>
+      </li>
+      <li class="drawer-item">
+        <a (click)="goToCursos(); toggleMenu()" class="drawer-link" [ngClass]="{ 'active': isHomePage }" style="cursor: pointer;">
+          <i class="fas fa-book"></i>
+          <span>Cursos</span>
+        </a>
+      </li>
+      <li class="drawer-item">
+        <a (click)="goToSobre(); toggleMenu()" class="drawer-link" [ngClass]="{ 'active': isHomePage }" style="cursor: pointer;">
+          <i class="fas fa-info-circle"></i>
+          <span>Sobre</span>
+        </a>
+      </li>
+      <li class="drawer-item">
+        <a (click)="toggleTheme()" class="drawer-link" style="cursor: pointer;">
+          <i class="fas" [ngClass]="{ 'fa-sun': currentTheme === 'dark', 'fa-moon': currentTheme !== 'dark' }"></i>
+          <span>{{ currentTheme === 'dark' ? 'Tema Claro' : 'Tema Escuro' }}</span>
+        </a>
+      </li>
+    </ul>
+    <div class="drawer-auth">
+      <a (click)="goToLogin(); toggleMenu()" class="drawer-login" [ngClass]="{ 'active': isLoginPage }" style="cursor: pointer;">
+        <i class="fas fa-sign-in-alt"></i>
+        <span>Entrar</span>
+      </a>
+      <a (click)="goToRegister(); toggleMenu()" class="drawer-register" [ngClass]="{ 'active': isRegisterPage }" style="cursor: pointer;">
+        <i class="fas fa-user-plus"></i>
+        <span>Cadastrar</span>
+      </a>
+    </div>
+  </nav>
+</div>

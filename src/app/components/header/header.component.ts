@@ -5,6 +5,7 @@ import { filter } from 'rxjs/operators';
 import { SidebarService } from '../../services/sidebar.service';
 import { AuthService } from '../../services/auth.service';
 import { ThemeService } from '../../services/theme.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,8 @@ import { ThemeService } from '../../services/theme.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   isHomePage = false;
+  isLoginPage = false;
+  isRegisterPage = false;
   hidePrimaryNavLinks = false;
   isSidebarOpen = false;
   isNavbarVisible = true;
@@ -22,6 +25,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isMenuOpen = false;
   lastScrollTop = 0;
   scrollThreshold = 100;
+  isMobile = false;
+  showResponsiveMenuButton = false;
 
   private subscriptions: Subscription = new Subscription();
   currentTheme: string = 'light';
@@ -30,11 +35,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private sidebarService: SidebarService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
+    this.updateIsMobile();
 
     const themeSub = this.themeService.currentTheme$.subscribe(theme => {
       this.currentTheme = theme;
@@ -52,9 +59,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ).subscribe((event) => {
       const navEvent = event as NavigationEnd;
       this.isHomePage = navEvent.url === '/' || navEvent.url === '/home';
+      this.isLoginPage = navEvent.url.startsWith('/login');
+      this.isRegisterPage = navEvent.url.startsWith('/register');
       this.isLoggedIn = this.authService.isLoggedIn();
       const hiddenPaths = ['/dashboard', '/my-courses', '/progress', '/certificates', '/settings'];
       this.hidePrimaryNavLinks = hiddenPaths.some(path => navEvent.url.startsWith(path));
+      this.updateResponsiveMenuButton();
     });
 
     this.subscriptions.add(sidebarSub);
@@ -72,7 +82,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
-    // Garantir que o header permaneça visível quando o menu está aberto
+    
     if (this.isMenuOpen) {
       this.isHeaderVisible = true;
       this.isNavbarVisible = true;
@@ -113,6 +123,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/']);
+    this.notificationService.showSuccess('Foi deslogado com sucesso');
   }
 
   goToHome(): void {
@@ -180,11 +191,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.themeService.toggleTheme();
   }
 
+  private updateIsMobile(): void {
+    this.isMobile = window.innerWidth <= 768;
+    this.updateResponsiveMenuButton();
+  }
+
+  private updateResponsiveMenuButton(): void {
+    
+    this.showResponsiveMenuButton = this.isMobile && !this.hidePrimaryNavLinks;
+    
+    if (!this.showResponsiveMenuButton) {
+      this.isMenuOpen = false;
+    }
+  }
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     if (!this.isHomePage) return;
 
-    // Se o menu está aberto, manter o header visível e não aplicar ocultação
+    
     if (this.isMenuOpen) {
       this.isHeaderVisible = true;
       this.isNavbarVisible = true;
@@ -212,5 +237,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     this.lastScrollTop = currentScrollTop;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(): void {
+    this.updateIsMobile();
   }
 }

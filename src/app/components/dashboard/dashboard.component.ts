@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private calculateUserStats(): void {
-    // Resetar estatísticas se não há cursos matriculados
+    
     if (!this.enrolledCourses || this.enrolledCourses.length === 0) {
       this.completedCourses = 0;
       this.studyHours = 0;
@@ -75,15 +75,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // Calcular cursos completados (progresso >= 100%)
+    
     this.completedCourses = this.enrolledCourses.filter(course => 
       course.progress && course.progress >= 100
     ).length;
 
-    // Calcular certificados (mesmo que cursos completados)
+    
     this.certificates = this.completedCourses;
 
-    // Calcular progresso médio de todos os cursos
+    
     const totalProgress = this.enrolledCourses.reduce((total, course) => {
       return total + (course.progress || 0);
     }, 0);
@@ -91,18 +91,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
       ? Math.round(totalProgress / this.enrolledCourses.length) 
       : 0;
 
-    // Calcular total de horas estudadas baseado no progresso dos cursos
+    
     this.studyHours = this.enrolledCourses.reduce((total, course) => {
-      // Estimar horas estudadas baseado no progresso do curso
-      const estimatedCourseHours = 20; // Assumindo 20 horas por curso
+      
+      const estimatedCourseHours = 20; 
       const progressPercentage = (course.progress || 0) / 100;
       return total + (estimatedCourseHours * progressPercentage);
     }, 0);
 
-    // Arredondar para uma casa decimal
+    
     this.studyHours = Math.round(this.studyHours * 10) / 10;
 
-    // Determinar nível baseado nas horas estudadas e cursos completados
+    
     if (this.studyHours < 10 && this.completedCourses === 0) {
       this.currentLevel = 'Iniciante';
     } else if (this.studyHours < 50 && this.completedCourses < 2) {
@@ -192,7 +192,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   goToMyCourses(): void {
-    // Fazer scroll até a seção de cursos matriculados
+    
     const coursesSection = document.querySelector('.courses-section');
     if (coursesSection) {
       coursesSection.scrollIntoView({ 
@@ -207,7 +207,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   scrollToAvailableCourses(): void {
-    // Fazer scroll até a seção de cursos disponíveis
+    
     const availableCoursesSection = document.querySelector('.available-courses-section');
     if (availableCoursesSection) {
       availableCoursesSection.scrollIntoView({ 

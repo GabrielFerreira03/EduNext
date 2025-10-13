@@ -95,6 +95,12 @@ export class SettingsComponent implements OnInit {
   }
 
   changePassword(): void {
+    
+    if (!this.currentUser || !this.currentUser.email) {
+      this.notificationService.showError('Você precisa estar logado para alterar a senha.');
+      return;
+    }
+
     if (this.passwordForm.newPassword !== this.passwordForm.confirmPassword) {
       this.notificationService.showError('As senhas não coincidem!');
       return;
@@ -105,12 +111,33 @@ export class SettingsComponent implements OnInit {
       return;
     }
     
-    // Nova regra: pelo menos um símbolo na nova senha
+    
     if (!this.hasSymbol(this.passwordForm.newPassword)) {
       this.notificationService.showError('A nova senha deve conter pelo menos um símbolo (ex: ! &#64; # $ %).');
       return;
     }
+
     
+    const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    const userIndex = existingUsers.findIndex((u: any) => u.email === this.currentUser!.email);
+
+    if (userIndex === -1) {
+      this.notificationService.showError('Conta não encontrada. Faça login novamente.');
+      return;
+    }
+
+    const storedUser = existingUsers[userIndex];
+
+    
+    if (!this.passwordForm.currentPassword || storedUser.password !== this.passwordForm.currentPassword) {
+      this.notificationService.showError('Senha atual incorreta!');
+      return;
+    }
+
+    
+    existingUsers[userIndex].password = this.passwordForm.newPassword;
+    localStorage.setItem('users', JSON.stringify(existingUsers));
+
     console.log('Alterando senha...');
     this.notificationService.showSuccess('Senha alterada com sucesso!');
     this.passwordForm = {
@@ -165,7 +192,7 @@ export class SettingsComponent implements OnInit {
            this.hasSymbol(this.passwordForm.newPassword);
   }
 
-  // Verifica se há pelo menos um símbolo na senha
+  
   hasSymbol(value: string): boolean {
     if (!value) return false;
     return /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);

@@ -54,7 +54,7 @@
   <div class="stats-section">
     <h2>Estatísticas</h2>
     
-    <!-- Estatísticas quando há cursos matriculados -->
+    
     <div *ngIf="enrolledCourses.length > 0" class="stats-grid-compact">
       <div class="stat-card-compact">
         <div class="stat-icon-compact trophy">
@@ -107,7 +107,7 @@
       </div>
     </div>
 
-    <!-- Mensagem quando não há cursos matriculados -->
+    
     <div *ngIf="enrolledCourses.length === 0" class="no-stats-message-compact">
       <div class="no-stats-content">
         <i class="fas fa-chart-line"></i>

@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
 
   goToRegister(): void {
     this.router.navigate(['/register']).then(() => {
-      // Aguarda um pequeno delay para garantir que a página carregou
+      
       setTimeout(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }, 100);

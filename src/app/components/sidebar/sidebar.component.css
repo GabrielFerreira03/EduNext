@@ -259,13 +259,13 @@
   background: #a8a8a8;
 }
 
-/* Overrides de tema escuro focados na navegação da sidebar */
+
 :host-context([data-theme="dark"]) .sidebar-nav,
 [data-theme="dark"] .sidebar-nav {
   color: #ffffff !important;
 }
 
-/* Fundo da navegação no tema escuro */
+
 :host-context([data-theme="dark"]) .sidebar-nav,
 [data-theme="dark"] .sidebar-nav {
   background-color: #2d2d2d !important;
@@ -274,7 +274,7 @@ body.dark-mode .sidebar-nav {
   background-color: #2d2d2d !important;
 }
 
-/* Suporte a variante global body.dark-mode */
+
 body.dark-mode .sidebar-nav {
   color: #ffffff !important;
 }

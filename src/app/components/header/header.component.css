@@ -3,7 +3,7 @@
   box-shadow: var(--box-shadow);
   position: fixed;
   top: 0;
-  z-index: 1000;
+  z-index: 10000;
   width: 100%;
   left: 0;
   right: 0;
@@ -40,7 +40,13 @@
   opacity: 0;
 }
 
-/* Ocultar navbar durante a visualização de certificado */
+
+.navbar.menu-open {
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+
 body.hide-header .navbar {
   display: none !important;
 }
@@ -57,9 +63,68 @@ body.hide-header .navbar {
   align-items: center;
   gap: 2rem;
   flex-shrink: 0;
+  position: relative;
+}
+.navbar-right.menu-open .navbar-nav.mobile-menu,
+.navbar-right.menu-open .auth-buttons.mobile-menu {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
-/* Removidos estilos do dropdown de tema */
+
+.navbar-nav.mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--primary-color);
+  flex-direction: column;
+  padding: 1rem;
+  gap: 0;
+  transform: translateY(-10px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: var(--transition);
+  z-index: 1001;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.navbar-nav.mobile-menu.open {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  display: flex !important;
+  width: 100% !important;
+}
+
+.auth-buttons.mobile-menu {
+  position: absolute;
+  top: calc(100% + 180px);
+  left: 0;
+  right: 0;
+  background: var(--primary-color);
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  transform: translateY(-10px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: var(--transition);
+  z-index: 1001;
+}
+.auth-buttons.mobile-menu.open {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+
 
 .toggle-btn {
   background: #007bff;
@@ -274,12 +339,13 @@ body.hide-header .navbar {
     gap: 1rem;
   }
   
-  /* Botão de menu removido, não exibir no mobile */
+ 
   .menu-toggle {
-    display: none;
+    display: flex;
   }
   
-  .navbar-nav {
+  
+  .navbar-nav.mobile-menu {
     position: absolute;
     top: 100%;
     left: 0;
@@ -288,11 +354,20 @@ body.hide-header .navbar {
     flex-direction: column;
     padding: 1rem;
     gap: 0;
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: var(--transition);
+    z-index: 1001;
+  }
+  .navbar-nav.mobile-menu.open {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
-    transition: var(--transition);
-    z-index: 1001;
+    pointer-events: auto;
+    display: flex;
+    width: 100%;
   }
   
   .nav-item {
@@ -305,7 +380,8 @@ body.hide-header .navbar {
     border-radius: var(--border-radius);
   }
   
-  .auth-buttons {
+  
+  .auth-buttons.mobile-menu {
     position: absolute;
     top: calc(100% + 180px);
     left: 0;
@@ -314,11 +390,18 @@ body.hide-header .navbar {
     padding: 1rem;
     display: flex;
     gap: 1rem;
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: var(--transition);
+    z-index: 1001;
+  }
+  .auth-buttons.mobile-menu.open {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
-    transition: var(--transition);
-    z-index: 1001;
+    pointer-events: auto;
   }
 }
 
@@ -326,6 +409,48 @@ body.hide-header .navbar {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.btn-theme {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--border-radius);
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.btn-theme:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-theme i {
+  font-size: 1rem;
+}
+
+.auth-buttons .btn-theme,
+.auth-buttons .btn-login,
+.auth-buttons .btn-register {
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+}
+
+[data-theme="dark"] .btn-theme {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .btn-theme:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .btn-login,
@@ -336,6 +461,7 @@ body.hide-header .navbar {
   font-weight: 500;
   transition: var(--transition);
   font-size: 0.9rem;
+  line-height: 1.2;
 }
 
 .btn-login {
@@ -565,7 +691,7 @@ body.hide-header .navbar {
   }
 }
 
-/* Tema escuro: sobrescrever fundos para atender especificação */
+
 [data-theme="dark"] .header {
   background: #2d2d2d !important;
 }
@@ -588,14 +714,14 @@ body.hide-header .navbar {
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Dark theme: sidebar toggle button background */
+
 [data-theme="dark"] .toggle-btn.sidebar-toggle-btn {
   background: rgba(255, 255, 255, 0.1) !important;
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Dark theme: hover and active states for sidebar toggle */
+
 [data-theme="dark"] .toggle-btn.sidebar-toggle-btn:hover {
   background: rgba(255, 255, 255, 0.2) !important;
   transform: scale(1.05);
@@ -613,7 +739,7 @@ body.hide-header .navbar {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* Escopo do componente: garantir aplicação via :host-context */
+
 :host-context([data-theme="dark"]) .toggle-btn.sidebar-toggle-btn {
   background: rgba(255, 255, 255, 0.1) !important;
   color: #ffffff;
@@ -634,7 +760,7 @@ body.hide-header .navbar {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* Dark theme: regra geral para qualquer .toggle-btn no header */
+
 [data-theme="dark"] .toggle-btn {
   background: rgba(255, 255, 255, 0.1) !important;
   color: #ffffff !important;
@@ -644,4 +770,201 @@ body.hide-header .navbar {
   background: rgba(255, 255, 255, 0.1) !important;
   color: #ffffff !important;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  contain: layout paint;
+}
+.mobile-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--primary-color), #0056b3);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10001;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  pointer-events: none;
+  will-change: right;
+}
+.mobile-drawer.active {
+  right: 0;
+  pointer-events: auto;
+}
+
+.drawer-header {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+.drawer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.drawer-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+.drawer-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+}
+.drawer-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+.drawer-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.drawer-nav {
+  flex: 1;
+  padding: 0.75rem 0;
+}
+.drawer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.drawer-item { margin-bottom: 0.25rem; }
+.drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  font-weight: 500;
+}
+.drawer-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-left-color: white;
+  transform: translateX(4px);
+}
+.drawer-link.active {
+  background-color: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  border-left-color: #ffffff;
+  font-weight: 600;
+}
+.drawer-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.drawer-login, .drawer-register {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  width: 100%;
+}
+.drawer-login {
+  background: white;
+  color: #0056b3;
+}
+.drawer-login.active {
+  border-color: #0056b3;
+}
+.drawer-register {
+  background: #0056b3;
+  color: white;
+}
+.drawer-register.active {
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.9);
+}
+.drawer-user {
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.drawer-logout {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: white;
+  color: #0056b3;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-drawer { width: 280px; right: -280px; }
+  .drawer-link { padding: 0.75rem 1rem; }
+}
+
+@media (max-width: 480px) {
+  .mobile-drawer { width: 260px; right: -260px; }
+  .drawer-title { font-size: 1rem; }
+  .drawer-link { padding: 0.625rem 0.875rem; gap: 0.5rem; }
+}
+
+
+:host-context([data-theme="dark"]) .mobile-drawer,
+[data-theme="dark"] .mobile-drawer,
+body.dark-mode .mobile-drawer {
+  background: linear-gradient(135deg, #1f1f1f, #2d2d2d) !important;
+}
+:host-context([data-theme="dark"]) .drawer-link,
+[data-theme="dark"] .drawer-link,
+body.dark-mode .drawer-link {
+  color: #ffffff !important;
+}
+:host-context([data-theme="dark"]) .drawer-link:hover,
+[data-theme="dark"] .drawer-link:hover,
+body.dark-mode .drawer-link:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
 }

@@ -37,7 +37,7 @@ export class CertificatesComponent implements OnInit, OnDestroy {
     this.loadCertificates();
     this.extractSkills();
     this.filteredCertificates = this.certificates;
-    // Oculta o cabeçalho/navbar enquanto estiver na rota de certificados
+    
     document.body.classList.add('hide-header');
   }
 
@@ -172,7 +172,7 @@ export class CertificatesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Garante que a classe seja removida ao destruir o componente
+    
     document.body.classList.remove('hide-header');
   }
 }

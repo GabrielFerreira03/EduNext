@@ -413,7 +413,7 @@
   margin-bottom: 2rem;
 }
 
-/* Animações */
+
 
 
 @keyframes float {
@@ -426,7 +426,7 @@
   50% { opacity: 1; transform: scale(1.1); }
 }
 
-/* Media Queries para Responsividade */
+
 @media (max-width: 1200px) {
   .courses-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -438,7 +438,7 @@
   }
 }
 
-/* Modal de Confirmação */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -574,7 +574,7 @@
   to { opacity: 1; }
 }
 
-/* Tema escuro: overrides para modal de confirmação */
+
 :host-context([data-theme="dark"]) .modal-content,
 [data-theme="dark"] .modal-content,
 body.dark-mode .modal-content {
@@ -662,7 +662,7 @@ body.dark-mode .modal-footer {
     padding: 1rem;
   }
 }
-/* Dark theme overrides for My Courses page */
+
 :host-context([data-theme="dark"]) .my-courses-container,
 [data-theme="dark"] .my-courses-container {
   background: #2d2d2d !important;

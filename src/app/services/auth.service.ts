@@ -53,15 +53,16 @@ export class AuthService {
     });
   }
 
-  register(name: string, email: string, password: string): Observable<boolean> {
+  register(name: string, username: string, email: string, password: string): Observable<boolean> {
     return new Observable(observer => {
       setTimeout(() => {
-        if (name && email && password) {
-          // Verificar se o email já existe
+        if (name && username && email && password) {
+          
           const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
           const emailExists = existingUsers.find((u: any) => u.email === email);
+          const usernameExists = existingUsers.find((u: any) => u.username === username);
           
-          if (emailExists) {
+          if (emailExists || usernameExists) {
             observer.next(false);
             observer.complete();
             return;
@@ -70,21 +71,23 @@ export class AuthService {
           const newUser = {
             id: Date.now().toString(),
             name: name,
+            username: username,
             email: email,
-            password: password, // Salvar a senha para o login funcionar
+            password: password, 
             avatar: 'assets/images/default-avatar.png',
             birthDate: new Date('1990-01-01'),
             joinDate: new Date()
           };
           
-          // Adicionar ao array de usuários
+          
           existingUsers.push(newUser);
           localStorage.setItem('users', JSON.stringify(existingUsers));
           
-          // Criar objeto User para o currentUser (sem senha)
+          
           const user: User = {
             id: newUser.id,
             name: newUser.name,
+            
             email: newUser.email,
             avatar: newUser.avatar,
             birthDate: newUser.birthDate,
@@ -120,7 +123,7 @@ export class AuthService {
     return name.charAt(0).toUpperCase() + name.slice(1);
   }
 
-  // Método para resetar todos os dados (útil para desenvolvimento/testes)
+  
   clearAllData(): void {
     localStorage.removeItem('users');
     localStorage.removeItem('currentUser');

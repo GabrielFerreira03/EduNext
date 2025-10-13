@@ -39,7 +39,7 @@ export class RegisterComponent {
       return;
     }
 
-    // Validação de força da senha: mínimo 8 caracteres e pelo menos 1 símbolo
+    
     if (!this.isStrongPassword(this.password)) {
       this.errorMessage = 'A senha deve conter pelo menos 8 caracteres e um símbolo.';
       return;
@@ -57,11 +57,11 @@ export class RegisterComponent {
 
     this.isLoading = true;
 
-    this.authService.register(this.fullName, this.email, this.password).subscribe({
+    this.authService.register(this.fullName, this.username, this.email, this.password).subscribe({
       next: (success) => {
         this.isLoading = false;
         if (success) {
-          // Mostrar mensagem de sucesso e redirecionar para o mesmo lugar do login (dashboard)
+          
           this.notificationService.showSuccess('Cadastro concluído com sucesso');
           this.router.navigate(['/dashboard']).then(() => {
             setTimeout(() => {
@@ -69,20 +69,30 @@ export class RegisterComponent {
             }, 100);
           });
         } else {
-          // Verificar se o email já existe
+          
           const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
           const emailExists = existingUsers.find((u: any) => u.email === this.email);
-          
-          if (emailExists) {
-            this.errorMessage = 'Este email já está cadastrado. Tente fazer login ou use outro email.';
+          const usernameExists = existingUsers.find((u: any) => u.username === this.username);
+
+          if (emailExists && usernameExists) {
+            this.errorMessage = 'Email e nome de usuário já registrados. Use outros para continuar.';
+            this.notificationService.showError('Email e nome de usuário já registrados. Use outros.');
+          } else if (emailExists) {
+            this.errorMessage = 'Este email já está cadastrado. Use outro email ou faça login.';
+            this.notificationService.showError('Este email já está cadastrado. Use outro email ou faça login.');
+          } else if (usernameExists) {
+            this.errorMessage = 'Este nome de usuário já existe. Escolha outro.';
+            this.notificationService.showError('Este nome de usuário já existe. Escolha outro.');
           } else {
             this.errorMessage = 'Erro ao criar conta. Tente novamente.';
+            this.notificationService.showError('Erro ao criar conta. Tente novamente.');
           }
         }
       },
       error: (error) => {
         this.isLoading = false;
         this.errorMessage = 'Erro ao criar conta. Tente novamente.';
+        this.notificationService.showError('Erro ao criar conta. Tente novamente.');
       }
     });
   }
@@ -107,18 +117,18 @@ export class RegisterComponent {
     this.router.navigate(['/']);
   }
 
-  // Validação: mínimo 8 caracteres e pelo menos 1 símbolo
+  
   private isStrongPassword(pw: string): boolean {
     return /^(?=.*[^A-Za-z0-9]).{8,}$/.test(pw);
   }
 
-  // Auxiliar para o template: verifica se há ao menos um símbolo
+  
   hasSymbol(pw: string): boolean {
     return /[^A-Za-z0-9]/.test(pw || '');
   }
 
-  // Controla habilitação do botão: todos os campos preenchidos, termos aceitos,
-  // senha forte e confirmação igual
+  
+  
   isFormValid(): boolean {
     return !!(
       this.fullName &&

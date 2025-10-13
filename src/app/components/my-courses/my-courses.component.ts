@@ -13,7 +13,7 @@ export class MyCoursesComponent implements OnInit, OnDestroy {
   availableCourses: Course[] = [];
   isLoading = true;
   
-  // Modal de confirmação
+ 
   showConfirmModal = false;
   courseToCancel: Course | null = null;
 

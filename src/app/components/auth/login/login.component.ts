@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit {
 
     if (!user) {
       this.errorMessage = 'Email não encontrado. Cadastre-se primeiro.';
+      this.notificationService.showError('Email não encontrado. Cadastre-se primeiro.');
       this.isLoading = false;
       return;
     }
@@ -56,17 +59,19 @@ export class LoginComponent implements OnInit {
             } else {
               localStorage.removeItem('rememberedEmail');
             }
-
+            this.notificationService.showSuccess('Login concluído com sucesso');
             this.router.navigate(['/dashboard']);
           }
         },
         error: (error) => {
           this.isLoading = false;
           this.errorMessage = 'Erro ao fazer login. Tente novamente.';
+          this.notificationService.showError('Erro ao fazer login. Tente novamente.');
         }
       });
     } else {
       this.errorMessage = 'Senha incorreta.';
+      this.notificationService.showError('Senha incorreta.');
       this.isLoading = false;
     }
   }
