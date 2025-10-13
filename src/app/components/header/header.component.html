@@ -20,7 +20,7 @@
 
       <div class="navbar-right">
 
-        <ul class="navbar-nav active">
+        <ul class="navbar-nav active" *ngIf="!hidePrimaryNavLinks">
           <li class="nav-item">
             <a (click)="goToHome()" class="nav-link" style="cursor: pointer;">Início</a>
           </li>

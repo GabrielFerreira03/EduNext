@@ -14,6 +14,7 @@ import { ThemeService } from '../../services/theme.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   isHomePage = false;
+  hidePrimaryNavLinks = false;
   isSidebarOpen = false;
   isNavbarVisible = true;
   isHeaderVisible = true;
@@ -52,6 +53,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       const navEvent = event as NavigationEnd;
       this.isHomePage = navEvent.url === '/' || navEvent.url === '/home';
       this.isLoggedIn = this.authService.isLoggedIn();
+      const hiddenPaths = ['/dashboard', '/my-courses', '/progress', '/certificates', '/settings'];
+      this.hidePrimaryNavLinks = hiddenPaths.some(path => navEvent.url.startsWith(path));
     });
 
     this.subscriptions.add(sidebarSub);
