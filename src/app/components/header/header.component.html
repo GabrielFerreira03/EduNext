@@ -21,7 +21,7 @@
 
       <div class="navbar-right">
 
-        <ul class="navbar-nav" [class.active]="isMenuOpen">
+        <ul class="navbar-nav active">
           <li class="nav-item">
             <a (click)="goToHome()" class="nav-link" style="cursor: pointer;">Início</a>
           </li>
@@ -33,7 +33,7 @@
           </li>
         </ul>
         
-        <div *ngIf="!isLoggedIn" class="auth-buttons" [class.active]="isMenuOpen">
+        <div *ngIf="!isLoggedIn" class="auth-buttons active">
           <a (click)="goToLogin()" class="btn-login" style="cursor: pointer;">Entrar</a>
           <a (click)="goToRegister()" class="btn-register" style="cursor: pointer;">Cadastrar</a>
         </div>
