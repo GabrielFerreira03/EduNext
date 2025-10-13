@@ -33,13 +33,16 @@ export class AuthService {
     return new Observable(observer => {
       setTimeout(() => {
         if (email && password) {
+          const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+          const stored = existingUsers.find((u: any) => u.email === email);
+
           const user: User = {
-            id: '1',
-            name: this.extractNameFromEmail(email),
+            id: stored?.id || '1',
+            name: stored?.name || this.extractNameFromEmail(email),
             email: email,
-            avatar: 'assets/images/default-avatar.png',
-            birthDate: new Date('1990-01-01'),
-            joinDate: new Date('2023-01-01')
+            avatar: stored?.avatar || 'assets/images/default-avatar.png',
+            birthDate: stored?.birthDate ? new Date(stored.birthDate) : new Date('1990-01-01'),
+            joinDate: stored?.joinDate ? new Date(stored.joinDate) : new Date()
           };
           
           this.currentUserSubject.next(user);
@@ -53,7 +56,7 @@ export class AuthService {
     });
   }
 
-  register(name: string, username: string, email: string, password: string): Observable<boolean> {
+  register(name: string, username: string, email: string, password: string, birthDate: string): Observable<boolean> {
     return new Observable(observer => {
       setTimeout(() => {
         if (name && username && email && password) {
@@ -75,7 +78,7 @@ export class AuthService {
             email: email,
             password: password, 
             avatar: 'assets/images/default-avatar.png',
-            birthDate: new Date('1990-01-01'),
+            birthDate: new Date(birthDate),
             joinDate: new Date()
           };
           
