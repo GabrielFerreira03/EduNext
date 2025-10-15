@@ -13,9 +13,9 @@ export class MyCoursesComponent implements OnInit, OnDestroy {
   availableCourses: Course[] = [];
   isLoading = true;
   
- 
-  showConfirmModal = false;
-  courseToCancel: Course | null = null;
+  // Modal de pagamento
+  showPaymentModal = false;
+  paymentCourse: Course | null = null;
 
   private subscriptions: Subscription = new Subscription();
 
@@ -68,26 +68,45 @@ export class MyCoursesComponent implements OnInit, OnDestroy {
     console.log(message);
   }
 
-  cancelEnrollment(courseId: string): void {
-    const course = this.enrolledCourses.find(c => c.id === courseId);
-    if (course) {
-      this.courseToCancel = course;
-      this.showConfirmModal = true;
-    }
+  openPaymentInfo(courseId: string): void {
+    const course = this.enrolledCourses.find(c => c.id === courseId) || null;
+    this.paymentCourse = course;
+    this.showPaymentModal = true;
   }
 
-  confirmCancelEnrollment(): void {
-    if (this.courseToCancel) {
-      this.courseService.cancelEnrollment(this.courseToCancel);
-      this.loadCourses();
-      this.showNotification('Matrícula cancelada com sucesso!');
-      this.closeConfirmModal();
-    }
+  closePaymentModal(): void {
+    this.showPaymentModal = false;
+    this.paymentCourse = null;
   }
 
-  closeConfirmModal(): void {
-    this.showConfirmModal = false;
-    this.courseToCancel = null;
+  getPaymentDueDate(course: Course | null | undefined): string {
+    const enrolledAt = (course?.enrolledAt ? new Date(course.enrolledAt) : new Date());
+    const due = new Date(enrolledAt);
+    due.setDate(due.getDate() + 7);
+    return this.formatDate(due);
+  }
+
+  getFirstExpirationDate(course: Course | null | undefined): string {
+    const enrolledAt = (course?.enrolledAt ? new Date(course.enrolledAt) : new Date());
+    const exp = new Date(enrolledAt);
+    exp.setDate(exp.getDate() + 30);
+    return this.formatDate(exp);
+  }
+
+  getRenewalDueDate(course: Course | null | undefined): string {
+    const enrolledAt = (course?.enrolledAt ? new Date(course.enrolledAt) : new Date());
+    const exp = new Date(enrolledAt);
+    exp.setDate(exp.getDate() + 30);
+    const renewal = new Date(exp);
+    renewal.setDate(renewal.getDate() + 7);
+    return this.formatDate(renewal);
+  }
+
+  private formatDate(date: Date): string {
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const yyyy = date.getFullYear();
+    return `${dd}/${mm}/${yyyy}`;
   }
 
   viewCertificate(courseId: string): void {

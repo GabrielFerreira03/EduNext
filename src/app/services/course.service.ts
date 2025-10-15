@@ -124,7 +124,9 @@ export class CourseService {
       if (course && !currentEnrolled.find(c => c.id === courseId)) {
         const courseWithProgress = {
           ...course,
-          ...this.generateCourseProgressData(course)
+          ...this.generateCourseProgressData(course),
+          enrolledAt: new Date(),
+          lastAccessed: new Date()
         };
 
         this.enrolledCoursesSubject.next([...currentEnrolled, courseWithProgress]);

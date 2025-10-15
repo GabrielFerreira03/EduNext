@@ -273,6 +273,158 @@ body.dark-mode .tech-card p {
 }
 
 
+/* ===== Carrossel de Cursos ===== */
+.courses-highlight .section-title {
+  color: #007bff;
+  margin-top: 1rem;
+}
+.course-carousel {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto 2.5rem auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.carousel-track {
+  position: relative;
+  height: 640px;
+  background: rgba(0,0,0,0.05);
+}
+
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.65) 70%);
+  display: flex;
+  align-items: flex-end;
+  padding: 2rem;
+}
+
+.carousel-info {
+  color: #fff;
+  max-width: 900px;
+}
+
+.carousel-title {
+  font-size: 2.8rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.carousel-level {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 0.25rem 0.6rem;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.carousel-desc {
+  color: #eaeaea;
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+.course-carousel .btn.btn-primary {
+  background-color: #ffd700;
+  color: #121212;
+  border: none;
+}
+.course-carousel .btn.btn-primary:hover {
+  background-color: #ffea86;
+  color: #121212;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 200ms ease, transform 200ms ease;
+}
+.carousel-arrow:hover {
+  background: rgba(0,0,0,0.5);
+  transform: translateY(-50%) scale(1.05);
+}
+.carousel-arrow.left { left: 12px; }
+.carousel-arrow.right { right: 12px; }
+
+.carousel-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  z-index: 11;
+}
+.carousel-dots .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.35);
+  cursor: pointer;
+}
+.carousel-dots .dot.active {
+  background: #ffd700;
+  border-color: #ffd700;
+}
+
+/* Dark mode */
+:host-context([data-theme="dark"]) .course-carousel,
+[data-theme="dark"] .course-carousel,
+body.dark-mode .course-carousel {
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45) !important;
+}
+:host-context([data-theme="dark"]) .carousel-desc,
+[data-theme="dark"] .carousel-desc,
+body.dark-mode .carousel-desc { color: #f0f0f0 !important; }
+:host-context([data-theme="dark"]) .carousel-level,
+[data-theme="dark"] .carousel-level,
+body.dark-mode .carousel-level {
+  background: rgba(255,255,255,0.1) !important;
+  border-color: rgba(255,255,255,0.25) !important;
+}
+
+@media (max-width: 768px) {
+  .carousel-track { height: 420px; }
+  .carousel-title { font-size: 1.8rem; }
+}
+
+
 #courses {
   background: #ffffff;
 }

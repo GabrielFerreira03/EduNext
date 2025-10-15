@@ -19,8 +19,8 @@
             </div>
           </div>
           <div class="course-actions">
-            <button class="btn-cancel" (click)="cancelEnrollment(course.id)">
-              Cancelar Matrícula
+            <button class="btn-payment" (click)="openPaymentInfo(course.id)">
+              Informações de Pagamento
             </button>
             <button class="btn-certificate" 
                     *ngIf="(course.progress || 0) >= 100" 
@@ -60,29 +60,28 @@
     </div>
   </div>
 
-  <!-- Modal de Confirmação -->
-  <div class="modal-overlay" *ngIf="showConfirmModal" (click)="closeConfirmModal()">
+  <!-- Modal de Informações de Pagamento -->
+  <div class="modal-overlay" *ngIf="showPaymentModal" (click)="closePaymentModal()">
     <div class="modal-content" (click)="$event.stopPropagation()">
-      <div class="modal-header">
-        <h3>Confirmar Cancelamento</h3>
-        <button class="modal-close" (click)="closeConfirmModal()">
+      <div class="modal-header info">
+        <h3>Informações de Pagamento</h3>
+        <button class="modal-close" (click)="closePaymentModal()">
           <i class="fas fa-times"></i>
         </button>
       </div>
       <div class="modal-body">
         <div class="warning-icon">
-          <i class="fas fa-exclamation-triangle"></i>
+          <i class="fas fa-info-circle"></i>
         </div>
-        <p>Tem certeza que deseja cancelar sua matrícula no curso:</p>
-        <h4>{{ courseToCancel?.title }}</h4>
-        <p class="warning-text">Esta ação não pode ser desfeita e você perderá todo o progresso atual.</p>
+        <p>Confira os prazos relacionados à sua matrícula no curso:</p>
+        <h4>{{ paymentCourse?.title }}</h4>
+        <p><strong>Pagamento inicial:</strong> até {{ getPaymentDueDate(paymentCourse) }}</p>
+        <p><strong>Expiração da primeira matrícula:</strong> {{ getFirstExpirationDate(paymentCourse) }}</p>
+        <p><strong>Próximo pagamento (renovação):</strong> até {{ getRenewalDueDate(paymentCourse) }}</p>
       </div>
       <div class="modal-footer">
-        <button class="btn-modal-cancel" (click)="closeConfirmModal()">
-          Manter Matrícula
-        </button>
-        <button class="btn-modal-confirm" (click)="confirmCancelEnrollment()">
-          Sim, Cancelar
+        <button class="btn-modal-cancel" (click)="closePaymentModal()">
+          Entendi
         </button>
       </div>
     </div>

@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Course, CourseService } from '../../services/course.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   courses: any[] = [];
   showLGPDModal: boolean = false;
   lgpdConsent = {
@@ -15,11 +16,18 @@ export class HomeComponent implements OnInit {
     marketing: false
   };
 
-  constructor(private router: Router) { }
+  // Carrossel
+  carouselCourses: Course[] = [];
+  currentSlide: number = 0;
+  private slideIntervalId: any;
+
+  constructor(private router: Router, private courseService: CourseService) { }
 
   ngOnInit(): void {
     this.loadCourses();
     this.checkLGPDConsent();
+    this.loadCarouselCourses();
+    this.startAutoSlide();
   }
 
   private loadCourses(): void {
@@ -107,6 +115,71 @@ export class HomeComponent implements OnInit {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }, 100);
     });
+  }
+
+  private loadCarouselCourses(): void {
+    this.courseService.availableCourses$.subscribe(courses => {
+      this.carouselCourses = courses;
+      if (this.currentSlide >= this.carouselCourses.length) {
+        this.currentSlide = 0;
+      }
+    });
+  }
+
+  // Resolve caminho da imagem baseado na tecnologia do curso usando assets existentes
+  getCourseImage(course: Course): string {
+    const techKey = (course.technology || '').toLowerCase().replace(/\s+/g, '').replace(/\./g, '');
+    const imageMap: Record<string, string> = {
+      angular: 'assets/images/angular.png',
+      react: 'assets/images/react.png',
+      nodejs: 'assets/images/nodejs.png',
+      python: 'assets/images/python.png',
+      vuejs: 'assets/images/vuejs.png',
+      vue: 'assets/images/vuejs.png'
+    };
+    return imageMap[techKey] || 'assets/images/logofundoinvisivel.png';
+  }
+
+  private startAutoSlide(): void {
+    this.clearAutoSlide();
+    this.slideIntervalId = setInterval(() => {
+      this.nextSlide();
+    }, 4000);
+  }
+
+  private clearAutoSlide(): void {
+    if (this.slideIntervalId) {
+      clearInterval(this.slideIntervalId);
+      this.slideIntervalId = null;
+    }
+  }
+
+  nextSlide(): void {
+    if (!this.carouselCourses.length) return;
+    this.currentSlide = (this.currentSlide + 1) % this.carouselCourses.length;
+  }
+
+  prevSlide(): void {
+    if (!this.carouselCourses.length) return;
+    this.currentSlide = (this.currentSlide - 1 + this.carouselCourses.length) % this.carouselCourses.length;
+  }
+
+  goToSlide(index: number): void {
+    if (index >= 0 && index < this.carouselCourses.length) {
+      this.currentSlide = index;
+    }
+  }
+
+  onCarouselMouseEnter(): void {
+    this.clearAutoSlide();
+  }
+
+  onCarouselMouseLeave(): void {
+    this.startAutoSlide();
+  }
+
+  ngOnDestroy(): void {
+    this.clearAutoSlide();
   }
 
 }
